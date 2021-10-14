@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.ReportController">
+   <children>
+      <BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #edf2f7;">
+         <top>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="71.0" prefWidth="331.0" style="-fx-background-color: #525564;">
+                     <children>
+                        <JFXButton fx:id="homeBtn" buttonType="RAISED" onAction="#toHome" prefHeight="71.0" prefWidth="313.0" text="หน้าแรก" textFill="#fef6eb">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="71.0" prefWidth="1616.0" style="-fx-background-color: #525564;">
+                     <children>
+                        <JFXButton fx:id="customerBtn" buttonType="RAISED" onAction="#toCustomer" prefWidth="500.0" text="ลูกค้า" textFill="#fef6eb">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="saleOrderBtn" buttonType="RAISED" onAction="#toSaleOrder" prefHeight="71.0" prefWidth="500.0" text="ใบสั่งขาย" textFill="#fef6eb">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="stockBtn" buttonType="RAISED" onAction="#toStock" prefWidth="500.0" text="คลังสินค้า" textFill="#fef6eb">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="reportBtn" buttonType="RAISED" onAction="#toReport" prefWidth="500.0" text="รายงาน" textFill="#fef6eb">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <Label text="Report Page" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

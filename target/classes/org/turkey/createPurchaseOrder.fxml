@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.CreatePurchaseOrderController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="806.0" spacing="30.0">
+         <children>
+            <Label text="ใบสั่งซื้อ">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="1191.0" spacing="10.0">
+               <children>
+                  <Label text="เลขใบกำกับสั่งซื้อ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="51.0" prefWidth="221.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="900.0" spacing="10.0">
+               <children>
+                  <ComboBox prefHeight="59.0" prefWidth="150.0" />
+                  <Label text="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantityField_1" alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="128.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label text="ราคาต่อชิ้น">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceField_1" alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="122.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="900.0" spacing="10.0">
+               <children>
+                  <ComboBox prefHeight="52.0" prefWidth="150.0" />
+                  <Label text="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantityField_2" alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="128.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label text="ราคาต่อชิ้น">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceField_2" alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="122.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="900.0" spacing="10.0">
+               <children>
+                  <ComboBox prefHeight="52.0" prefWidth="150.0" />
+                  <Label text="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantityField_3" alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="128.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label text="ราคาต่อชิ้น">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceField_3" alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="122.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="ผู้ผลิต :">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox prefHeight="35.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <Label text="&lt; Alert &gt;" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="30.0">
+               <children>
+                  <JFXButton buttonType="RAISED" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="ยืนยัน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" style="-fx-background-color: #525564; -fx-background-radius: 50;" text="ยกเลิก" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
