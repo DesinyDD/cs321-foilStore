@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.CreatePurchaseOrderController">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.CreatePurchaseOrderController">
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="806.0" spacing="30.0">
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="800.0" spacing="30.0">
          <children>
             <Label text="ใบสั่งซื้อ">
                <font>
@@ -117,6 +117,11 @@
                   <ComboBox prefHeight="35.0" prefWidth="150.0" />
                </children>
             </HBox>
+            <Label text="เบอร์โทรศัพท์ : 08X-XXX-XXXX">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
             <Label text="&lt; Alert &gt;" textFill="RED">
                <font>
                   <Font size="18.0" />
