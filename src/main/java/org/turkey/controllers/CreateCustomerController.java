@@ -23,7 +23,7 @@ public class CreateCustomerController {
     @FXML public void addCustomer(ActionEvent event){
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
-        if(!nameF.getText().equals("") && !phoneF.getText().equals("") && !addressF.getText().equals("")){
+        if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
             Customer customer = new Customer(new BigInteger("4"),nameF.getText(),phoneF.getText(),addressF.getText());
             customers.add(customer);
             setCustomerTable();

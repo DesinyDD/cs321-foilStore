@@ -101,10 +101,11 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <TableView prefHeight="791.0" prefWidth="1500.0">
+                  <TableView fx:id="table" prefHeight="791.0" prefWidth="1500.0" style="-fx-font: 24 system;">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="code" prefWidth="417.0" text="เลขใบกำกับใบสั่งซื้อ" />
+                      <TableColumn fx:id="price" prefWidth="556.6666259765625" text="ราคารวม" />
+                        <TableColumn fx:id="supplier" prefWidth="572.9999389648438" text="ผู้ผลิต" />
                     </columns>
                   </TableView>
                </children>

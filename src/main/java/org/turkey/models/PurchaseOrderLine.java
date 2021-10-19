@@ -9,4 +9,8 @@ public class PurchaseOrderLine extends OrderLine{
         super(id, code, colorCode, quantity);
         this.pricePerUnit = pricePerUnit;
     }
+
+    public float getPricePerUnit() {
+        return pricePerUnit;
+    }
 }

@@ -63,6 +63,18 @@ public class SaleOrderController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/createSaleOrder.fxml"));
         Scene scene = new Scene(loader.load());
         createSaleOrderPage.setScene(scene);
+        CreateSaleOrderController csc = loader.getController();
+        csc.setTable(table);
+        csc.setCodeCol(code);
+        csc.setPrice(price);
+        csc.setCustomerCol(customer);
+        ArrayList<Order> arrayList = new ArrayList<>();
+        for(Order order: orders){
+            if(((SaleOrder)order).getStatus().equals(SaleStatus.WaitCreateBill)){
+                arrayList.add(order);
+            }
+        }
+        csc.setWaitCrateBillSO(arrayList);
         createSaleOrderPage.show();
     }
 

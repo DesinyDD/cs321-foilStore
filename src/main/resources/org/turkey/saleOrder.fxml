@@ -100,9 +100,9 @@
                   </HBox>
                   <TableView fx:id="table" prefHeight="711.0" prefWidth="1595.0" style="-fx-font: 24 system;">
                     <columns>
-                      <TableColumn fx:id="code" prefWidth="417.0" text="Sale Order Code" />
-                      <TableColumn fx:id="price" prefWidth="556.6666259765625" text="Total Price" />
-                        <TableColumn fx:id="customer" prefWidth="527.3333740234375" text="Customer Name" />
+                      <TableColumn fx:id="code" prefWidth="417.0" text="เลขกำกับใบสั่งขาย" />
+                      <TableColumn fx:id="price" prefWidth="556.6666259765625" text="ราคารวม" />
+                        <TableColumn fx:id="customer" prefWidth="527.3333740234375" text="ชื่อผู้ซื้อ" />
                     </columns>
                   </TableView>
                </children>

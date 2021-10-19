@@ -1,5 +1,6 @@
 package org.turkey.models;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public abstract class Order {
@@ -22,4 +23,5 @@ public abstract class Order {
     public String getCode() {return code;}
     public float getTotalPrice() {return totalPrice;}
     public String getPartner() {return partner.getName();}
+    public void addToTotal(float price){this.totalPrice += price;}
 }

@@ -1,11 +1,13 @@
 package org.turkey.models;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class SaleOrder extends Order{
     private Enum<SaleStatus> status;
     private Date completeDate;
+    private String paymentMethod;
 
     public SaleOrder(String code, Information partner, float totalPrice, Enum<SaleStatus> status) {
         super(code, partner, totalPrice);
@@ -17,4 +19,6 @@ public class SaleOrder extends Order{
     public void setCompleteDate(Date completeDate) {this.completeDate = completeDate;}
 
     public void setStatus(Enum<SaleStatus> status) {this.status = status;}
+
+    public void setPaymentMethod(String paymentMethod){this.paymentMethod = paymentMethod;}
 }
