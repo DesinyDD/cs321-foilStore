@@ -32,4 +32,16 @@ public class Item {
     public void noPO(){
         this.status = Status.ไม่มีการสั่งสินค้า;
     }
+
+    public BigInteger getAmount() {
+        return amount;
+    }
+
+    public Enum<Status> getStatus() {
+        return status;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
 }

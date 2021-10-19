@@ -25,7 +25,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField promptText="ชื่อ">
+                  <TextField fx:id="nameF" promptText="ชื่อ">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="200.0" prefWidth="598.0" promptText="ที่อยู่">
+                  <TextArea fx:id="addressF" prefHeight="200.0" prefWidth="598.0" promptText="ที่อยู่">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="51.0" prefWidth="450.0" promptText="เบอร์โทรศัพท์">
+                  <TextField fx:id="phoneF" prefHeight="51.0" prefWidth="450.0" promptText="เบอร์โทรศัพท์">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -75,7 +75,7 @@
                   </Label>
                </children>
             </VBox>
-            <JFXButton buttonType="RAISED" prefHeight="51.0" prefWidth="440.0" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="บันทึกข้อมูล">
+            <JFXButton buttonType="RAISED" onAction="#addCustomer" prefHeight="51.0" prefWidth="440.0" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="บันทึกข้อมูล">
                <font>
                   <Font size="24.0" />
                </font>

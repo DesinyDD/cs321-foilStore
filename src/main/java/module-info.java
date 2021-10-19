@@ -6,5 +6,6 @@ module org.example {
     opens org.turkey to javafx.fxml;
     exports org.turkey;
     exports org.turkey.controllers;
+    exports org.turkey.models;
     opens org.turkey.controllers to javafx.fxml;
 }

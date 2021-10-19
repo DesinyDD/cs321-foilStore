@@ -70,10 +70,11 @@
                         </JFXButton>
                      </children>
                   </HBox>
-                  <TableView prefHeight="780.0" prefWidth="1500.0">
+                  <TableView fx:id="table" prefHeight="780.0" prefWidth="1500.0" style="-fx-font: 24 system;">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="name" prefWidth="336.0" text="ชื่อ-นามสกุล" />
+                      <TableColumn fx:id="phone" prefWidth="297.0" text="เบอร์โทรศัพท์" />
+                        <TableColumn fx:id="address" prefWidth="867.3333740234375" text="ที่อยู่" />
                     </columns>
                   </TableView>
                </children>

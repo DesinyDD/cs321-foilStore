@@ -13,6 +13,10 @@ import java.io.IOException;
 public class PurchaseOrderController {
     @FXML private JFXButton waitDeliveryBtn, waitPayBtn, doneBtn;
 
+    @FXML public void initialize(){
+        showWaitDelivery();
+    }
+
     @FXML private void createPurchaseOrder() throws IOException {
         Stage createPurchaseOrderPage = new Stage();
         createPurchaseOrderPage.initModality(Modality.APPLICATION_MODAL);

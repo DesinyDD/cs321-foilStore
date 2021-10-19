@@ -129,12 +129,12 @@
             </Label>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="ยืนยัน">
+                  <JFXButton fx:id="create" buttonType="RAISED" onAction="#createPO" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="ยืนยัน">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #525564; -fx-background-radius: 50;" text="ยกเลิก" textFill="WHITE">
+                  <JFXButton fx:id="cancel" buttonType="RAISED" style="-fx-background-color: #525564; -fx-background-radius: 50;" text="ยกเลิก" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
