@@ -13,7 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Customer;
+import org.turkey.models.Information;
 import org.turkey.models.Item;
+import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class CustomerController {
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
     private ObservableList list;
-    private ArrayList<Customer> customers;
+    private ArrayList<Information> customers;
 
     @FXML public void initialize(){
         table.setRowFactory( tv -> {
@@ -34,23 +36,17 @@ public class CustomerController {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Customer rowData = row.getItem();
                     try {
-                        editCustomer();
+                        editCustomer(rowData.getName(), rowData.getAddress(), rowData.getPhoneNo());
                     } catch (IOException e) {
                         // do nothing . . .
                     }
-                    System.out.println(rowData);
                 }
             });
             return row;
         });
 
         customers = new ArrayList<>();
-        Customer customer = new Customer(new BigInteger("1"),"Ford", "08xxxxxxxx","Bodin");
-        customers.add(customer);
-        customer = new Customer(new BigInteger("2"),"MIX", "08xxxxxxxx","KU");
-        customers.add(customer);
-        customer = new Customer(new BigInteger("3"),"Q", "08xxxxxxxx","Barn");
-        customers.add(customer);
+        MockUpData.mockUpCustomer(customers);
         setCustomerTable();
     }
 
@@ -69,7 +65,7 @@ public class CustomerController {
         createCustomerPage.show();
     }
 
-    @FXML private void editCustomer() throws IOException {
+    @FXML private void editCustomer(String name, String address, String phone) throws IOException {
         Stage editCustomerPage = new Stage();
         editCustomerPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/customer/editCustomer.fxml"));
@@ -77,6 +73,10 @@ public class CustomerController {
         editCustomerPage.setScene(scene);
         editCustomerPage.setTitle("แก้ไขข้อมูลลูกค้า");
         editCustomerPage.setResizable(false);
+        EditCustomerController ec = loader.getController();
+        ec.setName(name);
+        ec.setAddress(address);
+        ec.setPhone(phone);
         editCustomerPage.show();
     }
 

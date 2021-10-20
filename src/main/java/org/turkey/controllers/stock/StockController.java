@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import org.turkey.controllers.purchaseOrder.CreatePurchaseOrderController;
 import org.turkey.models.Item;
 import org.turkey.models.Status;
+import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class StockController {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Item rowData = row.getItem();
                     try {
-                        editItem();
+                        editItem(rowData.getColorCode(), rowData.getPrice(), rowData.getMinAmount());
                     } catch (IOException e) {
                         // do nothing . . .
                     }
@@ -47,10 +48,7 @@ public class StockController {
         });
 
         stock = new ArrayList<>();
-        Item item = new Item("OSP 900", new BigInteger(230+""), 1100, new BigInteger(50+""));
-        stock.add(item);
-        item = new Item("OSP 730", new BigInteger(180+""), 1000, new BigInteger(35+""));
-        stock.add(item);
+        MockUpData.mockUpStock(stock);
         setItemTable();
     }
 
@@ -65,7 +63,7 @@ public class StockController {
         createItemPage.show();
     }
 
-    @FXML private void editItem() throws IOException {
+    @FXML private void editItem(String colorCode, float price, BigInteger min) throws IOException {
         Stage editItemPage = new Stage();
         editItemPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/editItem.fxml"));
@@ -73,6 +71,10 @@ public class StockController {
         editItemPage.setScene(scene);
         editItemPage.setTitle("แก้ไขข้อมูลสินค้า");
         editItemPage.setResizable(false);
+        EditItemController ec = loader.getController();
+        ec.setColorCode(colorCode);
+        ec.setMinAmount(min);
+        ec.setPrice(price);
         editItemPage.show();
     }
 

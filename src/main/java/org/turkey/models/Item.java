@@ -44,4 +44,12 @@ public class Item {
     public String getColorCode() {
         return colorCode;
     }
+
+    public BigInteger getMinAmount() {
+        return minAmount;
+    }
+
+    public float getPrice() {
+        return price;
+    }
 }
