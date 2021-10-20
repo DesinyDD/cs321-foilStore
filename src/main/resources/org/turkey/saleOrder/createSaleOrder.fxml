@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.saleOrder.CreateSaleOrderController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="800.0" spacing="25.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="510.0" text="ใบสั่งขาย (ครั้งละไม่เกิน 3 รายการ)">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="เลขใบกำกับสั่งขาย">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="code" alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="200.0" promptText="เลขใบกำกับสั่งขาย">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="334.0" spacing="10.0">
+               <children>
+                  <JFXButton buttonType="RAISED" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <ComboBox fx:id="code1" prefHeight="51.0" prefWidth="244.0" promptText="รหัสสี" style="-fx-font-size: 24 px;" />
+                  <Label text="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <TextField fx:id="quantityField_1" alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="186.0" promptText="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font></TextField>
+                  <Label prefHeight="35.0" prefWidth="138.0" text="จำนวนคงเหลือ">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="334.0" spacing="10.0">
+               <children>
+                  <JFXButton buttonType="RAISED" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <ComboBox fx:id="code2" prefHeight="51.0" prefWidth="244.0" promptText="รหัสสี" style="-fx-font-size: 24px;" />
+                  <Label text="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantityField_2" alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="186.0" promptText="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Label prefHeight="35.0" prefWidth="138.0" text="จำนวนคงเหลือ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="334.0" spacing="10.0">
+               <children>
+                  <JFXButton buttonType="RAISED" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <ComboBox fx:id="code3" prefHeight="51.0" prefWidth="244.0" promptText="รหัสสี" style="-fx-font-size: 24px;" />
+                  <Label text="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantityField_3" alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="186.0" promptText="จำนวน">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Label prefHeight="35.0" prefWidth="138.0" text="จำนวนคงเหลือ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="รูปแบบการชำระเงิน :">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="customerBox1" prefHeight="51.0" prefWidth="238.0" promptText="การชำระเงิน" style="-fx-font-size: 24px;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="ลูกค้า :">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="customerBox" prefHeight="51.0" prefWidth="238.0" promptText="ชื่อลูกค้า" style="-fx-font-size: 24px;" />
+               </children>
+            </HBox>
+            <Label text="&lt; Alert &gt;" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" onAction="#CreateSO" prefHeight="51.0" prefWidth="393.0" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="บันทึกข้อมูล">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

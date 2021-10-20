@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.customer.CreateCustomerController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="600.0" spacing="5.0">
+         <children>
+            <Label text="เพิ่มข้อมูลลูกค้าใหม่">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <VBox>
+               <children>
+                  <Label text="ชื่อ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameF" promptText="ชื่อ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Label text="&lt; Alert &gt;" textFill="RED">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="ที่อยู่">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="addressF" prefHeight="200.0" prefWidth="598.0" promptText="ที่อยู่">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextArea>
+                  <Label text="&lt; Alert &gt;" textFill="RED">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="เบอร์โทรศัพท์">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phoneF" prefHeight="51.0" prefWidth="450.0" promptText="เบอร์โทรศัพท์">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Label prefWidth="538.0" text="&lt; Alert &gt;" textFill="RED">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <JFXButton buttonType="RAISED" onAction="#addCustomer" prefHeight="51.0" prefWidth="440.0" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="บันทึกข้อมูล">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets left="50.0" right="50.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

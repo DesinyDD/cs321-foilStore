@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.stock.CreateItemAlertController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="30.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label alignment="CENTER" prefWidth="606.0" text="สร้างประเภทสินค้ารหัสสี">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefWidth="606.0" text="(&amp;รหัสสี)">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefWidth="606.0" text="สำเร็จ">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <JFXButton buttonType="RAISED" onAction="#close" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="รับทราบ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
