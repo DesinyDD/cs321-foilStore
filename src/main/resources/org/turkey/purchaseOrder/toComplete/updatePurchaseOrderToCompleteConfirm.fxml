@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.saleOrder.UpdateSaleOrderToWaitPayConfirmController">
+<AnchorPane prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.purchaseOrder.toComplete.UpdatePurchaseOrderToCompleteConfirmController">
    <children>
       <VBox alignment="CENTER" prefHeight="250.0" prefWidth="500.0" spacing="25.0">
          <children>

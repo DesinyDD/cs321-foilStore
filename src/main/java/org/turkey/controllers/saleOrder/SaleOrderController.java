@@ -29,15 +29,16 @@ public class SaleOrderController {
     private OrderLine orderLine;
     private ObservableList list;
 
-    @FXML public void initialize(){
+    @FXML public void initialize() {
         table.setRowFactory( tv -> {
             TableRow<Order> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Order rowData = row.getItem();
                     try {
-                        updateOrderToWaitPay();
-                        // updateOrderToComplete();
+                        // this.updateOrderToWaitPay();
+                        // this.updateOrderToComplete();
+                        this.showOrderComplete();
                     } catch (IOException e) {
                         // do nothing . . .
                     }
@@ -96,11 +97,11 @@ public class SaleOrderController {
         createSaleOrderPage.show();
     }
 
-    // เปลี่ยนสถานะ Order เป็น WaitPay
+    // เปลี่ยนสถานะ Order เป็น 'WaitPay'
     @FXML private void updateOrderToWaitPay() throws IOException {
         Stage updateSaleOrderToWaitPayPage = new Stage();
         updateSaleOrderToWaitPayPage.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/updateSaleOrderToWaitPay.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/toWaitPay/updateSaleOrderToWaitPay.fxml"));
         Scene scene = new Scene(loader.load());
         updateSaleOrderToWaitPayPage.setScene(scene);
         updateSaleOrderToWaitPayPage.setTitle("เปลี่ยนสถานะใบสั่งขาย");
@@ -108,9 +109,28 @@ public class SaleOrderController {
         updateSaleOrderToWaitPayPage.show();
     }
 
-    // เปลี่ยนสถานะ Order เป็น Complete
-    @FXML private void updateOrderToComplete() {
+    // เปลี่ยนสถานะ Order เป็น 'Complete'
+    @FXML private void updateOrderToComplete() throws IOException {
+        Stage updateSaleOrderToCompletePage = new Stage();
+        updateSaleOrderToCompletePage.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/toComplete/updateSaleOrderToComplete.fxml"));
+        Scene scene = new Scene(loader.load());
+        updateSaleOrderToCompletePage.setScene(scene);
+        updateSaleOrderToCompletePage.setTitle("เปลี่ยนสถานะใบสั่งขาย");
+        updateSaleOrderToCompletePage.setResizable(false);
+        updateSaleOrderToCompletePage.show();
+    }
 
+    // แสดง Order (สำหรับ Order ที่มีสถานะ 'Complete')
+    @FXML private void showOrderComplete() throws IOException {
+        Stage showSaleOrderCompletePage = new Stage();
+        showSaleOrderCompletePage.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/showSaleOrderComplete.fxml"));
+        Scene scene = new Scene(loader.load());
+        showSaleOrderCompletePage.setScene(scene);
+        showSaleOrderCompletePage.setTitle("ใบสั่งขาย");
+        showSaleOrderCompletePage.setResizable(false);
+        showSaleOrderCompletePage.show();
     }
 
     @FXML private void showWaitCreateBill() {
