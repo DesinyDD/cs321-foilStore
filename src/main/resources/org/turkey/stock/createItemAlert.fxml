@@ -17,7 +17,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefWidth="606.0" text="(&amp;รหัสสี)">
+                  <Label fx:id="code" alignment="CENTER" prefWidth="606.0" text="(&amp;รหัสสี)">
                      <font>
                         <Font size="36.0" />
                      </font>

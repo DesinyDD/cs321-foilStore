@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
+import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
@@ -30,30 +31,7 @@ public class PurchaseOrderController {
 
     @FXML public void initialize(){
         orders = new ArrayList<>();
-        order = new PurchaseOrder("F62190158900",new Customer(new BigInteger("6"),"Test","09xxxxxxxx","?"),8000, PurchaseStatus.Wait);
-        orderLine = new PurchaseOrderLine(new BigInteger("1"),"F62190158900","OSP 730", new BigInteger("35"),900);
-        order.addOrderLine(orderLine);
-        orderLine = new PurchaseOrderLine(new BigInteger("2"),"F62190158900","OSP 900", new BigInteger("12"),900);
-        order.addOrderLine(orderLine);
-        orderLine = new PurchaseOrderLine(new BigInteger("3"),"F62190158900","OSP 830", new BigInteger("5"),900);
-        order.addOrderLine(orderLine);
-        orders.add(order);
-        order = new PurchaseOrder("F62190158901",new Customer(new BigInteger("6"),"Test","09xxxxxxxx","?"),13500, PurchaseStatus.WaitPay);
-        orderLine = new PurchaseOrderLine(new BigInteger("4"),"F62190158901","OSP 420", new BigInteger("15"),900);
-        order.addOrderLine(orderLine);
-        orderLine = new PurchaseOrderLine(new BigInteger("5"),"F62190158901","OSP 630", new BigInteger("5"),900);
-        order.addOrderLine(orderLine);
-        orderLine = new PurchaseOrderLine(new BigInteger("6"),"F62190158901","OSP 213", new BigInteger("75"),900);
-        order.addOrderLine(orderLine);
-        orders.add(order);
-        order = new PurchaseOrder("F62190158899",new Customer(new BigInteger("6"),"Test","09xxxxxxxx","?"),8000, PurchaseStatus.Complete);
-        orderLine = new PurchaseOrderLine(new BigInteger("7"),"F62190158900","OSP 730", new BigInteger("35"),900);
-        order.addOrderLine(orderLine);
-        orderLine = new PurchaseOrderLine(new BigInteger("8"),"F62190158900","OSP 900", new BigInteger("12"),900);
-        order.addOrderLine(orderLine);
-        orderLine = new PurchaseOrderLine(new BigInteger("9"),"F62190158900","OSP 830", new BigInteger("5"),900);
-        order.addOrderLine(orderLine);
-        orders.add(order);
+        MockUpData.mockUpPO(orders);
         showWaitDelivery();
     }
 
