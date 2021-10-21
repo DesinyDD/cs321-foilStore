@@ -106,16 +106,6 @@
             </HBox>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label text="รูปแบบการชำระเงิน :">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="payment" prefHeight="51.0" prefWidth="238.0" promptText="การชำระเงิน" style="-fx-font-size: 24px;" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
                   <Label text="ลูกค้า :">
                      <font>
                         <Font size="24.0" />
