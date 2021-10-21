@@ -7,15 +7,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Item;
 import org.turkey.models.Status;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -84,12 +88,23 @@ public class CreatePurchaseOrderController {
         });
     }
 
-    @FXML public void createPO(ActionEvent event){
+    @FXML public void createPO(ActionEvent event) throws IOException {
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
-        Item item = new Item("Test",new BigInteger("30"),200, new BigInteger("10"));
-        stock.add(item);
-        setItemTable();
+        // Item item = new Item("Test",new BigInteger("30"),200, new BigInteger("10"));
+        // stock.add(item);
+        // setItemTable();
+
+        // Alert Box
+        Stage purchaseOrderAlertPage = new Stage();
+        purchaseOrderAlertPage.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrderAlert.fxml"));
+        Scene scene = new Scene(loader.load());
+        purchaseOrderAlertPage.setScene(scene);
+        purchaseOrderAlertPage.setTitle("สำเร็จ");
+        purchaseOrderAlertPage.setResizable(false);
+        purchaseOrderAlertPage.show();
+
         stage.close();
     }
 

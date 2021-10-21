@@ -1,4 +1,4 @@
-package org.turkey.controllers.saleOrder;
+package org.turkey.controllers.saleOrder.toWaitPay;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ public class UpdateSaleOrderToWaitPayConfirmController {
         // Alert Box
         Stage updateSaleOrderToWaitPayAlertPage = new Stage();
         updateSaleOrderToWaitPayAlertPage.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/updateSaleOrderToWaitPayAlert.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/toWaitPay/updateSaleOrderToWaitPayAlert.fxml"));
         Scene scene = new Scene(loader.load());
         updateSaleOrderToWaitPayAlertPage.setScene(scene);
         updateSaleOrderToWaitPayAlertPage.setTitle("สำเร็จ");
