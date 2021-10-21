@@ -22,20 +22,20 @@ import java.util.List;
 
 public class SaleOrderController {
     @FXML private JFXButton waitCreateBillBtn, waitPayBtn, doneBtn;
-    @FXML private TableView<Order> table;
-    @FXML private TableColumn<Order,String> code,customer;
-    @FXML private TableColumn<Order, Float> price;
+    @FXML private TableView<SaleOrder> table;
+    @FXML private TableColumn<SaleOrder,String> code,customer;
+    @FXML private TableColumn<SaleOrder, Float> price;
     private List<SaleOrder> orders = new HttpManage().getSaleOrder();
-    private Order order;
-    private OrderLine orderLine;
+    private SaleOrder order;
+    private SaleOrderLine orderLine;
     private ObservableList list;
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
-            TableRow<Order> row = new TableRow<>();
+            TableRow<SaleOrder> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-                    Order rowData = row.getItem();
+                    SaleOrder rowData = row.getItem();
                     try {
                         // this.updateOrderToWaitPay();
                         // this.updateOrderToComplete();
@@ -65,9 +65,9 @@ public class SaleOrderController {
         csc.setCodeCol(code);
         csc.setPrice(price);
         csc.setCustomerCol(customer);
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((SaleOrder)order).getStatus().equals(Status.WaitCreateBill)){
+        ArrayList<SaleOrder> arrayList = new ArrayList<>();
+        for(SaleOrder order: orders){
+            if(order.getStatus().equals(Status.WaitCreateBill)){
                 arrayList.add(order);
             }
         }

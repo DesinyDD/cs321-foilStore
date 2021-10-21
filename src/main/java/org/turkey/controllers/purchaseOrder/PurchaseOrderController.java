@@ -22,20 +22,20 @@ import java.util.ArrayList;
 
 public class PurchaseOrderController {
     @FXML private JFXButton waitDeliveryBtn, waitPayBtn, doneBtn;
-    @FXML private TableView<Order> table;
-    @FXML private TableColumn<Order, String> code,supplier;
-    @FXML private TableColumn<Order, Float> price;
+    @FXML private TableView<Po> table;
+    @FXML private TableColumn<Po, String> code,supplier;
+    @FXML private TableColumn<Po, Float> price;
     private ObservableList list;
-    private Order order;
-    private OrderLine orderLine;
-    private ArrayList<Order> orders;
+    private Po order;
+    private PoLine orderLine;
+    private ArrayList<Po> orders;
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
-            TableRow<Order> row = new TableRow<>();
+            TableRow<Po> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-                    Order rowData = row.getItem();
+                    Po rowData = row.getItem();
                     try {
                         this.updatePurchaseOrderToWaitPay();
                         // this.updateOrderToComplete();
@@ -102,9 +102,9 @@ public class PurchaseOrderController {
     @FXML private void showWaitDelivery() {
         clearBtnStyle();
         this.waitDeliveryBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((PurchaseOrder)order).getStatus().equals(PurchaseStatus.Wait)){
+        ArrayList<Po> arrayList = new ArrayList<>();
+        for(Po order: orders){
+            if(order.getStatus().equals(PurchaseStatus.Wait)){
                 arrayList.add(order);
             }
         }
@@ -114,9 +114,9 @@ public class PurchaseOrderController {
     @FXML private void showWaitPay() {
         clearBtnStyle();
         this.waitPayBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((PurchaseOrder)order).getStatus().equals(PurchaseStatus.WaitPay)){
+        ArrayList<Po> arrayList = new ArrayList<>();
+        for(Po order: orders){
+            if(order.getStatus().equals(PurchaseStatus.WaitPay)){
                 arrayList.add(order);
             }
         }
@@ -126,9 +126,9 @@ public class PurchaseOrderController {
     @FXML private void showDone() {
         clearBtnStyle();
         this.doneBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((PurchaseOrder)order).getStatus().equals(PurchaseStatus.Complete)){
+        ArrayList<Po> arrayList = new ArrayList<>();
+        for(Po order: orders){
+            if(order.getStatus().equals(PurchaseStatus.Complete)){
                 arrayList.add(order);
             }
         }
@@ -140,7 +140,7 @@ public class PurchaseOrderController {
         this.waitPayBtn.setStyle("-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 50");
         this.doneBtn.setStyle("-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 50");
     }
-    public void setPOTable(ArrayList<Order> arrayList){
+    public void setPOTable(ArrayList<Po> arrayList){
         table.getItems().clear();
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);

@@ -29,8 +29,8 @@ public class CreateCustomerController {
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
         if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
-            Customer customer = new Customer(new BigInteger("4"),nameF.getText(),phoneF.getText(),addressF.getText());
-//            customers.add(customer);
+            Customer customer = new Customer(new BigInteger("4"),nameF.getText(),addressF.getText(),phoneF.getText());
+            customers.add(customer);
             setCustomerTable();
 
             // Alert Box

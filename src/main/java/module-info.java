@@ -31,4 +31,5 @@ module org.example {
     opens org.turkey.controllers.saleOrder.toComplete to javafx.fxml;
     exports org.turkey.controllers.saleOrder.toWaitPay;
     opens org.turkey.controllers.saleOrder.toWaitPay to javafx.fxml;
+    opens org.turkey.models to com.google.gson;
 }

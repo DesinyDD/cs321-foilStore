@@ -49,7 +49,7 @@ public class MockUpData {
 //        order.addOrderLine(orderLine);
 //        orders.add(order);
     }
-    public static void mockUpPO(ArrayList<Order> orders){
+    public static void mockUpPO(ArrayList<Po> orders){
 //        Order order = new PurchaseOrder("F62190158900",new Customer(new BigInteger("6"),"Test","09xxxxxxxx","?"),8000, PurchaseStatus.Wait);
 //        OrderLine orderLine = new PurchaseOrderLine(new BigInteger("1"),"F62190158900","OSP 730", new BigInteger("35"),900);
 //        order.addOrderLine(orderLine);

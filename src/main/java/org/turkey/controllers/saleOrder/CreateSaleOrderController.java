@@ -22,16 +22,16 @@ import java.util.ArrayList;
 public class CreateSaleOrderController {
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, code;
     @FXML private ComboBox code1, code2, code3, customerBox;
-    @FXML private TableView<Order> table;
-    @FXML private TableColumn<Order, String> codeCol,customerCol;
-    @FXML private TableColumn<Order, Float> price;
+    @FXML private TableView<SaleOrder> table;
+    @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
+    @FXML private TableColumn<SaleOrder, Float> price;
     private ArrayList<Item> stock = new ArrayList<>();
-    private ArrayList<Information> customers = new ArrayList<>();
-    private ArrayList<Order> orders = new ArrayList<>(), waitCrateBillSO;
+    private ArrayList<Customer> customers = new ArrayList<>();
+    private ArrayList<SaleOrder> orders = new ArrayList<>(), waitCrateBillSO;
     private Item item;
-    private Information customer;
-    private Order order;
-    private OrderLine orderLine;
+    private Customer customer;
+    private SaleOrder order;
+    private SaleOrderLine orderLine;
     private ArrayList<String> itemCode = new ArrayList<>(), customerName = new ArrayList<>(), orderCode = new ArrayList<>();
     private ObservableList list;
 
@@ -39,13 +39,13 @@ public class CreateSaleOrderController {
 //        MockUpData.mockUpSO(orders);
 //        MockUpData.mockUpStock(stock);
 //        MockUpData.mockUpCustomer(customers);
-        for(Order order: orders){
+        for(SaleOrder order: orders){
 //            orderCode.add(order.getCode());
         }
         for(Item item: stock){
 //            itemCode.add(item.getColorCode());
         }
-        for(Information customer : customers ){
+        for(Customer customer : customers ){
 //            customerName.add(customer.getName());
         }
         customerBox.getItems().addAll(customerName);
@@ -160,7 +160,7 @@ public class CreateSaleOrderController {
         }
 //    }
 
-    public void setSOTable(ArrayList<Order> arrayList){
+    public void setSOTable(ArrayList<SaleOrder> arrayList){
         table.getItems().clear();
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
@@ -169,23 +169,23 @@ public class CreateSaleOrderController {
         customerCol.setCellValueFactory(new PropertyValueFactory<>("partner"));
     }
 
-    public void setTable(TableView<Order> table) {
+    public void setTable(TableView<SaleOrder> table) {
         this.table = table;
     }
 
-    public void setCodeCol(TableColumn<Order, String> codeCol) {
+    public void setCodeCol(TableColumn<SaleOrder, String> codeCol) {
         this.codeCol = codeCol;
     }
 
-    public void setCustomerCol(TableColumn<Order, String> customerCol) {
+    public void setCustomerCol(TableColumn<SaleOrder, String> customerCol) {
         this.customerCol = customerCol;
     }
 
-    public void setPrice(TableColumn<Order, Float> price) {
+    public void setPrice(TableColumn<SaleOrder, Float> price) {
         this.price = price;
     }
 
-    public void setWaitCrateBillSO(ArrayList<Order> waitCrateBillSO) {
+    public void setWaitCrateBillSO(ArrayList<SaleOrder> waitCrateBillSO) {
         this.waitCrateBillSO = waitCrateBillSO;
     }
 }
