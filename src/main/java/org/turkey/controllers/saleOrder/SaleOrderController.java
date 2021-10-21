@@ -1,6 +1,7 @@
 package org.turkey.controllers.saleOrder;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,29 +14,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
-import org.turkey.services.MockUpData;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SaleOrderController {
     @FXML private JFXButton waitCreateBillBtn, waitPayBtn, doneBtn;
-    @FXML private TableView<Order> table;
-    @FXML private TableColumn<Order,String> code,customer;
-    @FXML private TableColumn<Order, Float> price;
-    private ArrayList<Order> orders;
-    private Order order;
-    private OrderLine orderLine;
+    @FXML private TableView<SaleOrder> table;
+    @FXML private TableColumn<SaleOrder,String> code,customer;
+    @FXML private TableColumn<SaleOrder, Float> price;
+    private List<SaleOrder> orders = new HttpManage().getSaleOrder();
+//    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
+    private SaleOrder order;
+    private SaleOrderLine orderLine;
     private ObservableList list;
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
-            TableRow<Order> row = new TableRow<>();
+            TableRow<SaleOrder> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-                    Order rowData = row.getItem();
+                    SaleOrder rowData = row.getItem();
                     try {
                         // this.updateOrderToWaitPay();
                         // this.updateOrderToComplete();
@@ -48,10 +50,13 @@ public class SaleOrderController {
             });
             return row;
         });
-
-        orders = new ArrayList<>();
-        MockUpData.mockUpSO(orders);
-        showWaitCreateBill();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showWaitCreateBill();
+            }
+        });
+//        MockUpData.mockUpSO(orders);
     }
 
     @FXML private void createSaleOrder() throws IOException {
@@ -65,9 +70,9 @@ public class SaleOrderController {
         csc.setCodeCol(code);
         csc.setPrice(price);
         csc.setCustomerCol(customer);
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((SaleOrder)order).getStatus().equals(SaleStatus.WaitCreateBill)){
+        ArrayList<SaleOrder> arrayList = new ArrayList<>();
+        for(SaleOrder order: orders){
+            if(order.getStatus().equals(Status.WaitCreateBill)){
                 arrayList.add(order);
             }
         }
@@ -112,11 +117,12 @@ public class SaleOrderController {
     }
 
     @FXML private void showWaitCreateBill() {
+        System.out.println(orders);
         clearBtnStyle();
         this.waitCreateBillBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((SaleOrder)order).getStatus().equals(SaleStatus.WaitCreateBill)){
+        ArrayList<SaleOrder> arrayList = new ArrayList<>();
+        for(SaleOrder order: orders){
+            if(order.getStatus().equals(Status.WaitCreateBill)){
                 arrayList.add(order);
             }
         }
@@ -126,9 +132,9 @@ public class SaleOrderController {
     @FXML private void showWaitPay() {
         clearBtnStyle();
         this.waitPayBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((SaleOrder)order).getStatus().equals(SaleStatus.WaitPay)){
+        ArrayList<SaleOrder> arrayList = new ArrayList<>();
+        for(SaleOrder order: orders){
+            if(order.getStatus().equals(Status.WaitPay)){
                 arrayList.add(order);
             }
         }
@@ -138,9 +144,9 @@ public class SaleOrderController {
     @FXML private void showDone() {
         clearBtnStyle();
         this.doneBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<Order> arrayList = new ArrayList<>();
-        for(Order order: orders){
-            if(((SaleOrder)order).getStatus().equals(SaleStatus.Complete)){
+        ArrayList<SaleOrder> arrayList = new ArrayList<>();
+        for(SaleOrder order: orders){
+            if(order.getStatus().equals(Status.Complete)){
                 arrayList.add(order);
             }
         }
@@ -153,13 +159,13 @@ public class SaleOrderController {
         this.doneBtn.setStyle("-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 50");
     }
 
-    public void setSOTable(ArrayList<Order> arrayList){
+    public void setSOTable(ArrayList<SaleOrder> arrayList){
         table.getItems().clear();
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
         price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        customer.setCellValueFactory(new PropertyValueFactory<>("partner"));
+        customer.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
     // Page Switcher
     @FXML private void toHome() throws IOException { NavBarService.switchToHome(); }

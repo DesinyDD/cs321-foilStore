@@ -15,19 +15,21 @@ import javafx.stage.Stage;
 import org.turkey.models.Customer;
 import org.turkey.models.Information;
 import org.turkey.models.Item;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerController {
     @FXML private JFXButton addCustomerBtn;
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
     private ObservableList list;
-    private ArrayList<Information> customers;
+//    private List<Customer> customers = new HttpManage().
 
     @FXML public void initialize(){
         table.setRowFactory( tv -> {
@@ -45,8 +47,8 @@ public class CustomerController {
             return row;
         });
 
-        customers = new ArrayList<>();
-        MockUpData.mockUpCustomer(customers);
+//        customers = new ArrayList<>();
+//        MockUpData.mockUpCustomer(customers);
         setCustomerTable();
     }
 
@@ -57,7 +59,6 @@ public class CustomerController {
         Scene scene = new Scene(loader.load());
         createCustomerPage.setScene(scene);
         CreateCustomerController cc = loader.getController();
-        cc.setCustomers(customers);
         cc.setTable(table);
         cc.setName(name);
         cc.setPhone(phone);
@@ -81,7 +82,7 @@ public class CustomerController {
     }
 
     public void setCustomerTable(){
-        list = FXCollections.observableArrayList(customers);
+//        list = FXCollections.observableArrayList(customers);
         table.setItems(list);
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));

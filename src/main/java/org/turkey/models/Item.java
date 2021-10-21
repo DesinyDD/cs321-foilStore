@@ -1,55 +1,74 @@
 package org.turkey.models;
-
-import java.math.BigInteger;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Item {
-    private String colorCode;
-    private BigInteger amount;
-    private float price;
-    private BigInteger minAmount;
-    private Enum<Status> status;
 
-    public Item(String colorCode, BigInteger amount, float price, BigInteger minAmount){
-        this.colorCode = colorCode;
-        this.amount = amount;
+    @SerializedName("code")
+    @Expose
+    private String code;
+    @SerializedName("price")
+    @Expose
+    private Double price;
+    @SerializedName("amount")
+    @Expose
+    private Integer amount;
+    @SerializedName("min_amount")
+    @Expose
+    private Integer minAmount;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Item() {
+    }
+
+    /**
+     *
+     * @param minAmount
+     * @param amount
+     * @param code
+     * @param price
+     */
+    public Item(String code, Double price, Integer amount, Integer minAmount) {
+        super();
+        this.code = code;
         this.price = price;
+        this.amount = amount;
         this.minAmount = minAmount;
-        this.status = Status.ไม่มีการสั่งสินค้า;
     }
 
-    public void addStock(BigInteger quantity){
-        this.amount = this.amount.add(quantity);
+    public String getCode() {
+        return code;
     }
 
-    public void saleItem(BigInteger quantity){
-        this.amount = this.amount.subtract(quantity);
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void havePO(){
-        this.status = Status.มีการสั่งสินค้า;
+    public Double getPrice() {
+        return price;
     }
 
-    public void noPO(){
-        this.status = Status.ไม่มีการสั่งสินค้า;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public BigInteger getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public Enum<Status> getStatus() {
-        return status;
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public BigInteger getMinAmount() {
+    public Integer getMinAmount() {
         return minAmount;
     }
 
-    public float getPrice() {
-        return price;
+    public void setMinAmount(Integer minAmount) {
+        this.minAmount = minAmount;
     }
+
 }

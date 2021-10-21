@@ -22,31 +22,31 @@ import java.util.ArrayList;
 public class CreateSaleOrderController {
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, code;
     @FXML private ComboBox code1, code2, code3, customerBox;
-    @FXML private TableView<Order> table;
-    @FXML private TableColumn<Order, String> codeCol,customerCol;
-    @FXML private TableColumn<Order, Float> price;
+    @FXML private TableView<SaleOrder> table;
+    @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
+    @FXML private TableColumn<SaleOrder, Float> price;
     private ArrayList<Item> stock = new ArrayList<>();
-    private ArrayList<Information> customers = new ArrayList<>();
-    private ArrayList<Order> orders = new ArrayList<>(), waitCrateBillSO;
+    private ArrayList<Customer> customers = new ArrayList<>();
+    private ArrayList<SaleOrder> orders = new ArrayList<>(), waitCrateBillSO;
     private Item item;
-    private Information customer;
-    private Order order;
-    private OrderLine orderLine;
+    private Customer customer;
+    private SaleOrder order;
+    private SaleOrderLine orderLine;
     private ArrayList<String> itemCode = new ArrayList<>(), customerName = new ArrayList<>(), orderCode = new ArrayList<>();
     private ObservableList list;
 
     @FXML public void initialize() {
-        MockUpData.mockUpSO(orders);
-        MockUpData.mockUpStock(stock);
-        MockUpData.mockUpCustomer(customers);
-        for(Order order: orders){
-            orderCode.add(order.getCode());
+//        MockUpData.mockUpSO(orders);
+//        MockUpData.mockUpStock(stock);
+//        MockUpData.mockUpCustomer(customers);
+        for(SaleOrder order: orders){
+//            orderCode.add(order.getCode());
         }
         for(Item item: stock){
-            itemCode.add(item.getColorCode());
+//            itemCode.add(item.getColorCode());
         }
-        for(Information customer : customers ){
-            customerName.add(customer.getName());
+        for(Customer customer : customers ){
+//            customerName.add(customer.getName());
         }
         customerBox.getItems().addAll(customerName);
         code1.getItems().addAll(itemCode);
@@ -114,26 +114,26 @@ public class CreateSaleOrderController {
                     System.out.println("not complete");
                 }else{
                     // เสดหมด
-                    System.out.println("success");
-                    order = new SaleOrder(code.getText(), customer, 0, SaleStatus.WaitCreateBill);
-                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
-                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
-                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
-                        order.addOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
-                    }
-                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
-                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
-                        order.addOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
-                    }
-                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
-                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
-                        order.addOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
+//                    System.out.println("success");
+//                    order = new SaleOrder(code.getText(), customer, 0, Status.WaitCreateBill);
+//                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
+//                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
+//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+//                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
+//                        order.addOrderLine(orderLine);
+//                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
+//                    }
+//                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
+//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+//                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
+//                        order.addOrderLine(orderLine);
+//                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
+//                    }
+//                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
+//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+//                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
+//                        order.addOrderLine(orderLine);
+//                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
                     }
                     waitCrateBillSO.add(order);
                     setSOTable(waitCrateBillSO);
@@ -154,13 +154,13 @@ public class CreateSaleOrderController {
                 System.out.println("no order");
                 //กรุณาใส่สินค้าอย่างน้อย 1 ชุด
             }
-        }else{
+//        }else{
             System.out.println("no code");
             // alert ต้องใส่เลขกำกับ
         }
-    }
+//    }
 
-    public void setSOTable(ArrayList<Order> arrayList){
+    public void setSOTable(ArrayList<SaleOrder> arrayList){
         table.getItems().clear();
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
@@ -169,23 +169,23 @@ public class CreateSaleOrderController {
         customerCol.setCellValueFactory(new PropertyValueFactory<>("partner"));
     }
 
-    public void setTable(TableView<Order> table) {
+    public void setTable(TableView<SaleOrder> table) {
         this.table = table;
     }
 
-    public void setCodeCol(TableColumn<Order, String> codeCol) {
+    public void setCodeCol(TableColumn<SaleOrder, String> codeCol) {
         this.codeCol = codeCol;
     }
 
-    public void setCustomerCol(TableColumn<Order, String> customerCol) {
+    public void setCustomerCol(TableColumn<SaleOrder, String> customerCol) {
         this.customerCol = customerCol;
     }
 
-    public void setPrice(TableColumn<Order, Float> price) {
+    public void setPrice(TableColumn<SaleOrder, Float> price) {
         this.price = price;
     }
 
-    public void setWaitCrateBillSO(ArrayList<Order> waitCrateBillSO) {
+    public void setWaitCrateBillSO(ArrayList<SaleOrder> waitCrateBillSO) {
         this.waitCrateBillSO = waitCrateBillSO;
     }
 }

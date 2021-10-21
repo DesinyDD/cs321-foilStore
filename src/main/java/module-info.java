@@ -2,6 +2,9 @@ module org.example {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.jfoenix;
+    requires com.google.gson;
+    requires retrofit2;
+    requires retrofit2.converter.gson;
 
     opens org.turkey to javafx.fxml;
     exports org.turkey;
@@ -28,4 +31,5 @@ module org.example {
     opens org.turkey.controllers.saleOrder.toComplete to javafx.fxml;
     exports org.turkey.controllers.saleOrder.toWaitPay;
     opens org.turkey.controllers.saleOrder.toWaitPay to javafx.fxml;
+    opens org.turkey.models to com.google.gson;
 }

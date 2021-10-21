@@ -1,24 +1,28 @@
 package org.turkey.models;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.math.BigInteger;
 
-public class SaleOrderLine {
+public class PoLine {
 
     @SerializedName("id")
     @Expose
     private BigInteger id;
-    @SerializedName("sale_order_code")
+    @SerializedName("po_code")
     @Expose
-    private String saleOrderCode;
+    private String poCode;
     @SerializedName("color_code")
     @Expose
     private String colorCode;
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
+    @SerializedName("price_per_unit")
+    @Expose
+    private Double pricePerUnit;
     @SerializedName("item")
     @Expose
     private Item item;
@@ -27,23 +31,25 @@ public class SaleOrderLine {
      * No args constructor for use in serialization
      *
      */
-    public SaleOrderLine() {
+    public PoLine() {
     }
 
     /**
      *
-     * @param saleOrderCode
      * @param item
      * @param quantity
+     * @param poCode
      * @param colorCode
      * @param id
+     * @param pricePerUnit
      */
-    public SaleOrderLine(BigInteger id, String saleOrderCode, String colorCode, Integer quantity, Item item) {
+    public PoLine(BigInteger id, String poCode, String colorCode, Integer quantity, Double pricePerUnit, Item item) {
         super();
         this.id = id;
-        this.saleOrderCode = saleOrderCode;
+        this.poCode = poCode;
         this.colorCode = colorCode;
         this.quantity = quantity;
+        this.pricePerUnit = pricePerUnit;
         this.item = item;
     }
 
@@ -55,12 +61,12 @@ public class SaleOrderLine {
         this.id = id;
     }
 
-    public String getSaleOrderCode() {
-        return saleOrderCode;
+    public String getPoCode() {
+        return poCode;
     }
 
-    public void setSaleOrderCode(String saleOrderCode) {
-        this.saleOrderCode = saleOrderCode;
+    public void setPoCode(String poCode) {
+        this.poCode = poCode;
     }
 
     public String getColorCode() {
@@ -77,6 +83,14 @@ public class SaleOrderLine {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(Double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 
     public Item getItem() {

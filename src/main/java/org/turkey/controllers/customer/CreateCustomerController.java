@@ -12,13 +12,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Customer;
 import org.turkey.models.Information;
+import org.turkey.services.HTTPRequest.HttpManage;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateCustomerController {
-    private ArrayList<Information> customers;
+    private List<Customer> customers;
     private ObservableList list;
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
@@ -29,7 +31,7 @@ public class CreateCustomerController {
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
         if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
-            Customer customer = new Customer(new BigInteger("4"),nameF.getText(),phoneF.getText(),addressF.getText());
+            Customer customer = new Customer(new BigInteger("4"),nameF.getText(),addressF.getText(),phoneF.getText());
             customers.add(customer);
             setCustomerTable();
 
@@ -60,7 +62,6 @@ public class CreateCustomerController {
     }
 
     public void setAddress(TableColumn<Customer, String> address) {this.address = address;}
-    public void setCustomers(ArrayList<Information> customers) {this.customers = customers;}
     public void setName(TableColumn<Customer, String> name) {this.name = name;}
     public void setTable(TableView<Customer> table) {this.table = table;}
     public void setPhone(TableColumn<Customer, String> phone) {this.phone = phone;}

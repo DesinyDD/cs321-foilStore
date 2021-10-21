@@ -17,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Item;
-import org.turkey.models.Status;
+import org.turkey.models.StatusInApp;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -30,7 +30,7 @@ public class CreatePurchaseOrderController {
     @FXML private TableView<Item> table;
     @FXML private TableColumn<Item, String> code;
     @FXML private TableColumn<Item, BigInteger> amount;
-    @FXML private TableColumn<Item, Enum<Status>> status;
+    @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private ArrayList<Item> stock;
     private ObservableList list;
     @FXML public void initialize() {
@@ -120,5 +120,5 @@ public class CreatePurchaseOrderController {
     public void setTable(TableView<Item> table){this.table = table;}
     public void setAmount(TableColumn<Item, BigInteger> amount) {this.amount = amount;}
     public void setCode(TableColumn<Item, String> code) {this.code = code;}
-    public void setStatus(TableColumn<Item, Enum<Status>> status) {this.status = status;}
+    public void setStatus(TableColumn<Item, Enum<StatusInApp>> status) {this.status = status;}
 }
