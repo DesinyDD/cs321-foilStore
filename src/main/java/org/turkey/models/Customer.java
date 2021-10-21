@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Customer {
-    @SerializedName("customer_id")
+    @SerializedName("id")
     @Expose
     private BigInteger customerId;
     @SerializedName("name")
@@ -70,5 +70,15 @@ public class Customer {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                '}';
     }
 }

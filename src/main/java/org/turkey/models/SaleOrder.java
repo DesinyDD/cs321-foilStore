@@ -66,12 +66,11 @@ public class SaleOrder {
         this.customer = customer;
     }
 
-    public SaleOrder(String code, BigInteger customerId, List<SaleOrderLine> saleOrderLines, Customer customer) {
+    public SaleOrder(String code, BigInteger customerId, Customer customer) {
         this.code = code;
         this.customerId = customerId;
         this.status = Status.WaitCreateBill;
         this.totalPrice = 0;
-        this.saleOrderLines = saleOrderLines;
         this.customer = customer;
     }
 

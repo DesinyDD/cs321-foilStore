@@ -23,7 +23,7 @@ import java.util.List;
 
 public class CreateSaleOrderController {
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, code;
-    @FXML private ComboBox code1, code2, code3, customerBox, payment;
+    @FXML private ComboBox code1, code2, code3, customerBox;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
     @FXML private TableColumn<SaleOrder, Float> price;
@@ -34,6 +34,7 @@ public class CreateSaleOrderController {
     private Customer customer;
     private SaleOrder order;
     private SaleOrderLine orderLine;
+    private BigInteger customerID;
     private ArrayList<String> itemCode = new ArrayList<>(), customerName = new ArrayList<>(), orderCode = new ArrayList<>();
     private ObservableList list;
 
@@ -83,11 +84,24 @@ public class CreateSaleOrderController {
     @FXML public void CreateSO(ActionEvent event) throws IOException {
         Button b = (Button) event.getSource();
         Stage stage =(Stage) b.getScene().getWindow();
-//        try{
-//            order = new SaleOrder(code.getText(), BigInteger customerId, List<SaleOrderLine> saleOrderLines, Customer customer)
-//        }catch (Exception e){
-//
-//        }
+        try{
+            customer = null;
+            for(Customer customer1: customers){
+                if (customerBox.getValue()==null){
+                    break;
+                }
+                if(customer1.getName().equals(customerBox.getValue().toString())){
+                    customer = customer1;
+                    customerID = customer1.getCustomerId();
+                    break;
+                }
+            }
+            // ได้ sale order
+            order = new SaleOrder(code.getText(), customerID, customer);
+            System.out.println(order);
+        }catch (Exception e){
+            System.out.println(1);
+        }
 //        if(!code.getText().trim().equals("")){
 //            if((code1.getValue() != null && !quantityField_1.getText().trim().equals("")) ||
 //                    (code2.getValue() != null && !quantityField_2.getText().trim().equals(""))||
