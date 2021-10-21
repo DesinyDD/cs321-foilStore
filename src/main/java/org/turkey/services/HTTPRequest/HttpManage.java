@@ -1,6 +1,8 @@
 package org.turkey.services.HTTPRequest;
 
+import org.turkey.models.Customer;
 import org.turkey.models.Item;
+import org.turkey.models.Po;
 import org.turkey.models.SaleOrder;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,20 +45,56 @@ public class HttpManage {
     public List<SaleOrder> getSaleOrder() {
         ApiService service = startConnection();
         Call<List<SaleOrder>> callSaleOrder = service.listSaleOrder();
-        List<SaleOrder> saleOrderList = new ArrayList<>();
-        callSaleOrder.enqueue(new Callback<List<SaleOrder>>() {
-            @Override
-            public void onResponse(Call<List<SaleOrder>> call, Response<List<SaleOrder>> response) {
-                if (response.isSuccessful()) {
-                    saleOrderList.addAll(response.body());
-                }
-            }
+        try{
+            List<SaleOrder> saleOrderList = callSaleOrder.execute().body();
+            return saleOrderList;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+//    public List<SaleOrder> getSaleOrder() {
+//        ApiService service = startConnection();
+//        Call<List<SaleOrder>> callSaleOrder = service.listSaleOrder();
+//        List<SaleOrder> saleOrderList = new ArrayList<>();
+//        callSaleOrder.enqueue(new Callback<List<SaleOrder>>() {
+//            @Override
+//            public void onResponse(Call<List<SaleOrder>> call, Response<List<SaleOrder>> response) {
+//                if (response.isSuccessful()) {
+//                    saleOrderList.addAll(response.body());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<SaleOrder>> call, Throwable t) {
+//
+//            }
+//        });
+//        return saleOrderList;
+//    }
 
-            @Override
-            public void onFailure(Call<List<SaleOrder>> call, Throwable t) {
+    public List<Po> getPO() {
+        ApiService service = startConnection();
+        Call<List<Po>> callPO = service.listPo();
+        try{
+            List<Po> pos = callPO.execute().body();
+            return pos;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-            }
-        });
-        return saleOrderList;
+    public List<Customer> getCustomer(){
+        ApiService service = startConnection();
+        Call<List<Customer>> callCustomer = service.listCustomers();
+        try{
+            List<Customer> customers = callCustomer.execute().body();
+            return customers;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

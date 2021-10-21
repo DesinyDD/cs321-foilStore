@@ -117,7 +117,7 @@ public class SaleOrderController {
     }
 
     @FXML private void showWaitCreateBill() {
-        System.out.println(orders);
+//        System.out.println(orders);
         clearBtnStyle();
         this.waitCreateBillBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();

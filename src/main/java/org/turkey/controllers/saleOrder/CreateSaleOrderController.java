@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class CreateSaleOrderController {
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, code;
-    @FXML private ComboBox code1, code2, code3, customerBox;
+    @FXML private ComboBox code1, code2, code3, customerBox, payment;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
     @FXML private TableColumn<SaleOrder, Float> price;
@@ -81,82 +81,87 @@ public class CreateSaleOrderController {
     @FXML public void CreateSO(ActionEvent event) throws IOException {
         Button b = (Button) event.getSource();
         Stage stage =(Stage) b.getScene().getWindow();
-        if(!code.getText().trim().equals("")){
-            if((code1.getValue() != null && !quantityField_1.getText().trim().equals("")) ||
-                    (code2.getValue() != null && !quantityField_2.getText().trim().equals(""))||
-                    (code3.getValue() != null && !quantityField_3.getText().trim().equals(""))){
-                System.out.println("have order line");
-                boolean err = false;
-                // 3 เงื่อนไขข้างล่างให้เช็คว่าเเมื่อช่องใดเป็นว่างแต่ถ้า 2 ช่องไม่ต้องแสดง
-                //ช่องแรกกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
-                if((code1.getValue() == null && !quantityField_1.getText().trim().equals("")) ||
-                        (code1.getValue() != null && quantityField_1.getText().trim().equals(""))){
-                    System.out.println(1);
-                    err = true;
-                }
-                //ช่องสองกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
-                if((code2.getValue() == null && !quantityField_2.getText().trim().equals("")) ||
-                        (code2.getValue() != null && quantityField_2.getText().trim().equals(""))){
-                    System.out.println(2);
-                    err = true;
-                }
-                //ช่องสามกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
-                if((code3.getValue() == null && !quantityField_3.getText().trim().equals("")) ||
-                        (code3.getValue() != null && quantityField_3.getText().trim().equals(""))){
-                    err = true;
-                    System.out.println(3);
-                }
-                //ไม่เลือกลูกค้า
-                if(customerBox.getValue() == null){
-                    System.out.println("no customer");
-                }else if(err){
-                    // เลือกลูกค้าแต่ช่องสินค้ายังกรอกไม่่ดี
-                    System.out.println("not complete");
-                }else{
-                    // เสดหมด
-//                    System.out.println("success");
-//                    order = new SaleOrder(code.getText(), customer, 0, Status.WaitCreateBill);
-//                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
-//                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
-//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-//                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
-//                        order.addOrderLine(orderLine);
-//                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
-//                    }
-//                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
-//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-//                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
-//                        order.addOrderLine(orderLine);
-//                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
-//                    }
-//                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
-//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-//                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
-//                        order.addOrderLine(orderLine);
-//                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
-                    }
-                    waitCrateBillSO.add(order);
-                    setSOTable(waitCrateBillSO);
+        try{
+            order = new SaleOrder()
+        }catch (Exception e){
 
-                    // Alert Box
-                    Stage createItemPage = new Stage();
-                    createItemPage.initModality(Modality.APPLICATION_MODAL);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/createSaleOrderAlert.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    createItemPage.setScene(scene);
-                    createItemPage.setTitle("สำเร็จ");
-                    createItemPage.setResizable(false);
-                    createItemPage.show();
-
-                    stage.close();
-                }
-            }else{
-                System.out.println("no order");
-                //กรุณาใส่สินค้าอย่างน้อย 1 ชุด
-            }
-//        }else{
-            System.out.println("no code");
-            // alert ต้องใส่เลขกำกับ
+        }
+//        if(!code.getText().trim().equals("")){
+//            if((code1.getValue() != null && !quantityField_1.getText().trim().equals("")) ||
+//                    (code2.getValue() != null && !quantityField_2.getText().trim().equals(""))||
+//                    (code3.getValue() != null && !quantityField_3.getText().trim().equals(""))){
+//                System.out.println("have order line");
+//                boolean err = false;
+//                // 3 เงื่อนไขข้างล่างให้เช็คว่าเเมื่อช่องใดเป็นว่างแต่ถ้า 2 ช่องไม่ต้องแสดง
+//                //ช่องแรกกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
+//                if((code1.getValue() == null && !quantityField_1.getText().trim().equals("")) ||
+//                        (code1.getValue() != null && quantityField_1.getText().trim().equals(""))){
+//                    System.out.println(1);
+//                    err = true;
+//                }
+//                //ช่องสองกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
+//                if((code2.getValue() == null && !quantityField_2.getText().trim().equals("")) ||
+//                        (code2.getValue() != null && quantityField_2.getText().trim().equals(""))){
+//                    System.out.println(2);
+//                    err = true;
+//                }
+//                //ช่องสามกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
+//                if((code3.getValue() == null && !quantityField_3.getText().trim().equals("")) ||
+//                        (code3.getValue() != null && quantityField_3.getText().trim().equals(""))){
+//                    err = true;
+//                    System.out.println(3);
+//                }
+//                //ไม่เลือกลูกค้า
+//                if(customerBox.getValue() == null){
+//                    System.out.println("no customer");
+//                }else if(err){
+//                    // เลือกลูกค้าแต่ช่องสินค้ายังกรอกไม่่ดี
+//                    System.out.println("not complete");
+//                }else{
+//                    // เสดหมด
+////                    System.out.println("success");
+////                    order = new SaleOrder(code.getText(), customer, 0, Status.WaitCreateBill);
+////                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
+////                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
+////                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+////                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
+////                        order.addOrderLine(orderLine);
+////                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
+////                    }
+////                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
+////                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+////                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
+////                        order.addOrderLine(orderLine);
+////                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
+////                    }
+////                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
+////                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+////                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
+////                        order.addOrderLine(orderLine);
+////                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
+//                    }
+//                    waitCrateBillSO.add(order);
+//                    setSOTable(waitCrateBillSO);
+//
+//                    // Alert Box
+//                    Stage createItemPage = new Stage();
+//                    createItemPage.initModality(Modality.APPLICATION_MODAL);
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/createSaleOrderAlert.fxml"));
+//                    Scene scene = new Scene(loader.load());
+//                    createItemPage.setScene(scene);
+//                    createItemPage.setTitle("สำเร็จ");
+//                    createItemPage.setResizable(false);
+//                    createItemPage.show();
+//
+//                    stage.close();
+//                }
+//            }else{
+//                System.out.println("no order");
+//                //กรุณาใส่สินค้าอย่างน้อย 1 ชุด
+//            }
+////        }else{
+//            System.out.println("no code");
+//            // alert ต้องใส่เลขกำกับ
         }
 //    }
 

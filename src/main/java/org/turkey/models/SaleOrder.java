@@ -18,7 +18,7 @@ public class SaleOrder {
     private Status status;
     @SerializedName("total_price")
     @Expose
-    private Double totalPrice;
+    private float totalPrice;
     @SerializedName("complete_date")
     @Expose
     private String completeDate;
@@ -54,8 +54,7 @@ public class SaleOrder {
      * @param updatedAt
      * @param customer
      */
-    public SaleOrder(String code, BigInteger customerId, Status status, Double totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer) {
-        super();
+    public SaleOrder(String code, BigInteger customerId, Status status, float totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer) {
         this.code = code;
         this.customerId = customerId;
         this.status = status;
@@ -63,6 +62,15 @@ public class SaleOrder {
         this.completeDate = completeDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.saleOrderLines = saleOrderLines;
+        this.customer = customer;
+    }
+
+    public SaleOrder(String code, BigInteger customerId, List<SaleOrderLine> saleOrderLines, Customer customer) {
+        this.code = code;
+        this.customerId = customerId;
+        this.status = Status.WaitCreateBill;
+        this.totalPrice = 0;
         this.saleOrderLines = saleOrderLines;
         this.customer = customer;
     }
@@ -91,11 +99,11 @@ public class SaleOrder {
         this.status = status;
     }
 
-    public Double getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
 

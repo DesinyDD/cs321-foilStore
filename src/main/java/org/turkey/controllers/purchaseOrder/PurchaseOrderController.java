@@ -1,6 +1,7 @@
 package org.turkey.controllers.purchaseOrder;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,12 +14,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseOrderController {
     @FXML private JFXButton waitDeliveryBtn, waitPayBtn, doneBtn;
@@ -28,7 +31,7 @@ public class PurchaseOrderController {
     private ObservableList list;
     private Po order;
     private PoLine orderLine;
-    private ArrayList<Po> orders;
+    private List<Po> orders = new HttpManage().getPO();
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
@@ -48,10 +51,12 @@ public class PurchaseOrderController {
             });
             return row;
         });
-
-        orders = new ArrayList<>();
-        MockUpData.mockUpPO(orders);
-        showWaitDelivery();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showWaitDelivery();
+            }
+        });
     }
 
     @FXML private void createPurchaseOrder() throws IOException {
@@ -108,6 +113,7 @@ public class PurchaseOrderController {
                 arrayList.add(order);
             }
         }
+        System.out.println(arrayList);
         setPOTable(arrayList);
     }
 
@@ -146,7 +152,7 @@ public class PurchaseOrderController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
         price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        supplier.setCellValueFactory(new PropertyValueFactory<>("partner"));
+        supplier.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
     // Page Switcher
