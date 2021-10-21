@@ -74,7 +74,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="93.0" prefWidth="1093.0" spacing="30.0">
                            <children>
-                              <JFXButton fx:id="waitCreateBillBtn" buttonType="RAISED" onAction="#showWaitCreateBill" style="-fx-border-color: #000000; -fx-border-radius: 50;" text="รอการสร้างใบเสร็จ" visible="false">
+                              <JFXButton fx:id="waitCreateBillBtn" buttonType="RAISED" style="-fx-border-color: #000000; -fx-border-radius: 50;" text="รอการสร้างใบเสร็จ" visible="false">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

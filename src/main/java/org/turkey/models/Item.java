@@ -9,7 +9,7 @@ public class Item {
     private String code;
     @SerializedName("price")
     @Expose
-    private Double price;
+    private Float price;
     @SerializedName("amount")
     @Expose
     private Integer amount;
@@ -31,7 +31,7 @@ public class Item {
      * @param code
      * @param price
      */
-    public Item(String code, Double price, Integer amount, Integer minAmount) {
+    public Item(String code, Float price, Integer amount, Integer minAmount) {
         super();
         this.code = code;
         this.price = price;
@@ -47,11 +47,11 @@ public class Item {
         this.code = code;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
