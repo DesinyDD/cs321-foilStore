@@ -1,6 +1,5 @@
 package org.turkey.models;
 
-
 import java.math.BigInteger;
 import java.util.List;
 import com.google.gson.annotations.Expose;
