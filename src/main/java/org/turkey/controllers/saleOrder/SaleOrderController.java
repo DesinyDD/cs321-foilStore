@@ -50,19 +50,13 @@ public class SaleOrderController {
             });
             return row;
         });
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                orders.forEach(o-> {
-                    System.out.println(o.toString() );
-                });
+                showWaitCreateBill();
             }
         });
-
-        orders = new ArrayList<>();
 //        MockUpData.mockUpSO(orders);
-        showWaitCreateBill();
     }
 
     @FXML private void createSaleOrder() throws IOException {
@@ -123,6 +117,7 @@ public class SaleOrderController {
     }
 
     @FXML private void showWaitCreateBill() {
+        System.out.println(orders);
         clearBtnStyle();
         this.waitCreateBillBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();
@@ -139,7 +134,7 @@ public class SaleOrderController {
         this.waitPayBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();
         for(SaleOrder order: orders){
-            if(((SaleOrder)order).getStatus().equals(Status.WaitPay)){
+            if(order.getStatus().equals(Status.WaitPay)){
                 arrayList.add(order);
             }
         }
@@ -151,7 +146,7 @@ public class SaleOrderController {
         this.doneBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();
         for(SaleOrder order: orders){
-            if(((SaleOrder)order).getStatus().equals(Status.Complete)){
+            if(order.getStatus().equals(Status.Complete)){
                 arrayList.add(order);
             }
         }
@@ -170,7 +165,7 @@ public class SaleOrderController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
         price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        customer.setCellValueFactory(new PropertyValueFactory<>("partner"));
+        customer.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
     // Page Switcher
     @FXML private void toHome() throws IOException { NavBarService.switchToHome(); }

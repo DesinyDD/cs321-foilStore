@@ -139,6 +139,8 @@ public class SaleOrder {
         this.customer = customer;
     }
 
+    public String getCustomerName(){return customer.getName();}
+
     @Override
     public String toString() {
         return "SaleOrder{" +

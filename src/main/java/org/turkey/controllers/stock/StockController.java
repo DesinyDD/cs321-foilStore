@@ -14,12 +14,14 @@ import javafx.stage.Stage;
 import org.turkey.controllers.purchaseOrder.CreatePurchaseOrderController;
 import org.turkey.models.Item;
 import org.turkey.models.StatusInApp;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StockController {
 
@@ -27,7 +29,7 @@ public class StockController {
     @FXML private TableColumn<Item, String> code;
     @FXML private TableColumn<Item, BigInteger> amount;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
-    private ArrayList<Item> stock;
+    private List<Item> stock = new HttpManage().getItem();
     private ObservableList list;
 
     @FXML public void initialize() {
@@ -47,8 +49,8 @@ public class StockController {
             return row;
         });
 
-        stock = new ArrayList<>();
-        MockUpData.mockUpStock(stock);
+//        stock = new ArrayList<>();
+//        MockUpData.mockUpStock(stock);
         setItemTable();
     }
 
@@ -86,12 +88,12 @@ public class StockController {
 
         // test
 
-        CreatePurchaseOrderController con = loader.getController();
-        con.setStock(stock);
-        con.setTable(table);
-        con.setStatus(status);
-        con.setCode(code);
-        con.setAmount(amount);
+//        CreatePurchaseOrderController con = loader.getController();
+//        con.setStock(stock);
+//        con.setTable(table);
+//        con.setStatus(status);
+//        con.setCode(code);
+//        con.setAmount(amount);
 
         // test
         createPurchaseOrderPage.setScene(scene);
@@ -115,7 +117,7 @@ public class StockController {
     public void setItemTable(){
         list = FXCollections.observableArrayList(stock);
         table.setItems(list);
-        code.setCellValueFactory(new PropertyValueFactory<>("colorCode"));
+        code.setCellValueFactory(new PropertyValueFactory<>("code"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
