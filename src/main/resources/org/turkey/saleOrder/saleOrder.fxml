@@ -74,16 +74,16 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="93.0" prefWidth="1093.0" spacing="30.0">
                            <children>
+                              <JFXButton fx:id="waitCreateBillBtn" buttonType="RAISED" onAction="#showWaitCreateBill" style="-fx-border-color: #000000; -fx-border-radius: 50;" text="รอการสร้างใบเสร็จ" visible="false">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXButton>
                               <Label text="สถานะ">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="waitCreateBillBtn" buttonType="RAISED" onAction="#showWaitCreateBill" style="-fx-border-color: #000000; -fx-border-radius: 50;" text="รอการสร้างใบเสร็จ">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </JFXButton>
                               <JFXButton fx:id="waitPayBtn" buttonType="RAISED" onAction="#showWaitPay" style="-fx-border-color: #000000; -fx-border-radius: 50;" text="รอการชำระเงินและขนส่ง">
                                  <font>
                                     <Font size="24.0" />
