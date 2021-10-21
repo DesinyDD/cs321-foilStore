@@ -1,6 +1,7 @@
 package org.turkey.controllers.saleOrder;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +27,7 @@ public class SaleOrderController {
     @FXML private TableColumn<SaleOrder,String> code,customer;
     @FXML private TableColumn<SaleOrder, Float> price;
     private List<SaleOrder> orders = new HttpManage().getSaleOrder();
+    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
     private SaleOrder order;
     private SaleOrderLine orderLine;
     private ObservableList list;
@@ -47,6 +49,15 @@ public class SaleOrderController {
                 }
             });
             return row;
+        });
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                saleOrder.forEach(o-> {
+                    System.out.println(o.toString() );
+                });
+            }
         });
 
         orders = new ArrayList<>();

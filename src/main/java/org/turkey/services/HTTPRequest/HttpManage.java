@@ -49,7 +49,6 @@ public class HttpManage {
             public void onResponse(Call<List<SaleOrder>> call, Response<List<SaleOrder>> response) {
                 if (response.isSuccessful()) {
                     saleOrderList.addAll(response.body());
-                    System.out.println(response.body());
                 }
             }
 
@@ -58,6 +57,6 @@ public class HttpManage {
 
             }
         });
-        return null;
+        return saleOrderList;
     }
 }
