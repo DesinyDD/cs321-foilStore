@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class CreateCustomerController {
-    private ArrayList<Information> customers;
+    private ArrayList<Customer> customers;
     private ObservableList list;
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
@@ -60,7 +60,7 @@ public class CreateCustomerController {
     }
 
     public void setAddress(TableColumn<Customer, String> address) {this.address = address;}
-    public void setCustomers(ArrayList<Information> customers) {this.customers = customers;}
+    public void setCustomers(ArrayList<Customer> customers) {this.customers = customers;}
     public void setName(TableColumn<Customer, String> name) {this.name = name;}
     public void setTable(TableView<Customer> table) {this.table = table;}
     public void setPhone(TableColumn<Customer, String> phone) {this.phone = phone;}

@@ -27,7 +27,7 @@ public class CustomerController {
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
     private ObservableList list;
-    private ArrayList<Information> customers;
+    private ArrayList<Customer> customers;
 
     @FXML public void initialize(){
         table.setRowFactory( tv -> {

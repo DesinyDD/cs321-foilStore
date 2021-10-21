@@ -12,13 +12,13 @@ public class MockUpData {
 //        item = new Item("OSP 730", new BigInteger(180+""), 1000, new BigInteger(35+""));
 //        stock.add(item);
     }
-    public static void mockUpCustomer(ArrayList<Information> customers){
-        Customer customer = new Customer(new BigInteger("1"),"Ford", "08xxxxxxxx","Bodin");
-//        customers.add(customer);
-        customer = new Customer(new BigInteger("2"),"MIX", "08xxxxxxxx","KU");
-//        customers.add(customer);
-        customer = new Customer(new BigInteger("3"),"Q", "08xxxxxxxx","Barn");
-//        customers.add(customer);
+    public static void mockUpCustomer(ArrayList<Customer> customers){
+        Customer customer = new Customer(new BigInteger("1"),"Ford","Bodin", "08xxxxxxxx");
+        customers.add(customer);
+        customer = new Customer(new BigInteger("2"),"MIX", "KU","08xxxxxxxx");
+        customers.add(customer);
+        customer = new Customer(new BigInteger("3"),"Q","Barn", "08xxxxxxxx");
+        customers.add(customer);
     }
     public static void mockUpSupplier(){
 
