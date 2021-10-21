@@ -2,6 +2,7 @@ module org.example {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.jfoenix;
+    requires com.google.gson;
 
     opens org.turkey to javafx.fxml;
     exports org.turkey;

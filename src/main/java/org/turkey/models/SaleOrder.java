@@ -1,24 +1,144 @@
 package org.turkey.models;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
+import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class SaleOrder extends Order{
-    private Enum<SaleStatus> status;
-    private Date completeDate;
-    private String paymentMethod;
+@Generated("jsonschema2pojo")
+public class SaleOrder {
 
-    public SaleOrder(String code, Information partner, float totalPrice, Enum<SaleStatus> status) {
-        super(code, partner, totalPrice);
+    @SerializedName("code")
+    @Expose
+    private String code;
+    @SerializedName("customer_id")
+    @Expose
+    private BigInteger customerId;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("total_price")
+    @Expose
+    private Double totalPrice;
+    @SerializedName("complete_date")
+    @Expose
+    private String completeDate;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    @SerializedName("sale_order_lines")
+    @Expose
+    private List<SaleOrderLine> saleOrderLines = null;
+    @SerializedName("customer")
+    @Expose
+    private Customer customer;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public SaleOrder() {
+    }
+
+    /**
+     *
+     * @param createdAt
+     * @param saleOrderLines
+     * @param code
+     * @param totalPrice
+     * @param customerId
+     * @param status
+     * @param completeDate
+     * @param updatedAt
+     * @param customer
+     */
+    public SaleOrder(String code, Integer customerId, String status, Double totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer) {
+        super();
+        this.code = code;
+        this.customerId = customerId;
+        this.status = status;
+        this.totalPrice = totalPrice;
+        this.completeDate = completeDate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.saleOrderLines = saleOrderLines;
+        this.customer = customer;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Enum<SaleStatus> getStatus() {return status;}
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
 
-    public void setCompleteDate(Date completeDate) {this.completeDate = completeDate;}
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
-    public void setStatus(Enum<SaleStatus> status) {this.status = status;}
+    public String getCompleteDate() {
+        return completeDate;
+    }
 
-    public void setPaymentMethod(String paymentMethod){this.paymentMethod = paymentMethod;}
+    public void setCompleteDate(String completeDate) {
+        this.completeDate = completeDate;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<SaleOrderLine> getSaleOrderLines() {
+        return saleOrderLines;
+    }
+
+    public void setSaleOrderLines(List<SaleOrderLine> saleOrderLines) {
+        this.saleOrderLines = saleOrderLines;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 }
