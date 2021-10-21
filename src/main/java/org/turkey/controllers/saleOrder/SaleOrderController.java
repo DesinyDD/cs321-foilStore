@@ -51,14 +51,9 @@ public class SaleOrderController {
             return row;
         });
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                saleOrder.forEach(o-> {
-                    System.out.println(o.toString() );
-                });
-            }
-        });
+        Platform.runLater(() -> saleOrder.forEach(o-> {
+            System.out.println(o.toString() );
+        }));
 
         orders = new ArrayList<>();
 //        MockUpData.mockUpSO(orders);

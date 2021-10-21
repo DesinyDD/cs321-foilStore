@@ -16,6 +16,9 @@ public class Po {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("total_price")
+    @Expose
+    private float totalPrice;
     @SerializedName("po_lines")
     @Expose
     private List<PoLine> poLines = null;
@@ -31,18 +34,19 @@ public class Po {
     }
 
     /**
-     *
-     * @param code
+     *  @param code
      * @param supplierId
+     * @param status
+     * @param totalPrice
      * @param poLines
      * @param supplier
-     * @param status
      */
-    public Po(String code, BigInteger supplierId, String status, List<PoLine> poLines, Supplier supplier) {
+    public Po(String code, BigInteger supplierId, String status, float totalPrice, List<PoLine> poLines, Supplier supplier) {
         super();
         this.code = code;
         this.supplierId = supplierId;
         this.status = status;
+        this.totalPrice = totalPrice;
         this.poLines = poLines;
         this.supplier = supplier;
     }
