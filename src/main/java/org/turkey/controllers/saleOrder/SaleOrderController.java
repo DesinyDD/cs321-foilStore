@@ -27,7 +27,7 @@ public class SaleOrderController {
     @FXML private TableColumn<SaleOrder,String> code,customer;
     @FXML private TableColumn<SaleOrder, Float> price;
     private List<SaleOrder> orders = new HttpManage().getSaleOrder();
-    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
+//    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
     private SaleOrder order;
     private SaleOrderLine orderLine;
     private ObservableList list;
@@ -54,7 +54,7 @@ public class SaleOrderController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                saleOrder.forEach(o-> {
+                orders.forEach(o-> {
                     System.out.println(o.toString() );
                 });
             }
@@ -127,7 +127,7 @@ public class SaleOrderController {
         this.waitCreateBillBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();
         for(SaleOrder order: orders){
-            if(((SaleOrder)order).getStatus().equals(Status.WaitCreateBill)){
+            if(order.getStatus().equals(Status.WaitCreateBill)){
                 arrayList.add(order);
             }
         }
