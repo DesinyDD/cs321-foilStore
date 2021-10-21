@@ -13,11 +13,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateSaleOrderController {
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, code;
@@ -25,9 +27,9 @@ public class CreateSaleOrderController {
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
     @FXML private TableColumn<SaleOrder, Float> price;
-    private ArrayList<Item> stock = new ArrayList<>();
-    private ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<SaleOrder> orders = new ArrayList<>(), waitCrateBillSO;
+    private List<Item> stock = new HttpManage().getItem();
+    private List<Customer> customers = new HttpManage().getCustomer();
+    private List<SaleOrder> orders = new HttpManage().getSaleOrder(), waitCrateBillSO;
     private Item item;
     private Customer customer;
     private SaleOrder order;
@@ -40,13 +42,13 @@ public class CreateSaleOrderController {
 //        MockUpData.mockUpStock(stock);
 //        MockUpData.mockUpCustomer(customers);
         for(SaleOrder order: orders){
-//            orderCode.add(order.getCode());
+            orderCode.add(order.getCode());
         }
         for(Item item: stock){
-//            itemCode.add(item.getColorCode());
+            itemCode.add(item.getCode());
         }
         for(Customer customer : customers ){
-//            customerName.add(customer.getName());
+            customerName.add(customer.getName());
         }
         customerBox.getItems().addAll(customerName);
         code1.getItems().addAll(itemCode);
@@ -81,11 +83,11 @@ public class CreateSaleOrderController {
     @FXML public void CreateSO(ActionEvent event) throws IOException {
         Button b = (Button) event.getSource();
         Stage stage =(Stage) b.getScene().getWindow();
-        try{
-            order = new SaleOrder()
-        }catch (Exception e){
-
-        }
+//        try{
+//            order = new SaleOrder(code.getText(), BigInteger customerId, List<SaleOrderLine> saleOrderLines, Customer customer)
+//        }catch (Exception e){
+//
+//        }
 //        if(!code.getText().trim().equals("")){
 //            if((code1.getValue() != null && !quantityField_1.getText().trim().equals("")) ||
 //                    (code2.getValue() != null && !quantityField_2.getText().trim().equals(""))||
