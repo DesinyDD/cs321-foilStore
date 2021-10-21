@@ -2,11 +2,9 @@ package org.turkey.models;
 
 import java.math.BigInteger;
 import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
 public class SaleOrder {
 
     @SerializedName("code")
@@ -17,7 +15,7 @@ public class SaleOrder {
     private BigInteger customerId;
     @SerializedName("status")
     @Expose
-    private String status;
+    private Status status;
     @SerializedName("total_price")
     @Expose
     private Double totalPrice;
@@ -56,7 +54,7 @@ public class SaleOrder {
      * @param updatedAt
      * @param customer
      */
-    public SaleOrder(String code, Integer customerId, String status, Double totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer) {
+    public SaleOrder(String code, BigInteger customerId, Status status, Double totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer) {
         super();
         this.code = code;
         this.customerId = customerId;
@@ -77,19 +75,19 @@ public class SaleOrder {
         this.code = code;
     }
 
-    public Integer getCustomerId() {
+    public BigInteger getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(BigInteger customerId) {
         this.customerId = customerId;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -141,4 +139,18 @@ public class SaleOrder {
         this.customer = customer;
     }
 
+    @Override
+    public String toString() {
+        return "SaleOrder{" +
+                "code='" + code + '\'' +
+                ", customerId=" + customerId +
+                ", status=" + status +
+                ", totalPrice=" + totalPrice +
+                ", completeDate='" + completeDate + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", saleOrderLines=" + saleOrderLines +
+                ", customer=" + customer +
+                '}';
+    }
 }

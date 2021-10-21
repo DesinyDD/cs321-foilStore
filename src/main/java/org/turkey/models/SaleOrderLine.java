@@ -3,11 +3,13 @@ package org.turkey.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigInteger;
+
 public class SaleOrderLine {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private BigInteger id;
     @SerializedName("sale_order_code")
     @Expose
     private String saleOrderCode;
@@ -17,6 +19,9 @@ public class SaleOrderLine {
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
+    @SerializedName("item")
+    @Expose
+    private Item item;
 
     /**
      * No args constructor for use in serialization
@@ -28,23 +33,25 @@ public class SaleOrderLine {
     /**
      *
      * @param saleOrderCode
+     * @param item
      * @param quantity
      * @param colorCode
      * @param id
      */
-    public SaleOrderLine(Integer id, String saleOrderCode, String colorCode, Integer quantity) {
+    public SaleOrderLine(BigInteger id, String saleOrderCode, String colorCode, Integer quantity, Item item) {
         super();
         this.id = id;
         this.saleOrderCode = saleOrderCode;
         this.colorCode = colorCode;
         this.quantity = quantity;
+        this.item = item;
     }
 
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -70,6 +77,14 @@ public class SaleOrderLine {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
 }

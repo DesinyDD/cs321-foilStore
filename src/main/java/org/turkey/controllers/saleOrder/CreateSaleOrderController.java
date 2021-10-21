@@ -36,17 +36,17 @@ public class CreateSaleOrderController {
     private ObservableList list;
 
     @FXML public void initialize() {
-        MockUpData.mockUpSO(orders);
-        MockUpData.mockUpStock(stock);
-        MockUpData.mockUpCustomer(customers);
+//        MockUpData.mockUpSO(orders);
+//        MockUpData.mockUpStock(stock);
+//        MockUpData.mockUpCustomer(customers);
         for(Order order: orders){
-            orderCode.add(order.getCode());
+//            orderCode.add(order.getCode());
         }
         for(Item item: stock){
-            itemCode.add(item.getColorCode());
+//            itemCode.add(item.getColorCode());
         }
         for(Information customer : customers ){
-            customerName.add(customer.getName());
+//            customerName.add(customer.getName());
         }
         customerBox.getItems().addAll(customerName);
         code1.getItems().addAll(itemCode);
@@ -114,26 +114,26 @@ public class CreateSaleOrderController {
                     System.out.println("not complete");
                 }else{
                     // เสดหมด
-                    System.out.println("success");
-                    order = new SaleOrder(code.getText(), customer, 0, SaleStatus.WaitCreateBill);
-                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
-                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
-                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
-                        order.addOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
-                    }
-                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
-                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
-                        order.addOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
-                    }
-                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
-                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
-                        order.addOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
+//                    System.out.println("success");
+//                    order = new SaleOrder(code.getText(), customer, 0, Status.WaitCreateBill);
+//                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
+//                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
+//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+//                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
+//                        order.addOrderLine(orderLine);
+//                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
+//                    }
+//                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
+//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+//                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
+//                        order.addOrderLine(orderLine);
+//                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
+//                    }
+//                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
+//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
+//                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
+//                        order.addOrderLine(orderLine);
+//                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
                     }
                     waitCrateBillSO.add(order);
                     setSOTable(waitCrateBillSO);
@@ -154,11 +154,11 @@ public class CreateSaleOrderController {
                 System.out.println("no order");
                 //กรุณาใส่สินค้าอย่างน้อย 1 ชุด
             }
-        }else{
+//        }else{
             System.out.println("no code");
             // alert ต้องใส่เลขกำกับ
         }
-    }
+//    }
 
     public void setSOTable(ArrayList<Order> arrayList){
         table.getItems().clear();

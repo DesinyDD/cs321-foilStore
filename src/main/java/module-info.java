@@ -3,6 +3,8 @@ module org.example {
     requires javafx.fxml;
     requires com.jfoenix;
     requires com.google.gson;
+    requires retrofit2;
+    requires retrofit2.converter.gson;
 
     opens org.turkey to javafx.fxml;
     exports org.turkey;

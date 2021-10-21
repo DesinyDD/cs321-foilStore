@@ -30,7 +30,7 @@ public class CreateCustomerController {
         Stage stage = (Stage) b.getScene().getWindow();
         if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
             Customer customer = new Customer(new BigInteger("4"),nameF.getText(),phoneF.getText(),addressF.getText());
-            customers.add(customer);
+//            customers.add(customer);
             setCustomerTable();
 
             // Alert Box

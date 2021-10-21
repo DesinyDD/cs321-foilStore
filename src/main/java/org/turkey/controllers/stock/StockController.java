@@ -13,7 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.controllers.purchaseOrder.CreatePurchaseOrderController;
 import org.turkey.models.Item;
-import org.turkey.models.Status;
+import org.turkey.models.StatusInApp;
 import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
@@ -26,7 +26,7 @@ public class StockController {
     @FXML private TableView<Item> table;
     @FXML private TableColumn<Item, String> code;
     @FXML private TableColumn<Item, BigInteger> amount;
-    @FXML private TableColumn<Item, Enum<Status>> status;
+    @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private ArrayList<Item> stock;
     private ObservableList list;
 
@@ -36,11 +36,11 @@ public class StockController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Item rowData = row.getItem();
-                    try {
-                        editItem(rowData.getColorCode(), rowData.getPrice(), rowData.getMinAmount());
-                    } catch (IOException e) {
+//                    try {
+//                        editItem(rowData.getColorCode(), rowData.getPrice(), rowData.getMinAmount());
+//                    } catch (IOException e) {
                         // do nothing . . .
-                    }
+//                    }
                     System.out.println(rowData);
                 }
             });
