@@ -162,7 +162,7 @@ public class CreateSaleOrderController {
                     (code2.getValue() != null && !quantityField_2.getText().trim().equals(""))||
                     (code3.getValue() != null && !quantityField_3.getText().trim().equals(""))){
                 System.out.println("have order line");
-                boolean err = false;
+                boolean err = false, payMethod = false, custBox = false;
                 // 3 เงื่อนไขข้างล่างให้เช็คว่าเเมื่อช่องใดเป็นว่างแต่ถ้า 2 ช่องไม่ต้องแสดง
                 //ช่องแรกกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
                 if((code1.getValue() == null && !quantityField_1.getText().trim().equals("")) ||
@@ -183,17 +183,26 @@ public class CreateSaleOrderController {
                     System.out.println(3);
                 }
                 if(payment.getValue()==null){
-                    err = true;
+                    payMethod = true;
                     System.out.println("no method selected");
                 }
                 //ไม่เลือกลูกค้า
                 if(customerBox.getValue() == null){
+                    custBox = true;
                     failToCreateSO();
-                    System.out.println("no customer");
-                }else if(err){
+                }
+                if(err==true || payMethod==true || custBox==true){
                     // เลือกลูกค้าแต่ช่องสินค้ายังกรอกไม่่ดี
+                    if(err){
+                        System.out.println("order not complete");
+                    }
+                    if(payMethod){
+                        System.out.println("No payment");
+                    }
+                    if(custBox){
+                        System.out.println("No customer");
+                    }
                     failToCreateSO();
-                    System.out.println("not complete");
                 }else {
                     // เสดหมด
                     System.out.println("success");
