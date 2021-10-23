@@ -13,12 +13,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseOrderController {
     @FXML private JFXButton waitDeliveryBtn, waitPayBtn, doneBtn;
@@ -49,6 +51,8 @@ public class PurchaseOrderController {
             return row;
         });
 
+        List<Po> listPo = new HttpManage().getPo();
+        System.out.println(" IN CONTROLLER " + listPo.toString());
         orders = new ArrayList<>();
         MockUpData.mockUpPO(orders);
         showWaitDelivery();

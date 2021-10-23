@@ -51,6 +51,14 @@ public class Po {
         this.supplier = supplier;
     }
 
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public String getCode() {
         return code;
     }
@@ -91,4 +99,15 @@ public class Po {
         this.supplier = supplier;
     }
 
+    @Override
+    public String toString() {
+        return "Po{" +
+                "code='" + code + '\'' +
+                ", supplierId=" + supplierId +
+                ", status='" + status + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", poLines=" + poLines +
+                ", supplier=" + supplier +
+                '}';
+    }
 }

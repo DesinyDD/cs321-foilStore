@@ -26,7 +26,7 @@ public class SaleOrderController {
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder,String> code,customer;
     @FXML private TableColumn<SaleOrder, Float> price;
-    private List<SaleOrder> orders = new HttpManage().getSaleOrder();
+    private List<SaleOrder> orders  = new ArrayList<>() ;
 //    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
     private SaleOrder order;
     private SaleOrderLine orderLine;
@@ -50,11 +50,9 @@ public class SaleOrderController {
             });
             return row;
         });
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                showWaitCreateBill();
-            }
+        Platform.runLater(() -> {
+            orders = new HttpManage().getSaleOrder();
+            showWaitCreateBill();
         });
 //        MockUpData.mockUpSO(orders);
     }
