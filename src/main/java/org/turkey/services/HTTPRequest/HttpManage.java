@@ -1,13 +1,17 @@
 package org.turkey.services.HTTPRequest;
 
+import org.turkey.models.Customer;
 import org.turkey.models.Item;
 import org.turkey.models.Po;
 import org.turkey.models.SaleOrder;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HttpManage {
@@ -41,19 +45,23 @@ public class HttpManage {
     public List<SaleOrder> getSaleOrder() {
         ApiService service = startConnection();
         Call<List<SaleOrder>> callSaleOrder = service.listSaleOrder();
-        List<SaleOrder> saleOrderList = null;
-        try {
-            saleOrderList = callSaleOrder.execute().body();
-        } catch (IOException e) {
+        try{
+            List<SaleOrder> saleOrderList = callSaleOrder.execute().body();
+            return saleOrderList;
+        }catch(Exception e){
             e.printStackTrace();
         }
+        return null;
+    }
+//    public List<SaleOrder> getSaleOrder() {
+//        ApiService service = startConnection();
+//        Call<List<SaleOrder>> callSaleOrder = service.listSaleOrder();
 //        List<SaleOrder> saleOrderList = new ArrayList<>();
 //        callSaleOrder.enqueue(new Callback<List<SaleOrder>>() {
 //            @Override
 //            public void onResponse(Call<List<SaleOrder>> call, Response<List<SaleOrder>> response) {
 //                if (response.isSuccessful()) {
 //                    saleOrderList.addAll(response.body());
-//                    System.out.println("IN HTTP" + saleOrderList);
 //                }
 //            }
 //
@@ -62,17 +70,29 @@ public class HttpManage {
 //
 //            }
 //        });
-        return saleOrderList;
+//        return saleOrderList;
+//    }
+
+    public List<Po> getPO() {
+        ApiService service = startConnection();
+        Call<List<Po>> callPO = service.listPo();
+        try{
+            List<Po> pos = callPO.execute().body();
+            return pos;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Po> getPo() {
-        ApiService apiService = startConnection();
-        Call<List<Po>> callPo = apiService.listPo();
-        try {
-            List<Po> pos = callPo.execute().body();
-            System.out.println("RETURN " + pos.toString() );
-            return pos;
-        } catch (IOException e) {
+    public List<Customer> getCustomer(){
+        ApiService service = startConnection();
+        Call<List<Customer>> callCustomer = service.listCustomers();
+        try{
+            List<Customer> customers = callCustomer.execute().body();
+            return customers;
+
+        }catch (Exception e){
             e.printStackTrace();
         }
         return null;

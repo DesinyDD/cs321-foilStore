@@ -1,6 +1,7 @@
 package org.turkey.controllers.purchaseOrder;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class PurchaseOrderController {
     private ObservableList list;
     private Po order;
     private PoLine orderLine;
-    private ArrayList<Po> orders;
+    private List<Po> orders = new HttpManage().getPO();
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
@@ -50,12 +51,12 @@ public class PurchaseOrderController {
             });
             return row;
         });
-
-        List<Po> listPo = new HttpManage().getPo();
-        System.out.println(" IN CONTROLLER " + listPo.toString());
-        orders = new ArrayList<>();
-        MockUpData.mockUpPO(orders);
-        showWaitDelivery();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showWaitDelivery();
+            }
+        });
     }
 
     @FXML private void createPurchaseOrder() throws IOException {
@@ -112,6 +113,7 @@ public class PurchaseOrderController {
                 arrayList.add(order);
             }
         }
+        System.out.println(arrayList);
         setPOTable(arrayList);
     }
 
@@ -150,7 +152,7 @@ public class PurchaseOrderController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
         price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        supplier.setCellValueFactory(new PropertyValueFactory<>("partner"));
+        supplier.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
     // Page Switcher

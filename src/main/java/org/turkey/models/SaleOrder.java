@@ -1,6 +1,7 @@
 package org.turkey.models;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -18,7 +19,7 @@ public class SaleOrder {
     private Status status;
     @SerializedName("total_price")
     @Expose
-    private Double totalPrice;
+    private float totalPrice;
     @SerializedName("complete_date")
     @Expose
     private String completeDate;
@@ -34,6 +35,9 @@ public class SaleOrder {
     @SerializedName("customer")
     @Expose
     private Customer customer;
+    @SerializedName("paymentMethod")
+    @Expose
+    private String paymentMethod;
 
     /**
      * No args constructor for use in serialization
@@ -54,8 +58,7 @@ public class SaleOrder {
      * @param updatedAt
      * @param customer
      */
-    public SaleOrder(String code, BigInteger customerId, Status status, Double totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer) {
-        super();
+    public SaleOrder(String code, BigInteger customerId, Status status, float totalPrice, String completeDate, String createdAt, String updatedAt, List<SaleOrderLine> saleOrderLines, Customer customer,String paymentMethod) {
         this.code = code;
         this.customerId = customerId;
         this.status = status;
@@ -65,6 +68,17 @@ public class SaleOrder {
         this.updatedAt = updatedAt;
         this.saleOrderLines = saleOrderLines;
         this.customer = customer;
+        this.paymentMethod = paymentMethod;
+    }
+
+    public SaleOrder(String code, BigInteger customerId, Customer customer, String paymentMethod) {
+        this.code = code;
+        this.customerId = customerId;
+        this.status = Status.WaitPay;
+        this.totalPrice = 0;
+        this.customer = customer;
+        this.saleOrderLines = new ArrayList<>();
+        this.paymentMethod = paymentMethod;
     }
 
     public String getCode() {
@@ -91,11 +105,11 @@ public class SaleOrder {
         this.status = status;
     }
 
-    public Double getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -141,6 +155,19 @@ public class SaleOrder {
 
     public String getCustomerName(){return customer.getName();}
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    public void addSaleOrderLine(SaleOrderLine saleOrderLine){
+        this.saleOrderLines.add(saleOrderLine);
+    }
+    public void addToTotal(Float price){
+        this.totalPrice += price;
+    }
     @Override
     public String toString() {
         return "SaleOrder{" +

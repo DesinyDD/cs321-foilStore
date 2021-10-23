@@ -1,10 +1,12 @@
 package org.turkey.controllers.customer;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.print.PageLayout;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -29,7 +31,7 @@ public class CustomerController {
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
     private ObservableList list;
-//    private List<Customer> customers = new HttpManage().
+    private List<Customer> customers = new HttpManage().getCustomer();
 
     @FXML public void initialize(){
         table.setRowFactory( tv -> {
@@ -46,10 +48,12 @@ public class CustomerController {
             });
             return row;
         });
-
-//        customers = new ArrayList<>();
-//        MockUpData.mockUpCustomer(customers);
-        setCustomerTable();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                setCustomerTable();
+            }
+        });
     }
 
     @FXML private void addCustomer() throws IOException {
@@ -82,7 +86,7 @@ public class CustomerController {
     }
 
     public void setCustomerTable(){
-//        list = FXCollections.observableArrayList(customers);
+        list = FXCollections.observableArrayList(customers);
         table.setItems(list);
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));

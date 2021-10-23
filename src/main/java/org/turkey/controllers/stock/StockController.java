@@ -118,7 +118,7 @@ public class StockController {
         list = FXCollections.observableArrayList(stock);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+//        status.setCellValueFactory(new PropertyValueFactory<>("status"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
 

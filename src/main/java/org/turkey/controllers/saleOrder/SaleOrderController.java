@@ -26,7 +26,7 @@ public class SaleOrderController {
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder,String> code,customer;
     @FXML private TableColumn<SaleOrder, Float> price;
-    private List<SaleOrder> orders  = new ArrayList<>() ;
+    private List<SaleOrder> orders = new HttpManage().getSaleOrder();
 //    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
     private SaleOrder order;
     private SaleOrderLine orderLine;
@@ -50,9 +50,11 @@ public class SaleOrderController {
             });
             return row;
         });
-        Platform.runLater(() -> {
-            orders = new HttpManage().getSaleOrder();
-            showWaitCreateBill();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showWaitPay();
+            }
         });
 //        MockUpData.mockUpSO(orders);
     }
@@ -70,11 +72,11 @@ public class SaleOrderController {
         csc.setCustomerCol(customer);
         ArrayList<SaleOrder> arrayList = new ArrayList<>();
         for(SaleOrder order: orders){
-            if(order.getStatus().equals(Status.WaitCreateBill)){
+            if(order.getStatus().equals(Status.WaitPay)){
                 arrayList.add(order);
             }
         }
-        csc.setWaitCrateBillSO(arrayList);
+        csc.setWaitPay(arrayList);
         createSaleOrderPage.show();
     }
 
@@ -114,18 +116,18 @@ public class SaleOrderController {
         showSaleOrderCompletePage.show();
     }
 
-    @FXML private void showWaitCreateBill() {
-        System.out.println(orders);
-        clearBtnStyle();
-        this.waitCreateBillBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
-        ArrayList<SaleOrder> arrayList = new ArrayList<>();
-        for(SaleOrder order: orders){
-            if(order.getStatus().equals(Status.WaitCreateBill)){
-                arrayList.add(order);
-            }
-        }
-        setSOTable(arrayList);
-    }
+//    @FXML private void showWaitCreateBill() {
+////        System.out.println(orders);
+//        clearBtnStyle();
+//        this.waitCreateBillBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
+//        ArrayList<SaleOrder> arrayList = new ArrayList<>();
+//        for(SaleOrder order: orders){
+//            if(order.getStatus().equals(Status.WaitCreateBill)){
+//                arrayList.add(order);
+//            }
+//        }
+//        setSOTable(arrayList);
+//    }
 
     @FXML private void showWaitPay() {
         clearBtnStyle();

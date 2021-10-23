@@ -46,6 +46,12 @@ public class SaleOrderLine {
         this.quantity = quantity;
         this.item = item;
     }
+    public SaleOrderLine(String saleOrderCode, String colorCode, Integer quantity, Item item) {
+        this.saleOrderCode = saleOrderCode;
+        this.colorCode = colorCode;
+        this.quantity = quantity;
+        this.item = item;
+    }
 
     public BigInteger getId() {
         return id;
@@ -87,4 +93,14 @@ public class SaleOrderLine {
         this.item = item;
     }
 
+    @Override
+    public String toString() {
+        return "SaleOrderLine{" +
+                "id=" + id +
+                ", saleOrderCode='" + saleOrderCode + '\'' +
+                ", colorCode='" + colorCode + '\'' +
+                ", quantity=" + quantity +
+                ", item=" + item +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package org.turkey.controllers.saleOrder;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,41 +13,52 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.turkey.controllers.FailAlertController;
 import org.turkey.models.*;
+import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateSaleOrderController {
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, code;
-    @FXML private ComboBox code1, code2, code3, customerBox;
+    @FXML private ComboBox code1, code2, code3, customerBox, payment;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
     @FXML private TableColumn<SaleOrder, Float> price;
-    private ArrayList<Item> stock = new ArrayList<>();
-    private ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<SaleOrder> orders = new ArrayList<>(), waitCrateBillSO;
+    @FXML private Label amount1, amount2, amount3;
+    private List<Item> stock = new HttpManage().getItem();
+    private List<Customer> customers = new HttpManage().getCustomer();
+    private List<SaleOrder> orders = new HttpManage().getSaleOrder(), waitPay;
     private Item item;
     private Customer customer;
     private SaleOrder order;
     private SaleOrderLine orderLine;
+    private BigInteger customerID;
     private ArrayList<String> itemCode = new ArrayList<>(), customerName = new ArrayList<>(), orderCode = new ArrayList<>();
     private ObservableList list;
 
     @FXML public void initialize() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                payment.getItems().addAll("จ่ายเงินสด","จ่ายด้วยเช็ค");
+            }
+        });
 //        MockUpData.mockUpSO(orders);
 //        MockUpData.mockUpStock(stock);
 //        MockUpData.mockUpCustomer(customers);
         for(SaleOrder order: orders){
-//            orderCode.add(order.getCode());
+            orderCode.add(order.getCode());
         }
         for(Item item: stock){
-//            itemCode.add(item.getColorCode());
+            itemCode.add(item.getCode());
         }
         for(Customer customer : customers ){
-//            customerName.add(customer.getName());
+            customerName.add(customer.getName());
         }
         customerBox.getItems().addAll(customerName);
         code1.getItems().addAll(itemCode);
@@ -78,6 +90,70 @@ public class CreateSaleOrderController {
         });
     }
 
+    @FXML public void clear1(ActionEvent event){
+        code1.getSelectionModel().clearSelection();
+        amount1.setText("");
+    }
+
+    @FXML public void clear2(ActionEvent event){
+        code2.getSelectionModel().clearSelection();
+        amount2.setText("");
+    }
+
+    @FXML public void clear3(ActionEvent event){
+        code3.getSelectionModel().clearSelection();
+        amount3.setText("");
+    }
+
+    @FXML public void select1(ActionEvent event){
+        boolean clear = false;
+        Integer amount = 0;
+        for (Item item1 : stock){
+            if (code1.getValue()==null){
+                clear = true;
+                break;
+            }
+            if(code1.getValue().toString().equals(item1.getCode())){
+                amount = item1.getAmount();
+            }
+        }
+        if(!clear) {
+            amount1.setText("/" + amount);
+        }
+    }
+    @FXML public void select2(ActionEvent event){
+        boolean clear = false;
+        Integer amount = 0;
+        for (Item item1 : stock){
+            if (code2.getValue()==null){
+                clear = true;
+                break;
+            }
+            if(code2.getValue().toString().equals(item1.getCode())){
+                amount = item1.getAmount();
+            }
+        }
+        if(!clear) {
+            amount2.setText("/" + amount);
+        }
+    }
+    @FXML public void select3(ActionEvent event){
+        boolean clear = false;
+        Integer amount = 0;
+        for (Item item1 : stock){
+            if (code3.getValue()==null){
+                clear = true;
+                break;
+            }
+            if(code3.getValue().toString().equals(item1.getCode())){
+                amount = item1.getAmount();
+            }
+        }
+        if(!clear) {
+            amount3.setText("/" + amount);
+        }
+    }
+
     @FXML public void CreateSO(ActionEvent event) throws IOException {
         Button b = (Button) event.getSource();
         Stage stage =(Stage) b.getScene().getWindow();
@@ -86,7 +162,7 @@ public class CreateSaleOrderController {
                     (code2.getValue() != null && !quantityField_2.getText().trim().equals(""))||
                     (code3.getValue() != null && !quantityField_3.getText().trim().equals(""))){
                 System.out.println("have order line");
-                boolean err = false;
+                boolean err = false, payMethod = false, custBox = false;
                 // 3 เงื่อนไขข้างล่างให้เช็คว่าเเมื่อช่องใดเป็นว่างแต่ถ้า 2 ช่องไม่ต้องแสดง
                 //ช่องแรกกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
                 if((code1.getValue() == null && !quantityField_1.getText().trim().equals("")) ||
@@ -106,37 +182,84 @@ public class CreateSaleOrderController {
                     err = true;
                     System.out.println(3);
                 }
+                if(payment.getValue()==null){
+                    payMethod = true;
+                    System.out.println("no method selected");
+                }
                 //ไม่เลือกลูกค้า
                 if(customerBox.getValue() == null){
-                    System.out.println("no customer");
-                }else if(err){
+                    custBox = true;
+                    failToCreateSO();
+                }
+                if(err==true || payMethod==true || custBox==true){
                     // เลือกลูกค้าแต่ช่องสินค้ายังกรอกไม่่ดี
-                    System.out.println("not complete");
-                }else{
-                    // เสดหมด
-//                    System.out.println("success");
-//                    order = new SaleOrder(code.getText(), customer, 0, Status.WaitCreateBill);
-//                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
-//                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
-//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-//                                code3.getValue().toString(), new BigInteger(quantityField_3.getText()));
-//                        order.addOrderLine(orderLine);
-//                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*1000);
-//                    }
-//                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
-//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-//                                code2.getValue().toString(), new BigInteger(quantityField_2.getText()));
-//                        order.addOrderLine(orderLine);
-//                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*1000);
-//                    }
-//                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
-//                        orderLine = new SaleOrderLine(new BigInteger("55"), code.getText(),
-//                                code1.getValue().toString(), new BigInteger(quantityField_1.getText()));
-//                        order.addOrderLine(orderLine);
-//                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*1000);
+                    if(err){
+                        System.out.println("order not complete");
                     }
-                    waitCrateBillSO.add(order);
-                    setSOTable(waitCrateBillSO);
+                    if(payMethod){
+                        System.out.println("No payment");
+                    }
+                    if(custBox){
+                        System.out.println("No customer");
+                    }
+                    failToCreateSO();
+                }else {
+                    // เสดหมด
+                    System.out.println("success");
+                    for(Customer customer1: customers){
+                        if(customer1.getName().equals(customerBox.getValue().toString())){
+                            customer = customer1;
+                            customerID = customer1.getCustomerId();
+                        }
+                    }
+                    order = new SaleOrder(code.getText(), customerID, customer, payment.getValue().toString());
+                    System.out.println(order);
+//                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
+                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
+                        float price = 0;
+                        for(Item item1: stock){
+                            if(item1.getCode().equals(code3.getValue().toString())){
+                                item = item1;
+                                price = item1.getPrice();
+                                break;
+                            }
+                        }
+                        orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), Integer.parseInt(quantityField_3.getText()), item);
+                        System.out.println(orderLine);
+                        order.addSaleOrderLine(orderLine);
+                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*price);
+                    }
+                    if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
+                        float price = 0;
+                        for(Item item1: stock){
+                            if(item1.getCode().equals(code2.getValue().toString())){
+                                item = item1;
+                                price = item1.getPrice();
+                                break;
+                            }
+                        }
+                        orderLine = new SaleOrderLine(code.getText(), code2.getValue().toString(), Integer.parseInt(quantityField_2.getText()), item);
+                        System.out.println(orderLine.toString());
+                        order.addSaleOrderLine(orderLine);
+                        order.addToTotal(Float.parseFloat(quantityField_2.getText())*price);
+                    }
+                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
+                        float price = 0;
+                        for(Item item1: stock){
+                            if(item1.getCode().equals(code1.getValue().toString())){
+                                item = item1;
+                                price = item1.getPrice();
+                                break;
+                            }
+                        }
+                        orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), Integer.parseInt(quantityField_1.getText()), item);
+                        System.out.println(orderLine.toString());
+                        order.addSaleOrderLine(orderLine);
+                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*price);
+                }
+                    waitPay.add(order);
+                    setSOTable(waitPay);
+                    System.out.println(order);
 
                     // Alert Box
                     Stage createItemPage = new Stage();
@@ -146,27 +269,44 @@ public class CreateSaleOrderController {
                     createItemPage.setScene(scene);
                     createItemPage.setTitle("สำเร็จ");
                     createItemPage.setResizable(false);
+                    CreateSaleOrderAlertController ca = loader.getController();
+                    ca.setSaleCode(code.getText());
                     createItemPage.show();
 
                     stage.close();
                 }
             }else{
+                failToCreateSO();
                 System.out.println("no order");
                 //กรุณาใส่สินค้าอย่างน้อย 1 ชุด
             }
-//        }else{
+        }else{
+            failToCreateSO();
             System.out.println("no code");
             // alert ต้องใส่เลขกำกับ
         }
-//    }
+    }
 
-    public void setSOTable(ArrayList<SaleOrder> arrayList){
+    public void setSOTable(List<SaleOrder> arrayList){
         table.getItems().clear();
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         codeCol.setCellValueFactory(new PropertyValueFactory<>("code"));
         price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
-        customerCol.setCellValueFactory(new PropertyValueFactory<>("partner"));
+        customerCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+    }
+
+    @FXML public void failToCreateSO() throws IOException {
+        Stage stage1 = new Stage();
+        stage1.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/failAlert.fxml"));
+        stage1.setScene(new Scene(loader.load()));
+        stage1.setTitle("แจ้งเตือน");
+        stage1.setResizable(false);
+        FailAlertController fa = loader.getController();
+        fa.setFrom("สร้างใบสั่งขายไม่สำเร็จ");
+        stage1.show();
+
     }
 
     public void setTable(TableView<SaleOrder> table) {
@@ -185,7 +325,7 @@ public class CreateSaleOrderController {
         this.price = price;
     }
 
-    public void setWaitCrateBillSO(ArrayList<SaleOrder> waitCrateBillSO) {
-        this.waitCrateBillSO = waitCrateBillSO;
+    public void setWaitPay(List<SaleOrder> waitPay) {
+        this.waitPay = waitPay;
     }
 }
