@@ -39,6 +39,13 @@ public class Item {
         this.minAmount = minAmount;
     }
 
+    public Item(String code, Float price, Integer minAmount) {
+        this.code = code;
+        this.price = price;
+        this.amount = 0;
+        this.minAmount = minAmount;
+    }
+
     public String getCode() {
         return code;
     }

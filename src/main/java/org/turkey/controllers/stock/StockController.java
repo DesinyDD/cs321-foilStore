@@ -62,6 +62,11 @@ public class StockController {
         createItemPage.setScene(scene);
         createItemPage.setTitle("เพิ่มประเภทสินค้า");
         createItemPage.setResizable(false);
+        CreateItemController ci = loader.getController();
+        ci.setTable(table);
+        ci.setCodeF(code);
+        ci.setStatus(status);
+        ci.setAmountF(amount);
         createItemPage.show();
     }
 

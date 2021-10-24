@@ -39,6 +39,11 @@ public class Customer {
         this.address = address;
         this.phoneNo = phoneNo;
     }
+    public Customer(String name, String address, String phoneNo) {
+        this.name = name;
+        this.address = address;
+        this.phoneNo = phoneNo;
+    }
 
     public BigInteger getCustomerId() {
         return customerId;

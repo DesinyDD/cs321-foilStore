@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateCustomerController {
-    private List<Customer> customers;
+    private List<Customer> customers = new HttpManage().getCustomer();
     private ObservableList list;
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
@@ -31,10 +31,10 @@ public class CreateCustomerController {
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
         if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
-            Customer customer = new Customer(new BigInteger("4"),nameF.getText(),addressF.getText(),phoneF.getText());
+            Customer customer = new Customer(nameF.getText(),addressF.getText(),phoneF.getText());
             customers.add(customer);
             setCustomerTable();
-
+            System.out.println(customer);
             // Alert Box
             Stage createCustomerAlertPage = new Stage();
             createCustomerAlertPage.initModality(Modality.APPLICATION_MODAL);
