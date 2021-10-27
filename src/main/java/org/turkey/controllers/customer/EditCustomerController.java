@@ -16,10 +16,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.controllers.FailAlertController;
 import org.turkey.models.Customer;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditCustomerController {
@@ -63,7 +62,7 @@ public class EditCustomerController {
 
 
             // ดึงข้อมูลมาใหม่
-            List<Customer> customers = new HttpManage().getCustomer();
+            List<Customer> customers = new DBConnector().getCustomer();
 
             setCustomerTable(customers);
 

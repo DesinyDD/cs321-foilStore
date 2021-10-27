@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.purchaseOrder.CreatePurchaseOrderController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.purchaseOrder.CreatePurchaseOrderController">
    <children>
-      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="800.0" spacing="30.0">
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="1000.0" spacing="30.0">
          <children>
             <Label text="ใบสั่งซื้อ">
                <font>
@@ -39,7 +39,7 @@
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <ComboBox fx:id="code1" prefHeight="59.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="code1" prefHeight="59.0" prefWidth="250.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
                   <Label text="จำนวน">
                      <font>
                         <Font size="24.0" />
@@ -74,7 +74,7 @@
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <ComboBox fx:id="code2" prefHeight="52.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="code2" prefHeight="52.0" prefWidth="250.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
                   <Label text="จำนวน">
                      <font>
                         <Font size="24.0" />
@@ -109,7 +109,7 @@
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <ComboBox fx:id="code3" prefHeight="52.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="code3" prefHeight="52.0" prefWidth="250.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
                   <Label text="จำนวน">
                      <font>
                         <Font size="24.0" />

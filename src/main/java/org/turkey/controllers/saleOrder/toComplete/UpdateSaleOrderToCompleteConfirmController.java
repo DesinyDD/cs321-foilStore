@@ -13,7 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.SaleOrder;
 import org.turkey.models.Status;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class UpdateSaleOrderToCompleteConfirmController {
 
 
         // fetch so for set table
-        List<SaleOrder> saleOrderList = new HttpManage().getSaleOrder();
+        List<SaleOrder> saleOrderList = new DBConnector().getSaleOrder();
         ArrayList<SaleOrder> saleOrders = new ArrayList<>();
         for (SaleOrder saleOrder1 : saleOrderList){
             if(saleOrder1.getStatus().equals(Status.WaitPay)){

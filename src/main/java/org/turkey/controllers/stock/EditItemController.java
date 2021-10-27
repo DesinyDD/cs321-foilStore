@@ -16,11 +16,10 @@ import javafx.stage.Stage;
 import org.turkey.controllers.FailAlertController;
 import org.turkey.models.Item;
 import org.turkey.models.StatusInApp;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditItemController {
@@ -53,7 +52,7 @@ public class EditItemController {
 
 
             // ดึงข้อมูล item หลังแก้จาก database
-            List<Item> stock = new HttpManage().getItem();
+            List<Item> stock = new DBConnector().getItem();
             setItemTable(stock);
 
             Stage editItemConfirmPage = new Stage();

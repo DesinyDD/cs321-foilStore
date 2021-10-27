@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.saleOrder.toWaitPay.UpdateSaleOrderToWaitPayController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.saleOrder.toWaitPay.UpdateSaleOrderToWaitPayController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="25.0">
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="600.0" spacing="25.0">
          <children>
             <Label text="เปลี่ยนสถานะใบสั่งขาย">
                <font>

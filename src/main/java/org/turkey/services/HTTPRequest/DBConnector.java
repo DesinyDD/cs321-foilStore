@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpManage {
+public class DBConnector {
 
     private static String API_ENDPOINT = "http://localhost:8000/api/";
 

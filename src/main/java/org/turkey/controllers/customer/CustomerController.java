@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.print.PageLayout;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -15,15 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Customer;
-import org.turkey.models.Information;
-import org.turkey.models.Item;
-import org.turkey.services.HTTPRequest.HttpManage;
-import org.turkey.services.MockUpData;
+import org.turkey.services.HTTPRequest.DBConnector;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerController {
@@ -31,7 +25,7 @@ public class CustomerController {
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;
     private ObservableList list;
-    private List<Customer> customers = new HttpManage().getCustomer();
+    private List<Customer> customers = new DBConnector().getCustomer();
 
     @FXML public void initialize(){
         table.setRowFactory( tv -> {

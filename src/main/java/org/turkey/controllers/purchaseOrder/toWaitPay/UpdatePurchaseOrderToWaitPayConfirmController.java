@@ -13,8 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Po;
 import org.turkey.models.PurchaseStatus;
-import org.turkey.models.SaleOrder;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class UpdatePurchaseOrderToWaitPayConfirmController {
 
 
         //fetch data from db
-        List<Po> poList = new HttpManage().getPO();
+        List<Po> poList = new DBConnector().getPO();
         ArrayList<Po> arrayList = new ArrayList<>();
         for (Po po1: poList){
             if(po1.getStatus().equals(PurchaseStatus.Wait)){
