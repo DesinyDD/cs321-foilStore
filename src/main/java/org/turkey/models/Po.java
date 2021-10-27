@@ -126,4 +126,14 @@ public class Po {
                 ", supplier=" + supplier +
                 '}';
     }
+
+    public String showLabel(){
+        String order="";
+        for (PoLine poLine : poLines){
+            order = order+poLine.getColorCode()+" ราคา "+poLine.getPricePerUnit()+" /ม้วน จำนวน"+poLine.getQuantity()+" ม้วน\n";
+        }
+        return "รหัสใบสั่งขาย : "+code+"\n"+
+                "บริษัทที่สั่งซื้อ : "+ supplier.getName() +"\n"+
+                "รายการที่สั่งซื้อ\n" + order + "ยอดรวม : " + totalPrice+" บาท";
+    }
 }

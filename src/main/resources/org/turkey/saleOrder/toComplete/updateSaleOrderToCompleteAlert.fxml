@@ -17,7 +17,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefWidth="606.0" text="(&amp;เลขกำกับใบสั่งขาย)">
+                  <Label fx:id="code" alignment="CENTER" prefWidth="606.0" text="(&amp;เลขกำกับใบสั่งขาย)">
                      <font>
                         <Font size="36.0" />
                      </font>

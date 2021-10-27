@@ -38,11 +38,11 @@ public class StockController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Item rowData = row.getItem();
-//                    try {
-//                        editItem(rowData.getColorCode(), rowData.getPrice(), rowData.getMinAmount());
-//                    } catch (IOException e) {
-                        // do nothing . . .
-//                    }
+                    try {
+                        editItem(rowData);
+                    } catch (IOException e) {
+//                         do nothing . . .
+                    }
                     System.out.println(rowData);
                 }
             });
@@ -70,7 +70,7 @@ public class StockController {
         createItemPage.show();
     }
 
-    @FXML private void editItem(String colorCode, float price, BigInteger min) throws IOException {
+    @FXML private void editItem(Item item) throws IOException {
         Stage editItemPage = new Stage();
         editItemPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/editItem.fxml"));
@@ -79,21 +79,26 @@ public class StockController {
         editItemPage.setTitle("แก้ไขข้อมูลสินค้า");
         editItemPage.setResizable(false);
         EditItemController ec = loader.getController();
-        ec.setColorCode(colorCode);
-        ec.setMinAmount(min);
-        ec.setPrice(price);
+        ec.setAmount(amount);
+        ec.setCode(code);
+        ec.setTable(table);
+        ec.setStatus(status);
+//        ec.setColorCode(colorCode);
+//        ec.setMinAmount(min);
+//        ec.setPrice(price);
+        ec.setThisItem(item);
         editItemPage.show();
     }
 
-    @FXML private void createPurchaseOrder() throws IOException {
-        Stage createPurchaseOrderPage = new Stage();
-        createPurchaseOrderPage.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrder.fxml"));
-        Scene scene = new Scene(loader.load());
-        CreatePurchaseOrderController con = loader.getController();
-        createPurchaseOrderPage.setScene(scene);
-        createPurchaseOrderPage.show();
-    }
+//    @FXML private void createPurchaseOrder() throws IOException {
+//        Stage createPurchaseOrderPage = new Stage();
+//        createPurchaseOrderPage.initModality(Modality.APPLICATION_MODAL);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrder.fxml"));
+//        Scene scene = new Scene(loader.load());
+//        CreatePurchaseOrderController con = loader.getController();
+//        createPurchaseOrderPage.setScene(scene);
+//        createPurchaseOrderPage.show();
+//    }
 
 //    public void setItemTable(){
 //        code.setSortable(true);

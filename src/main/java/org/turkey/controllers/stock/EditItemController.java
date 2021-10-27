@@ -2,62 +2,127 @@ package org.turkey.controllers.stock;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.turkey.controllers.FailAlertController;
+import org.turkey.models.Item;
+import org.turkey.models.StatusInApp;
+import org.turkey.services.HTTPRequest.HttpManage;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditItemController {
     @FXML private JFXButton cancelBtn;
     @FXML private TextField codeF, priceF, minF;
-    private String colorCode;
-    private float price;
-    private BigInteger minAmount;
-
+    @FXML private TableView<Item> table;
+    @FXML private TableColumn<Item, String> code;
+    @FXML private TableColumn<Item, BigInteger> amount;
+    @FXML private TableColumn<Item, Enum<StatusInApp>> status;
+    private Item thisItem;
+    private ObservableList list;
     public void initialize(){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                codeF.setText(colorCode);
-                priceF.setText(price+"");
-                minF.setText(minAmount+"");
+                codeF.setText(thisItem.getCode());
+                priceF.setText(thisItem.getPrice()+"");
+                minF.setText(thisItem.getMinAmount()+"");
             }
         });
     }
 
     @FXML private void editItem() throws IOException {
-        Stage editItemConfirmPage = new Stage();
-        editItemConfirmPage.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/editItemAlert.fxml"));
-        Scene scene = new Scene(loader.load());
-        editItemConfirmPage.setScene(scene);
-        editItemConfirmPage.setTitle("สำเร็จ");
-        editItemConfirmPage.setResizable(false);
-        editItemConfirmPage.show();
-        EditItemAlertController ea = loader.getController();
-        ea.setColorCode(codeF.getText());
-        this.close();
+        if(!codeF.getText().trim().equals("")&&!priceF.getText().trim().equals("")&&!minF.getText().trim().equals("")){
+            thisItem.setCode(codeF.getText().trim());
+            thisItem.setPrice(Float.parseFloat(priceF.getText().trim()));
+            thisItem.setMinAmount(new BigInteger(minF.getText().trim()));
+            System.out.println(thisItem);
+            // edit item on database
+
+
+            // ดึงข้อมูล item หลังแก้จาก database
+            List<Item> stock = new HttpManage().getItem();
+            setItemTable(stock);
+
+            Stage editItemConfirmPage = new Stage();
+            editItemConfirmPage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/editItemAlert.fxml"));
+            Scene scene = new Scene(loader.load());
+            editItemConfirmPage.setScene(scene);
+            editItemConfirmPage.setTitle("สำเร็จ");
+            editItemConfirmPage.setResizable(false);
+            editItemConfirmPage.show();
+            EditItemAlertController ea = loader.getController();
+            ea.setColorCode(codeF.getText());
+            this.close();
+        }else{
+            failToEditItem();
+            if (codeF.getText().trim().equals("")){
+                // code alert
+            }
+            if (priceF.getText().trim().equals("")){
+                // price alert
+            }
+            if (minF.getText().trim().equals("")){
+                // min alert
+            }
+        }
     }
 
+    @FXML public void failToEditItem() throws IOException {
+        Stage stage1 = new Stage();
+        stage1.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/failAlert.fxml"));
+        stage1.setScene(new Scene(loader.load()));
+        stage1.setTitle("แจ้งเตือน");
+        stage1.setResizable(false);
+        FailAlertController fa = loader.getController();
+        fa.setFrom("แก้ไขประเภทสินค้าใหม่ไม่สำเร็จ");
+        stage1.show();
+
+    }
     @FXML private void close() {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setItemTable(List<Item> stock){
+        list = FXCollections.observableArrayList(stock);
+        table.setItems(list);
+        code.setCellValueFactory(new PropertyValueFactory<>("code"));
+//        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
 
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
+    public void setThisItem(Item thisItem) {
+        this.thisItem = thisItem;
     }
 
-    public void setMinAmount(BigInteger minAmount) {
-        this.minAmount = minAmount;
+    public void setTable(TableView<Item> table) {
+        this.table = table;
+    }
+
+    public void setCode(TableColumn<Item, String> code) {
+        this.code = code;
+    }
+
+    public void setStatus(TableColumn<Item, Enum<StatusInApp>> status) {
+        this.status = status;
+    }
+
+    public void setAmount(TableColumn<Item, BigInteger> amount) {
+        this.amount = amount;
     }
 }

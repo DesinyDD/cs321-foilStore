@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.turkey.controllers.saleOrder.toComplete.UpdateSaleOrderToCompleteController;
 import org.turkey.models.*;
 import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.NavBarService;
@@ -41,7 +42,11 @@ public class SaleOrderController {
                     try {
                         // this.updateOrderToWaitPay();
                         // this.updateOrderToComplete();
-                        this.showOrderComplete();
+                        if (rowData.getStatus().equals(Status.WaitPay)){
+                            updateOrderToComplete(rowData);
+                        }else if(rowData.getStatus().equals(Status.Complete)){
+                            this.showOrderComplete(rowData);
+                        }
                     } catch (IOException e) {
                         // do nothing . . .
                     }
@@ -93,7 +98,7 @@ public class SaleOrderController {
     }
 
     // เปลี่ยนสถานะ Order เป็น 'Complete'
-    @FXML private void updateOrderToComplete() throws IOException {
+    @FXML private void updateOrderToComplete(SaleOrder saleOrder) throws IOException {
         Stage updateSaleOrderToCompletePage = new Stage();
         updateSaleOrderToCompletePage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/toComplete/updateSaleOrderToComplete.fxml"));
@@ -101,11 +106,17 @@ public class SaleOrderController {
         updateSaleOrderToCompletePage.setScene(scene);
         updateSaleOrderToCompletePage.setTitle("เปลี่ยนสถานะใบสั่งขาย");
         updateSaleOrderToCompletePage.setResizable(false);
+        UpdateSaleOrderToCompleteController uso = loader.getController();
+        uso.setSaleOrder(saleOrder);
+        uso.setTable(table);
+        uso.setCode(code);
+        uso.setCustomer(customer);
+        uso.setPrice(price);
         updateSaleOrderToCompletePage.show();
     }
 
     // แสดง Order (สำหรับ Order ที่มีสถานะ 'Complete')
-    @FXML private void showOrderComplete() throws IOException {
+    @FXML private void showOrderComplete(SaleOrder saleOrder) throws IOException {
         Stage showSaleOrderCompletePage = new Stage();
         showSaleOrderCompletePage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/showSaleOrderComplete.fxml"));
@@ -113,6 +124,8 @@ public class SaleOrderController {
         showSaleOrderCompletePage.setScene(scene);
         showSaleOrderCompletePage.setTitle("ใบสั่งขาย");
         showSaleOrderCompletePage.setResizable(false);
+        ShowSaleOrderCompleteController so = loader.getController();
+        so.setSaleOrder(saleOrder);
         showSaleOrderCompletePage.show();
     }
 

@@ -16,7 +16,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label text="(&amp;ข้อมูล SO รายการนี้)">
+            <Label fx:id="label" text="(&amp;ข้อมูล SO รายการนี้)">
                <font>
                   <Font size="24.0" />
                </font>

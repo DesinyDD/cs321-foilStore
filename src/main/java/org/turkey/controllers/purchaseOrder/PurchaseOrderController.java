@@ -13,6 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.turkey.controllers.purchaseOrder.toComplete.UpdatePurchaseOrderToCompleteController;
+import org.turkey.controllers.purchaseOrder.toWaitPay.UpdatePurchaseOrderToWaitPayController;
 import org.turkey.models.*;
 import org.turkey.services.HTTPRequest.HttpManage;
 import org.turkey.services.MockUpData;
@@ -40,9 +42,13 @@ public class PurchaseOrderController {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Po rowData = row.getItem();
                     try {
-                        this.updatePurchaseOrderToWaitPay();
-                        // this.updateOrderToComplete();
-                        // this.showOrderComplete();
+                        if (rowData.getStatus().equals(PurchaseStatus.Wait)){
+                            this.updatePurchaseOrderToWaitPay(rowData);
+                        }else if(rowData.getStatus().equals(PurchaseStatus.WaitPay)){
+                            this.updateOrderToComplete(rowData);
+                        }else if(rowData.getStatus().equals(PurchaseStatus.Complete)){
+                            this.showOrderComplete(rowData);
+                        }
                     } catch (IOException e) {
                         System.err.println(e);
                     }
@@ -74,7 +80,7 @@ public class PurchaseOrderController {
     }
 
     // เปลี่ยนสถานะ Order เป็น 'WaitPay'
-    @FXML private void updatePurchaseOrderToWaitPay() throws IOException {
+    @FXML private void updatePurchaseOrderToWaitPay(Po po) throws IOException {
         Stage updatePurchaseOrderToWaitPayPage = new Stage();
         updatePurchaseOrderToWaitPayPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/toWaitPay/updatePurchaseOrderToWaitPay.fxml"));
@@ -82,11 +88,17 @@ public class PurchaseOrderController {
         updatePurchaseOrderToWaitPayPage.setScene(scene);
         updatePurchaseOrderToWaitPayPage.setTitle("เปลี่ยนสถานะใบสั่งซื้อ");
         updatePurchaseOrderToWaitPayPage.setResizable(false);
+        UpdatePurchaseOrderToWaitPayController ua = loader.getController();
+        ua.setPo(po);
+        ua.setTable(table);
+        ua.setSupplier(supplier);
+        ua.setCode(code);
+        ua.setPrice(price);
         updatePurchaseOrderToWaitPayPage.show();
     }
 
     // เปลี่ยนสถานะ Order เป็น 'Complete'
-    @FXML private void updateOrderToComplete() throws IOException {
+    @FXML private void updateOrderToComplete(Po po) throws IOException {
         Stage updatePurchaseOrderToCompletePage = new Stage();
         updatePurchaseOrderToCompletePage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/toComplete/updatePurchaseOrderToComplete.fxml"));
@@ -94,11 +106,17 @@ public class PurchaseOrderController {
         updatePurchaseOrderToCompletePage.setScene(scene);
         updatePurchaseOrderToCompletePage.setTitle("เปลี่ยนสถานะใบสั่งขาย");
         updatePurchaseOrderToCompletePage.setResizable(false);
+        UpdatePurchaseOrderToCompleteController ua = loader.getController();
+        ua.setPo(po);
+        ua.setTable(table);
+        ua.setSupplier(supplier);
+        ua.setCode(code);
+        ua.setPrice(price);
         updatePurchaseOrderToCompletePage.show();
     }
 
     // แสดง Order (สำหรับ Order ที่มีสถานะ 'Complete')
-    @FXML private void showOrderComplete() throws IOException {
+    @FXML private void showOrderComplete(Po po) throws IOException {
         Stage showPurchaseOrderCompletePage = new Stage();
         showPurchaseOrderCompletePage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/showPurchaseOrderComplete.fxml"));
@@ -106,6 +124,8 @@ public class PurchaseOrderController {
         showPurchaseOrderCompletePage.setScene(scene);
         showPurchaseOrderCompletePage.setTitle("ใบสั่งขาย");
         showPurchaseOrderCompletePage.setResizable(false);
+        ShowPurchaseOrderCompleteController soc = loader.getController();
+        soc.setPo(po);
         showPurchaseOrderCompletePage.show();
     }
 

@@ -107,7 +107,7 @@ public class CreateSaleOrderController {
 
     @FXML public void select1(ActionEvent event){
         boolean clear = false;
-        Integer amount = 0;
+        BigInteger amount = new BigInteger(0+"");
         for (Item item1 : stock){
             if (code1.getValue()==null){
                 clear = true;
@@ -123,7 +123,7 @@ public class CreateSaleOrderController {
     }
     @FXML public void select2(ActionEvent event){
         boolean clear = false;
-        Integer amount = 0;
+        BigInteger amount = new BigInteger(0+"");
         for (Item item1 : stock){
             if (code2.getValue()==null){
                 clear = true;
@@ -139,7 +139,7 @@ public class CreateSaleOrderController {
     }
     @FXML public void select3(ActionEvent event){
         boolean clear = false;
-        Integer amount = 0;
+        BigInteger amount = new BigInteger(0+"");
         for (Item item1 : stock){
             if (code3.getValue()==null){
                 clear = true;

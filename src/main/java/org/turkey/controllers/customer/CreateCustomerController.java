@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.turkey.controllers.FailAlertController;
 import org.turkey.models.Customer;
 import org.turkey.models.Information;
 import org.turkey.services.HTTPRequest.HttpManage;
@@ -49,7 +50,16 @@ public class CreateCustomerController {
 
             stage.close();
         }else{
-            System.out.println(1);
+            failToCreateCustomer();
+            if (nameF.getText().trim().equals("")){
+                // alert name
+            }
+            if (addressF.getText().trim().equals("")){
+                // alert address
+            }
+            if (phoneF.getText().trim().equals("")){
+                // alert phone
+            }
         }
     }
 
@@ -59,6 +69,18 @@ public class CreateCustomerController {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
+    }
+    @FXML public void failToCreateCustomer() throws IOException {
+        Stage stage1 = new Stage();
+        stage1.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/failAlert.fxml"));
+        stage1.setScene(new Scene(loader.load()));
+        stage1.setTitle("แจ้งเตือน");
+        stage1.setResizable(false);
+        FailAlertController fa = loader.getController();
+        fa.setFrom("เพิ่มข้อมูลลูกค้าไม่สำเร็จไม่สำเร็จ");
+        stage1.show();
+
     }
 
     public void setAddress(TableColumn<Customer, String> address) {this.address = address;}

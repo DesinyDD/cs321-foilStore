@@ -182,4 +182,15 @@ public class SaleOrder {
                 ", customer=" + customer +
                 '}';
     }
+
+    public String showLabel(){
+        String order = "";
+        for(SaleOrderLine saleOrderLine : saleOrderLines){
+            order = order+saleOrderLine.getColorCode()+" จำนวน "+ saleOrderLine.getQuantity()+" ม้วน\n";
+        }
+        return "รหัสใบสั่งขาย : "+code+"\n"+
+                "ชื่อลูกค้า : "+ customer.getName()+"\n"+
+                "รูปแบบการจ่ายเงิน : "+ paymentMethod +"\n"+
+                "รายการที่สั่งซื้อ\n" + order+ "ราคารวม : " + totalPrice+ " บาท";
+    }
 }

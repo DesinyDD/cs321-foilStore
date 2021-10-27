@@ -40,7 +40,7 @@ public class CustomerController {
                 if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     Customer rowData = row.getItem();
                     try {
-                        editCustomer(rowData.getName(), rowData.getAddress(), rowData.getPhoneNo());
+                        editCustomer(rowData);
                     } catch (IOException e) {
                         // do nothing . . .
                     }
@@ -70,7 +70,7 @@ public class CustomerController {
         createCustomerPage.show();
     }
 
-    @FXML private void editCustomer(String name, String address, String phone) throws IOException {
+    @FXML private void editCustomer(Customer customer) throws IOException {
         Stage editCustomerPage = new Stage();
         editCustomerPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/customer/editCustomer.fxml"));
@@ -79,9 +79,11 @@ public class CustomerController {
         editCustomerPage.setTitle("แก้ไขข้อมูลลูกค้า");
         editCustomerPage.setResizable(false);
         EditCustomerController ec = loader.getController();
-        ec.setName(name);
-        ec.setAddress(address);
-        ec.setPhone(phone);
+        ec.setThisCustomer(customer);
+        ec.setTable(table);
+        ec.setAddressCol(this.address);
+        ec.setNameCol(this.name);
+        ec.setPhoneCol(this.phone);
         editCustomerPage.show();
     }
 

@@ -2,6 +2,8 @@ package org.turkey.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigInteger;
+
 public class Item {
 
     @SerializedName("code")
@@ -12,10 +14,10 @@ public class Item {
     private Float price;
     @SerializedName("amount")
     @Expose
-    private Integer amount;
+    private BigInteger amount;
     @SerializedName("min_amount")
     @Expose
-    private Integer minAmount;
+    private BigInteger minAmount;
 
     /**
      * No args constructor for use in serialization
@@ -31,7 +33,7 @@ public class Item {
      * @param code
      * @param price
      */
-    public Item(String code, Float price, Integer amount, Integer minAmount) {
+    public Item(String code, Float price, BigInteger amount, BigInteger minAmount) {
         super();
         this.code = code;
         this.price = price;
@@ -39,10 +41,10 @@ public class Item {
         this.minAmount = minAmount;
     }
 
-    public Item(String code, Float price, Integer minAmount) {
+    public Item(String code, Float price, BigInteger minAmount) {
         this.code = code;
         this.price = price;
-        this.amount = 0;
+        this.amount = new BigInteger(0+"");
         this.minAmount = minAmount;
     }
 
@@ -62,20 +64,29 @@ public class Item {
         this.price = price;
     }
 
-    public Integer getAmount() {
+    public BigInteger getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigInteger amount) {
         this.amount = amount;
     }
 
-    public Integer getMinAmount() {
+    public BigInteger getMinAmount() {
         return minAmount;
     }
 
-    public void setMinAmount(Integer minAmount) {
+    public void setMinAmount(BigInteger minAmount) {
         this.minAmount = minAmount;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "code='" + code + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", minAmount=" + minAmount +
+                '}';
+    }
 }
