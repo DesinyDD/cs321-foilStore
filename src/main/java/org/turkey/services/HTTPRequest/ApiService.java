@@ -1,9 +1,6 @@
 package org.turkey.services.HTTPRequest;
 
-import org.turkey.models.Customer;
-import org.turkey.models.Item;
-import org.turkey.models.Po;
-import org.turkey.models.SaleOrder;
+import org.turkey.models.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -27,4 +24,7 @@ public interface ApiService {
 
     @GET("po")
     Call<List<Po>> listPo();
+
+    @GET("supplier")
+    Call<List<Supplier>> listSupplier();
 }

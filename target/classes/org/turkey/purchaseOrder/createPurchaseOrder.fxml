@@ -25,7 +25,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="51.0" prefWidth="221.0" promptText="เลขใบกำกับสั่งซื้อ">
+                  <TextField fx:id="codeF" prefHeight="51.0" prefWidth="221.0" promptText="เลขใบกำกับสั่งซื้อ">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -34,12 +34,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="900.0" spacing="10.0">
                <children>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#clear1" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <ComboBox prefHeight="59.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="code1" prefHeight="59.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
                   <Label text="จำนวน">
                      <font>
                         <Font size="24.0" />
@@ -69,12 +69,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="900.0" spacing="10.0">
                <children>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#clear2" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <ComboBox prefHeight="52.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="code2" prefHeight="52.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
                   <Label text="จำนวน">
                      <font>
                         <Font size="24.0" />
@@ -104,12 +104,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="900.0" spacing="10.0">
                <children>
-                  <JFXButton buttonType="RAISED" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#clear3" style="-fx-background-color: #FF4444; -fx-background-radius: 15;" text="X" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <ComboBox prefHeight="52.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="code3" prefHeight="52.0" prefWidth="150.0" promptText="รหัสสี" style="-fx-font-size: 24;" />
                   <Label text="จำนวน">
                      <font>
                         <Font size="24.0" />
@@ -144,10 +144,10 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ComboBox prefHeight="35.0" prefWidth="150.0" promptText="ผู้ผลิต" style="-fx-font-size: 24;" />
+                  <ComboBox fx:id="supplier" onAction="#showPhone" prefHeight="35.0" prefWidth="150.0" promptText="ผู้ผลิต" style="-fx-font-size: 24;" />
                </children>
             </HBox>
-            <Label text="เบอร์โทรศัพท์ : 08X-XXX-XXXX">
+            <Label fx:id="phone" text="เบอร์โทรศัพท์ : 08X-XXX-XXXX">
                <font>
                   <Font size="24.0" />
                </font>

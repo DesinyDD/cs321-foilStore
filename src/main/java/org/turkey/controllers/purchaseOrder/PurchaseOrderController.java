@@ -65,6 +65,11 @@ public class PurchaseOrderController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrder.fxml"));
         Scene scene = new Scene(loader.load());
         createPurchaseOrderPage.setScene(scene);
+        CreatePurchaseOrderController poc = loader.getController();
+        poc.setTable(table);
+        poc.setTotalPriceCol(price);
+        poc.setCode(code);
+        poc.setSupplierCol(supplier);
         createPurchaseOrderPage.show();
     }
 

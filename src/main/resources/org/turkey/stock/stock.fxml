@@ -77,11 +77,6 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="93.0" prefWidth="813.0" spacing="30.0">
                            <children>
-                              <JFXButton buttonType="RAISED" onAction="#createPurchaseOrder" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="+ สร้างใบสั่งซื้อ">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </JFXButton>
                               <JFXButton buttonType="RAISED" onAction="#toPurchaseOrder" style="-fx-background-color: #ffed4a; -fx-background-radius: 50;" text="หน้าใบสั่งซื้อ">
                                  <font>
                                     <Font size="24.0" />

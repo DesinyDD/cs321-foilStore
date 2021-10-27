@@ -1,9 +1,6 @@
 package org.turkey.services.HTTPRequest;
 
-import org.turkey.models.Customer;
-import org.turkey.models.Item;
-import org.turkey.models.Po;
-import org.turkey.models.SaleOrder;
+import org.turkey.models.*;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -92,6 +89,17 @@ public class HttpManage {
             List<Customer> customers = callCustomer.execute().body();
             return customers;
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public List<Supplier> getSupplier(){
+        ApiService service = startConnection();
+        Call<List<Supplier>> callSupplier = service.listSupplier();
+        try {
+            List<Supplier> suppliers = callSupplier.execute().body();
+            return suppliers;
         }catch (Exception e){
             e.printStackTrace();
         }

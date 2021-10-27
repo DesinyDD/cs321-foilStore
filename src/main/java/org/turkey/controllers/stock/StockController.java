@@ -90,17 +90,7 @@ public class StockController {
         createPurchaseOrderPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrder.fxml"));
         Scene scene = new Scene(loader.load());
-
-        // test
-
-//        CreatePurchaseOrderController con = loader.getController();
-//        con.setStock(stock);
-//        con.setTable(table);
-//        con.setStatus(status);
-//        con.setCode(code);
-//        con.setAmount(amount);
-
-        // test
+        CreatePurchaseOrderController con = loader.getController();
         createPurchaseOrderPage.setScene(scene);
         createPurchaseOrderPage.show();
     }

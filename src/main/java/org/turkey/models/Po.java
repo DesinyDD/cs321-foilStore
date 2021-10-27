@@ -1,6 +1,7 @@
 package org.turkey.models;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -48,6 +49,15 @@ public class Po {
         this.status = status;
         this.totalPrice = totalPrice;
         this.poLines = poLines;
+        this.supplier = supplier;
+    }
+
+    public Po(String code, BigInteger supplierId, float totalPrice, Supplier supplier) {
+        this.code = code;
+        this.supplierId = supplierId;
+        this.status = PurchaseStatus.Wait;
+        this.totalPrice = totalPrice;
+        this.poLines = new ArrayList<>();
         this.supplier = supplier;
     }
 
@@ -100,6 +110,10 @@ public class Po {
     }
 
     public String getSupplierName() {return supplier.getName();}
+
+    public void addTotalPrice(float price) { this.totalPrice += price;}
+
+    public void addPoLine(PoLine poLine) {this.poLines.add(poLine);}
 
     @Override
     public String toString() {

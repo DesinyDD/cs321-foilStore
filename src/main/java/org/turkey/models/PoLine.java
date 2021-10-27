@@ -19,10 +19,10 @@ public class PoLine {
     private String colorCode;
     @SerializedName("quantity")
     @Expose
-    private Integer quantity;
+    private BigInteger quantity;
     @SerializedName("price_per_unit")
     @Expose
-    private Double pricePerUnit;
+    private float pricePerUnit;
     @SerializedName("item")
     @Expose
     private Item item;
@@ -43,8 +43,15 @@ public class PoLine {
      * @param id
      * @param pricePerUnit
      */
-    public PoLine(BigInteger id, String poCode, String colorCode, Integer quantity, Double pricePerUnit, Item item) {
-        super();
+    public PoLine(BigInteger id, String poCode, String colorCode, BigInteger quantity, float pricePerUnit, Item item) {
+        this.id = id;
+        this.poCode = poCode;
+        this.colorCode = colorCode;
+        this.quantity = quantity;
+        this.pricePerUnit = pricePerUnit;
+        this.item = item;
+    }
+    public PoLine(String poCode, String colorCode, BigInteger quantity, float pricePerUnit) {
         this.id = id;
         this.poCode = poCode;
         this.colorCode = colorCode;
@@ -77,19 +84,19 @@ public class PoLine {
         this.colorCode = colorCode;
     }
 
-    public Integer getQuantity() {
+    public BigInteger getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
     }
 
-    public Double getPricePerUnit() {
+    public float getPricePerUnit() {
         return pricePerUnit;
     }
 
-    public void setPricePerUnit(Double pricePerUnit) {
+    public void setPricePerUnit(float pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
 
