@@ -2,6 +2,8 @@ package org.turkey.controllers.stock;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,6 +40,22 @@ public class EditItemController {
                 codeF.setText(thisItem.getCode());
                 priceF.setText(thisItem.getPrice()+"");
                 minF.setText(thisItem.getMinAmount()+"");
+            }
+        });
+        priceF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,2})?")) {
+                    priceF.setText(oldValue);
+                }
+            }
+        });
+        minF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}?")) {
+                    minF.setText(oldValue);
+                }
             }
         });
     }

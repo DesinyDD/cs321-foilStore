@@ -1,6 +1,9 @@
 package org.turkey.controllers.stock;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,6 +33,25 @@ public class CreateItemController {
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
+
+    public void initialize(){
+        price.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,2})?")) {
+                    price.setText(oldValue);
+                }
+            }
+        });
+        min.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}?")) {
+                    min.setText(oldValue);
+                }
+            }
+        });
+    }
 
     @FXML private void createItem() throws IOException {
         if(code.getText().trim().equals("") || price.getText().trim().equals("") || min.getText().trim().equals("")){
