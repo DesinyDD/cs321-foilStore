@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class SaleOrderController {
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder,String> code,customer;
     @FXML private TableColumn<SaleOrder, Float> price;
-    private List<SaleOrder> orders = new HttpManage().getSaleOrder();
+    private List<SaleOrder> orders = new DBConnector().getSaleOrder();
 //    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
     private SaleOrder order;
     private SaleOrderLine orderLine;

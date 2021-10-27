@@ -14,12 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.*;
-import org.turkey.services.HTTPRequest.HttpManage;
-import org.turkey.services.MockUpData;
+import org.turkey.services.HTTPRequest.DBConnector;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class PurchaseOrderController {
     private ObservableList list;
     private Po order;
     private PoLine orderLine;
-    private List<Po> orders = new HttpManage().getPO();
+    private List<Po> orders = new DBConnector().getPO();
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {

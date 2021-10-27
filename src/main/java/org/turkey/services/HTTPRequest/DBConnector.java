@@ -1,5 +1,6 @@
 package org.turkey.services.HTTPRequest;
 
+import com.google.gson.Gson;
 import org.turkey.models.*;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpManage {
+public class DBConnector {
 
     private static String API_ENDPOINT = "http://localhost:8000/api/";
 
@@ -104,5 +105,18 @@ public class HttpManage {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void createSaleOrder(SaleOrder saleOrder) {
+        ApiService service = startConnection();
+        Call<Object> callSaleOrder = service.createSaleOrder(saleOrder);
+
+        try {
+            String res = new Gson().toJson(callSaleOrder.execute().body());
+            System.out.println("IN DBCONNECTOR");
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

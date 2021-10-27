@@ -3,7 +3,6 @@ package org.turkey.controllers.stock;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Item;
 import org.turkey.models.StatusInApp;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -28,7 +27,7 @@ public class CreateItemController {
     @FXML private TableColumn<Item, String> codeF;
     @FXML private TableColumn<Item, BigInteger> amountF;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
-    private List<Item> stock = new HttpManage().getItem();
+    private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
 
     @FXML private void createItem() throws IOException {

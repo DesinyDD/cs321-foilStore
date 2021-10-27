@@ -15,8 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.controllers.FailAlertController;
 import org.turkey.models.*;
-import org.turkey.services.HTTPRequest.HttpManage;
-import org.turkey.services.MockUpData;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -30,9 +29,9 @@ public class CreateSaleOrderController {
     @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
     @FXML private TableColumn<SaleOrder, Float> price;
     @FXML private Label amount1, amount2, amount3;
-    private List<Item> stock = new HttpManage().getItem();
-    private List<Customer> customers = new HttpManage().getCustomer();
-    private List<SaleOrder> orders = new HttpManage().getSaleOrder(), waitPay;
+    private List<Item> stock = new DBConnector().getItem();
+    private List<Customer> customers = new DBConnector().getCustomer();
+    private List<SaleOrder> orders = new DBConnector().getSaleOrder(), waitPay;
     private Item item;
     private Customer customer;
     private SaleOrder order;
@@ -260,6 +259,8 @@ public class CreateSaleOrderController {
                     waitPay.add(order);
                     setSOTable(waitPay);
                     System.out.println(order);
+
+                    new DBConnector().createSaleOrder(order);
 
                     // Alert Box
                     Stage createItemPage = new Stage();

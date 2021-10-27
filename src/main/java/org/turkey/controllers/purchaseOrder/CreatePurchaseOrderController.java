@@ -1,7 +1,6 @@
 package org.turkey.controllers.purchaseOrder;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,7 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.controllers.FailAlertController;
 import org.turkey.models.*;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -33,11 +32,11 @@ public class CreatePurchaseOrderController {
     @FXML private TableColumn<Po, String> code;
     @FXML private TableColumn<Po, Float> totalPriceCol;
     @FXML private TableColumn<Po, String> supplierCol;
-    private List<Item> stock = new HttpManage().getItem();
+    private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
-    private List<Supplier> supplierList = new HttpManage().getSupplier();
+    private List<Supplier> supplierList = new DBConnector().getSupplier();
     private List<String> supplierName = new ArrayList<>(), color = new ArrayList<>();
-    private List<Po> poList = new HttpManage().getPO();
+    private List<Po> poList = new DBConnector().getPO();
     private BigInteger supplier_id;
     private PoLine poLine;
     private Supplier supp;

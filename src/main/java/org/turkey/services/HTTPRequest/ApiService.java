@@ -27,4 +27,7 @@ public interface ApiService {
 
     @GET("supplier")
     Call<List<Supplier>> listSupplier();
+
+    @POST("sale_order")
+    Call<Object> createSaleOrder(@Body SaleOrder saleOrder);
 }

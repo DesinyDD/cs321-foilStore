@@ -11,16 +11,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.models.Customer;
-import org.turkey.models.Information;
-import org.turkey.services.HTTPRequest.HttpManage;
+import org.turkey.services.HTTPRequest.DBConnector;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateCustomerController {
-    private List<Customer> customers = new HttpManage().getCustomer();
+    private List<Customer> customers = new DBConnector().getCustomer();
     private ObservableList list;
     @FXML private TableView<Customer> table;
     @FXML private TableColumn<Customer, String> name, phone, address;

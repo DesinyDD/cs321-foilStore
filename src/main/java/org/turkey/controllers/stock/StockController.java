@@ -14,13 +14,11 @@ import javafx.stage.Stage;
 import org.turkey.controllers.purchaseOrder.CreatePurchaseOrderController;
 import org.turkey.models.Item;
 import org.turkey.models.StatusInApp;
-import org.turkey.services.HTTPRequest.HttpManage;
-import org.turkey.services.MockUpData;
+import org.turkey.services.HTTPRequest.DBConnector;
 import org.turkey.services.NavBarService;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StockController {
@@ -29,7 +27,7 @@ public class StockController {
     @FXML private TableColumn<Item, String> code;
     @FXML private TableColumn<Item, BigInteger> amount;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
-    private List<Item> stock = new HttpManage().getItem();
+    private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
 
     @FXML public void initialize() {
