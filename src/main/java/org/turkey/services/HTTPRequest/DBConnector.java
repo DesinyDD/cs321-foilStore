@@ -40,10 +40,10 @@ public class DBConnector {
     public List<SaleOrder> getSaleOrder() {
         ApiService service = startConnection();
         Call<List<SaleOrder>> callSaleOrder = service.listSaleOrder();
-        try{
+        try {
             List<SaleOrder> saleOrderList = callSaleOrder.execute().body();
             return saleOrderList;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -71,34 +71,35 @@ public class DBConnector {
     public List<Po> getPO() {
         ApiService service = startConnection();
         Call<List<Po>> callPO = service.listPo();
-        try{
+        try {
             List<Po> pos = callPO.execute().body();
             return pos;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public List<Customer> getCustomer(){
+    public List<Customer> getCustomer() {
         ApiService service = startConnection();
         Call<List<Customer>> callCustomer = service.listCustomers();
-        try{
+        try {
             List<Customer> customers = callCustomer.execute().body();
             return customers;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    public List<Supplier> getSupplier(){
+
+    public List<Supplier> getSupplier() {
         ApiService service = startConnection();
         Call<List<Supplier>> callSupplier = service.listSupplier();
         try {
             List<Supplier> suppliers = callSupplier.execute().body();
             return suppliers;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -116,7 +117,7 @@ public class DBConnector {
         }
     }
 
-    public void createPO(Po po){
+    public void createPO(Po po) {
         ApiService service = startConnection();
         Call<Object> callPo = service.createPO(po);
 
@@ -143,6 +144,18 @@ public class DBConnector {
     public void poToComplete(Po po) {
         ApiService service = startConnection();
         Call<Object> callToComplete = service.poToComplete(po.getCode());
+
+        try {
+            String res = new Gson().toJson(callToComplete.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saleOrderToComplete(SaleOrder saleOrder) {
+        ApiService service = startConnection();
+        Call<Object> callToComplete = service.saleOrderToComplete(saleOrder.getCode());
 
         try {
             String res = new Gson().toJson(callToComplete.execute().body());

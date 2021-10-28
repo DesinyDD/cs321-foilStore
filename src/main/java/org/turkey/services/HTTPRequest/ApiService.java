@@ -40,4 +40,7 @@ public interface ApiService {
 
     @POST("po/to_complete/{code}")
     Call<Object> poToComplete(@Path("code") String code);
+
+    @POST("sale_order/to_complete/{code}")
+    Call<Object> saleOrderToComplete(@Path("code") String code);
 }

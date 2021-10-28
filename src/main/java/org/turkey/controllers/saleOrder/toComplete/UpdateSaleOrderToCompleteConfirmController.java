@@ -30,6 +30,7 @@ public class UpdateSaleOrderToCompleteConfirmController {
     @FXML private void confirm() throws IOException {
         // edit status api
 
+        new DBConnector().saleOrderToComplete(saleOrder);
 
         // fetch so for set table
         List<SaleOrder> saleOrderList = new DBConnector().getSaleOrder();
