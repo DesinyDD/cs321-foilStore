@@ -30,6 +30,7 @@ public class UpdatePurchaseOrderToWaitPayConfirmController {
     @FXML private void confirm() throws IOException {
         // edit PO status on api
 
+        new DBConnector().poToWaitPay(po);
 
         //fetch data from db
         List<Po> poList = new DBConnector().getPO();

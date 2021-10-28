@@ -4,14 +4,15 @@ import org.turkey.models.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface ApiService {
     @GET("items")
     Call<List<Item>> listItems();
 
-    @GET("items/{color_code}")
-    Call<Item> showItem(@Path("color_code") String color_code);
+    @GET("items/{code}")
+    Call<Item> showItem(@Path("code") String code);
 
     @POST("items")
     Call<Object> createItem(@Body Item item);
@@ -27,4 +28,16 @@ public interface ApiService {
 
     @GET("supplier")
     Call<List<Supplier>> listSupplier();
+
+    @POST("sale_order")
+    Call<Object> createSaleOrder(@Body SaleOrder saleOrder);
+
+    @POST("po")
+    Call<Object> createPO(@Body Po po);
+
+    @POST("po/to_wait_pay/{code}")
+    Call<Object> poToWaitPay(@Path("code") String code);
+
+    @POST("po/to_complete/{code}")
+    Call<Object> poToComplete(@Path("code") String code);
 }

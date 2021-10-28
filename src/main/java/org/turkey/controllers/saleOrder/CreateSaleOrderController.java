@@ -260,6 +260,8 @@ public class CreateSaleOrderController {
                     setSOTable(waitPay);
                     System.out.println(order);
 
+                    new DBConnector().createSaleOrder(order);
+
                     // Alert Box
                     Stage createItemPage = new Stage();
                     createItemPage.initModality(Modality.APPLICATION_MODAL);

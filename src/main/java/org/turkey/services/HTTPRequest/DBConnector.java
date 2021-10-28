@@ -1,14 +1,12 @@
 package org.turkey.services.HTTPRequest;
 
+import com.google.gson.Gson;
 import org.turkey.models.*;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBConnector {
@@ -104,5 +102,54 @@ public class DBConnector {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void createSaleOrder(SaleOrder saleOrder) {
+        ApiService service = startConnection();
+        Call<Object> callSaleOrder = service.createSaleOrder(saleOrder);
+
+        try {
+            String res = new Gson().toJson(callSaleOrder.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createPO(Po po){
+        ApiService service = startConnection();
+        Call<Object> callPo = service.createPO(po);
+
+        try {
+            String res = new Gson().toJson(callPo.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void poToWaitPay(Po po) {
+        ApiService service = startConnection();
+        Call<Object> callToWaitPay = service.poToWaitPay(po.getCode());
+
+        try {
+            String res = new Gson().toJson(callToWaitPay.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void poToComplete(Po po) {
+        ApiService service = startConnection();
+        Call<Object> callToComplete = service.poToComplete(po.getCode());
+
+        try {
+            String res = new Gson().toJson(callToComplete.execute().body());
+            System.out.println("TO COMPLETE DBCONNECTOR");
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
