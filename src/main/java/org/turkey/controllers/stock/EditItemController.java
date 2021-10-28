@@ -31,7 +31,7 @@ public class EditItemController {
     @FXML private TableColumn<Item, String> code;
     @FXML private TableColumn<Item, BigInteger> amount;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
-    private Item thisItem;
+    private Item thisItem, beforeEdit;
     private ObservableList list;
     public void initialize(){
         Platform.runLater(new Runnable() {
@@ -40,6 +40,7 @@ public class EditItemController {
                 codeF.setText(thisItem.getCode());
                 priceF.setText(thisItem.getPrice()+"");
                 minF.setText(thisItem.getMinAmount()+"");
+                beforeEdit = new Item(thisItem.getCode(), thisItem.getPrice(), thisItem.getAmount(), thisItem.getMinAmount());
             }
         });
         priceF.textProperty().addListener(new ChangeListener<String>() {
@@ -66,6 +67,7 @@ public class EditItemController {
             thisItem.setPrice(Float.parseFloat(priceF.getText().trim()));
             thisItem.setMinAmount(new BigInteger(minF.getText().trim()));
             System.out.println(thisItem);
+            System.out.println(beforeEdit);
             // edit item on database
 
 
