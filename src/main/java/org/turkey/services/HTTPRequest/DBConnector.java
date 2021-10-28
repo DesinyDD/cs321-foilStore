@@ -159,6 +159,43 @@ public class DBConnector {
 
         try {
             String res = new Gson().toJson(callToComplete.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createCustomer(Customer customer) {
+        ApiService service = startConnection();
+        Call<Object> callCreateCustomer = service.createCustomer(customer);
+
+        try {
+            String res = new Gson().toJson(callCreateCustomer.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateCustomer(Customer customer) {
+        ApiService service = startConnection();
+        Call<Object> callUpdateCustomer = service.updateCustomer(customer, customer.getCustomerId());
+
+        try {
+            String res = new Gson().toJson(callUpdateCustomer.execute().body());
+            System.out.println("TO COMPLETE DBCONNECTOR");
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateItem(Item item) {
+        ApiService service = startConnection();
+        Call<Object> callUpdateItem = service.updateItem(item, item.getCode());
+
+        try {
+            String res = new Gson().toJson(callUpdateItem.execute().body());
             System.out.println("TO COMPLETE DBCONNECTOR");
             System.out.println(res);
         } catch (IOException e) {

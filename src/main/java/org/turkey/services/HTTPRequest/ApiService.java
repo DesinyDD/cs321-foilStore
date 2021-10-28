@@ -43,4 +43,13 @@ public interface ApiService {
 
     @POST("sale_order/to_complete/{code}")
     Call<Object> saleOrderToComplete(@Path("code") String code);
+
+    @POST("customers")
+    Call<Object> createCustomer(@Body Customer customer);
+
+    @PUT("customers/{id}")
+    Call<Object> updateCustomer(@Body Customer customer, @Path("id") BigInteger id);
+
+    @PUT("items/{code}")
+    Call<Object> updateItem(@Body Item item, @Path("code") String code);
 }

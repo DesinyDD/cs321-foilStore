@@ -22,15 +22,20 @@ import java.io.IOException;
 import java.util.List;
 
 public class EditCustomerController {
-    @FXML private JFXButton editBtn;
-    @FXML private TextField nameF, phoneF;
-    @FXML private TextArea addressF;
-    @FXML private TableView<Customer> table;
-    @FXML private TableColumn<Customer, String> nameCol, phoneCol, addressCol;
+    @FXML
+    private JFXButton editBtn;
+    @FXML
+    private TextField nameF, phoneF;
+    @FXML
+    private TextArea addressF;
+    @FXML
+    private TableView<Customer> table;
+    @FXML
+    private TableColumn<Customer, String> nameCol, phoneCol, addressCol;
     private Customer thisCustomer;
     private ObservableList list;
 
-    public void initialize(){
+    public void initialize() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -41,8 +46,9 @@ public class EditCustomerController {
         });
     }
 
-    @FXML private void editCustomer() throws IOException {
-        if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
+    @FXML
+    private void editCustomer() throws IOException {
+        if (!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")) {
             // Alert Box
             Stage editCustomerAlertPage = new Stage();
             editCustomerAlertPage.initModality(Modality.APPLICATION_MODAL);
@@ -59,7 +65,7 @@ public class EditCustomerController {
             thisCustomer.setPhoneNo(phoneF.getText().trim());
             System.out.println(thisCustomer);
             // edit ที่ database
-
+            new DBConnector().updateCustomer(thisCustomer);
 
             // ดึงข้อมูลมาใหม่
             List<Customer> customers = new DBConnector().getCustomer();
@@ -68,28 +74,30 @@ public class EditCustomerController {
 
             Stage stage = (Stage) editBtn.getScene().getWindow();
             stage.close();
-        }else{
+        } else {
             failToEditCustomer();
-            if (nameF.getText().trim().equals("")){
+            if (nameF.getText().trim().equals("")) {
                 // alert name
             }
-            if (addressF.getText().trim().equals("")){
+            if (addressF.getText().trim().equals("")) {
                 // alert address
             }
-            if (phoneF.getText().trim().equals("")){
+            if (phoneF.getText().trim().equals("")) {
                 // alert phone
             }
         }
     }
 
-    public void setCustomerTable(List<Customer> customers){
+    public void setCustomerTable(List<Customer> customers) {
         list = FXCollections.observableArrayList(customers);
         table.setItems(list);
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
-    @FXML public void failToEditCustomer() throws IOException {
+
+    @FXML
+    public void failToEditCustomer() throws IOException {
         Stage stage1 = new Stage();
         stage1.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/failAlert.fxml"));
@@ -101,6 +109,7 @@ public class EditCustomerController {
         stage1.show();
 
     }
+
     public void setThisCustomer(Customer thisCustomer) {
         this.thisCustomer = thisCustomer;
     }
