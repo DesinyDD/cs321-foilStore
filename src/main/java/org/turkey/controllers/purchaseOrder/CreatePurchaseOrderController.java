@@ -204,6 +204,9 @@ public class CreatePurchaseOrderController {
                     }
                     System.out.println(po);
                     arrayList.add(po);
+//                    CALL POST API
+                    new DBConnector().createPO(po);
+
                     setPOTable(arrayList);
                     stage.close();
                 }

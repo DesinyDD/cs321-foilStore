@@ -33,7 +33,8 @@ public class EditItemController {
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private Item thisItem, beforeEdit;
     private ObservableList list;
-    public void initialize(){
+
+    public void initialize() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -61,15 +62,16 @@ public class EditItemController {
         });
     }
 
-    @FXML private void editItem() throws IOException {
-        if(!codeF.getText().trim().equals("")&&!priceF.getText().trim().equals("")&&!minF.getText().trim().equals("")){
+    @FXML
+    private void editItem() throws IOException {
+        if (!codeF.getText().trim().equals("") && !priceF.getText().trim().equals("") && !minF.getText().trim().equals("")) {
             thisItem.setCode(codeF.getText().trim());
             thisItem.setPrice(Float.parseFloat(priceF.getText().trim()));
             thisItem.setMinAmount(new BigInteger(minF.getText().trim()));
             System.out.println(thisItem);
             System.out.println(beforeEdit);
             // edit item on database
-
+            new DBConnector().updateItem(thisItem);
 
             // ดึงข้อมูล item หลังแก้จาก database
             List<Item> stock = new DBConnector().getItem();
@@ -86,21 +88,22 @@ public class EditItemController {
             EditItemAlertController ea = loader.getController();
             ea.setColorCode(codeF.getText());
             this.close();
-        }else{
+        } else {
             failToEditItem();
-            if (codeF.getText().trim().equals("")){
+            if (codeF.getText().trim().equals("")) {
                 // code alert
             }
-            if (priceF.getText().trim().equals("")){
+            if (priceF.getText().trim().equals("")) {
                 // price alert
             }
-            if (minF.getText().trim().equals("")){
+            if (minF.getText().trim().equals("")) {
                 // min alert
             }
         }
     }
 
-    @FXML public void failToEditItem() throws IOException {
+    @FXML
+    public void failToEditItem() throws IOException {
         Stage stage1 = new Stage();
         stage1.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/failAlert.fxml"));
@@ -112,12 +115,14 @@ public class EditItemController {
         stage1.show();
 
     }
-    @FXML private void close() {
+
+    @FXML
+    private void close() {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
 
-    public void setItemTable(List<Item> stock){
+    public void setItemTable(List<Item> stock) {
         list = FXCollections.observableArrayList(stock);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));

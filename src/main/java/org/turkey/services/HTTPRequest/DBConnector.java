@@ -1,14 +1,12 @@
 package org.turkey.services.HTTPRequest;
 
+import com.google.gson.Gson;
 import org.turkey.models.*;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBConnector {
@@ -42,10 +40,10 @@ public class DBConnector {
     public List<SaleOrder> getSaleOrder() {
         ApiService service = startConnection();
         Call<List<SaleOrder>> callSaleOrder = service.listSaleOrder();
-        try{
+        try {
             List<SaleOrder> saleOrderList = callSaleOrder.execute().body();
             return saleOrderList;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -73,36 +71,135 @@ public class DBConnector {
     public List<Po> getPO() {
         ApiService service = startConnection();
         Call<List<Po>> callPO = service.listPo();
-        try{
+        try {
             List<Po> pos = callPO.execute().body();
             return pos;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public List<Customer> getCustomer(){
+    public List<Customer> getCustomer() {
         ApiService service = startConnection();
         Call<List<Customer>> callCustomer = service.listCustomers();
-        try{
+        try {
             List<Customer> customers = callCustomer.execute().body();
             return customers;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    public List<Supplier> getSupplier(){
+
+    public List<Supplier> getSupplier() {
         ApiService service = startConnection();
         Call<List<Supplier>> callSupplier = service.listSupplier();
         try {
             List<Supplier> suppliers = callSupplier.execute().body();
             return suppliers;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void createSaleOrder(SaleOrder saleOrder) {
+        ApiService service = startConnection();
+        Call<Object> callSaleOrder = service.createSaleOrder(saleOrder);
+
+        try {
+            String res = new Gson().toJson(callSaleOrder.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createPO(Po po) {
+        ApiService service = startConnection();
+        Call<Object> callPo = service.createPO(po);
+
+        try {
+            String res = new Gson().toJson(callPo.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void poToWaitPay(Po po) {
+        ApiService service = startConnection();
+        Call<Object> callToWaitPay = service.poToWaitPay(po.getCode());
+
+        try {
+            String res = new Gson().toJson(callToWaitPay.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void poToComplete(Po po) {
+        ApiService service = startConnection();
+        Call<Object> callToComplete = service.poToComplete(po.getCode());
+
+        try {
+            String res = new Gson().toJson(callToComplete.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saleOrderToComplete(SaleOrder saleOrder) {
+        ApiService service = startConnection();
+        Call<Object> callToComplete = service.saleOrderToComplete(saleOrder.getCode());
+
+        try {
+            String res = new Gson().toJson(callToComplete.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createCustomer(Customer customer) {
+        ApiService service = startConnection();
+        Call<Object> callCreateCustomer = service.createCustomer(customer);
+
+        try {
+            String res = new Gson().toJson(callCreateCustomer.execute().body());
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateCustomer(Customer customer) {
+        ApiService service = startConnection();
+        Call<Object> callUpdateCustomer = service.updateCustomer(customer, customer.getCustomerId());
+
+        try {
+            String res = new Gson().toJson(callUpdateCustomer.execute().body());
+            System.out.println("TO COMPLETE DBCONNECTOR");
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateItem(Item item) {
+        ApiService service = startConnection();
+        Call<Object> callUpdateItem = service.updateItem(item, item.getCode());
+
+        try {
+            String res = new Gson().toJson(callUpdateItem.execute().body());
+            System.out.println("TO COMPLETE DBCONNECTOR");
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

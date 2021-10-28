@@ -20,16 +20,24 @@ import java.util.List;
 public class CreateCustomerController {
     private List<Customer> customers = new DBConnector().getCustomer();
     private ObservableList list;
-    @FXML private TableView<Customer> table;
-    @FXML private TableColumn<Customer, String> name, phone, address;
-    @FXML private TextField nameF, phoneF;
-    @FXML private TextArea addressF;
+    @FXML
+    private TableView<Customer> table;
+    @FXML
+    private TableColumn<Customer, String> name, phone, address;
+    @FXML
+    private TextField nameF, phoneF;
+    @FXML
+    private TextArea addressF;
 
-    @FXML public void addCustomer(ActionEvent event) throws IOException {
+    @FXML
+    public void addCustomer(ActionEvent event) throws IOException {
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
-        if(!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")){
-            Customer customer = new Customer(nameF.getText(),addressF.getText(),phoneF.getText());
+        if (!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")) {
+            Customer customer = new Customer(nameF.getText(), addressF.getText(), phoneF.getText());
+//            create customer API
+            new DBConnector().createCustomer(customer);
+
             customers.add(customer);
             setCustomerTable();
             System.out.println(customer);
@@ -46,28 +54,30 @@ public class CreateCustomerController {
             createCustomerAlertPage.show();
 
             stage.close();
-        }else{
+        } else {
             failToCreateCustomer();
-            if (nameF.getText().trim().equals("")){
+            if (nameF.getText().trim().equals("")) {
                 // alert name
             }
-            if (addressF.getText().trim().equals("")){
+            if (addressF.getText().trim().equals("")) {
                 // alert address
             }
-            if (phoneF.getText().trim().equals("")){
+            if (phoneF.getText().trim().equals("")) {
                 // alert phone
             }
         }
     }
 
-    public void setCustomerTable(){
+    public void setCustomerTable() {
         list = FXCollections.observableArrayList(customers);
         table.setItems(list);
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
-    @FXML public void failToCreateCustomer() throws IOException {
+
+    @FXML
+    public void failToCreateCustomer() throws IOException {
         Stage stage1 = new Stage();
         stage1.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/failAlert.fxml"));
@@ -80,8 +90,19 @@ public class CreateCustomerController {
 
     }
 
-    public void setAddress(TableColumn<Customer, String> address) {this.address = address;}
-    public void setName(TableColumn<Customer, String> name) {this.name = name;}
-    public void setTable(TableView<Customer> table) {this.table = table;}
-    public void setPhone(TableColumn<Customer, String> phone) {this.phone = phone;}
+    public void setAddress(TableColumn<Customer, String> address) {
+        this.address = address;
+    }
+
+    public void setName(TableColumn<Customer, String> name) {
+        this.name = name;
+    }
+
+    public void setTable(TableView<Customer> table) {
+        this.table = table;
+    }
+
+    public void setPhone(TableColumn<Customer, String> phone) {
+        this.phone = phone;
+    }
 }
