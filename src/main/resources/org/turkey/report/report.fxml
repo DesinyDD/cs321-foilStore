@@ -2,13 +2,14 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.report.ReportController">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.turkey.controllers.report.ReportController">
    <children>
       <BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #edf2f7;">
          <top>
@@ -51,11 +52,67 @@
             </HBox>
          </top>
          <center>
-            <Label text="Report Page" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #edf2f7;" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="997.0" prefWidth="1585.0" spacing="10.0" style="-fx-background-color: #edf2f7;">
+                     <children>
+                        <VBox alignment="TOP_CENTER" spacing="20.0">
+                           <children>
+                              <Label text="รายงานการขาย">
+                                 <font>
+                                    <Font size="64.0" />
+                                 </font>
+                              </Label>
+                              <Label text="7 วันที่ผ่านมา">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <Label text="ยอดรวม 0.00 บาท">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="769.0" prefWidth="1585.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="300.0" />
+                              <VBox prefHeight="200.0" prefWidth="792.5" spacing="20.0">
+                                 <children>
+                                    <Label text="รายการสั่งซื้อ">
+                                       <font>
+                                          <Font size="48.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="&lt; รายการสั่งซื้อ &gt;">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="792.5" spacing="20.0">
+                                 <children>
+                                    <Label text="ราคา">
+                                       <font>
+                                          <Font size="48.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="&lt; ราคา &gt;">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="300.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </center>
       </BorderPane>
    </children>
