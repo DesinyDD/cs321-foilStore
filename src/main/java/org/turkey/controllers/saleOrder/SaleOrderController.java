@@ -32,6 +32,7 @@ public class SaleOrderController {
     private SaleOrder order;
     private SaleOrderLine orderLine;
     private ObservableList list;
+    private Boolean check = false;
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
@@ -65,6 +66,7 @@ public class SaleOrderController {
     }
 
     @FXML private void createSaleOrder() throws IOException {
+        check = true;
         Stage createSaleOrderPage = new Stage();
         createSaleOrderPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/createSaleOrder.fxml"));
@@ -99,6 +101,7 @@ public class SaleOrderController {
 
     // เปลี่ยนสถานะ Order เป็น 'Complete'
     @FXML private void updateOrderToComplete(SaleOrder saleOrder) throws IOException {
+        check = true;
         Stage updateSaleOrderToCompletePage = new Stage();
         updateSaleOrderToCompletePage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/toComplete/updateSaleOrderToComplete.fxml"));
@@ -143,6 +146,11 @@ public class SaleOrderController {
 //    }
 
     @FXML private void showWaitPay() {
+        if (check){
+            System.out.println("check");
+            orders = new DBConnector().getSaleOrder();
+            check = false;
+        }
         clearBtnStyle();
         this.waitPayBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();
@@ -155,6 +163,11 @@ public class SaleOrderController {
     }
 
     @FXML private void showDone() {
+        if (check){
+            System.out.println("check");
+            orders = new DBConnector().getSaleOrder();
+            check = false;
+        }
         clearBtnStyle();
         this.doneBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<SaleOrder> arrayList = new ArrayList<>();

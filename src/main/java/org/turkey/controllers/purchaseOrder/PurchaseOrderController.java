@@ -32,6 +32,7 @@ public class PurchaseOrderController {
     private Po order;
     private PoLine orderLine;
     private List<Po> orders = new DBConnector().getPO();
+    private Boolean check = false;
 
     @FXML public void initialize() {
         table.setRowFactory( tv -> {
@@ -64,6 +65,7 @@ public class PurchaseOrderController {
     }
 
     @FXML private void createPurchaseOrder() throws IOException {
+        check = true;
         Stage createPurchaseOrderPage = new Stage();
         createPurchaseOrderPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrder.fxml"));
@@ -79,6 +81,7 @@ public class PurchaseOrderController {
 
     // เปลี่ยนสถานะ Order เป็น 'WaitPay'
     @FXML private void updatePurchaseOrderToWaitPay(Po po) throws IOException {
+        check = true;
         Stage updatePurchaseOrderToWaitPayPage = new Stage();
         updatePurchaseOrderToWaitPayPage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/toWaitPay/updatePurchaseOrderToWaitPay.fxml"));
@@ -97,6 +100,7 @@ public class PurchaseOrderController {
 
     // เปลี่ยนสถานะ Order เป็น 'Complete'
     @FXML private void updateOrderToComplete(Po po) throws IOException {
+        check = true;
         Stage updatePurchaseOrderToCompletePage = new Stage();
         updatePurchaseOrderToCompletePage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/toComplete/updatePurchaseOrderToComplete.fxml"));
@@ -128,6 +132,10 @@ public class PurchaseOrderController {
     }
 
     @FXML private void showWaitDelivery() {
+        if (check){
+            orders = new DBConnector().getPO();
+            check = false;
+        }
         clearBtnStyle();
         this.waitDeliveryBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<Po> arrayList = new ArrayList<>();
@@ -141,6 +149,10 @@ public class PurchaseOrderController {
     }
 
     @FXML private void showWaitPay() {
+        if (check){
+            orders = new DBConnector().getPO();
+            check = false;
+        }
         clearBtnStyle();
         this.waitPayBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<Po> arrayList = new ArrayList<>();
@@ -153,6 +165,10 @@ public class PurchaseOrderController {
     }
 
     @FXML private void showDone() {
+        if (check){
+            orders = new DBConnector().getPO();
+            check = false;
+        }
         clearBtnStyle();
         this.doneBtn.setStyle("-fx-background-color: #525564; -fx-background-radius: 50; -fx-text-fill: #fef6eb");
         ArrayList<Po> arrayList = new ArrayList<>();
