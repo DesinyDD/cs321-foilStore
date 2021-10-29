@@ -111,6 +111,7 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callSaleOrder.execute().body();
+     
             return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -231,10 +232,10 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callGetOrderStatus.execute().body();
-            if(responseMessage.getStatus().equals("success")){
+            if (responseMessage.getStatus().equals("success")) {
                 return StatusInApp.อยู่ระหว่างการจัดส่ง;
             }
-            return  StatusInApp.ไม่มีการสั่งสินค้า;
+            return StatusInApp.ไม่มีการสั่งสินค้า;
         } catch (IOException e) {
             e.printStackTrace();
         }
