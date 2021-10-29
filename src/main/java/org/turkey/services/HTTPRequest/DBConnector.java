@@ -105,29 +105,31 @@ public class DBConnector {
         return null;
     }
 
-    public void createSaleOrder(SaleOrder saleOrder) {
+    public ResponseMessage createSaleOrder(SaleOrder saleOrder) {
         ApiService service = startConnection();
-        Call<Object> callSaleOrder = service.createSaleOrder(saleOrder);
+        Call<ResponseMessage> callSaleOrder = service.createSaleOrder(saleOrder);
 
         try {
-            String res = new Gson().toJson(callSaleOrder.execute().body());
-            System.out.println("IN CREATE SO");
-            System.out.println(res);
+            ResponseMessage responseMessage = callSaleOrder.execute().body();
+            System.out.println(responseMessage);
+            return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void createPO(Po po) {
+    public ResponseMessage createPO(Po po) {
         ApiService service = startConnection();
-        Call<Object> callPo = service.createPO(po);
+        Call<ResponseMessage> callPo = service.createPO(po);
 
         try {
-            String res = new Gson().toJson(callPo.execute().body());
-            System.out.println(res);
+            ResponseMessage responseMessage = callPo.execute().body();
+            return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public void poToWaitPay(Po po) {
@@ -191,27 +193,29 @@ public class DBConnector {
         }
     }
 
-    public void updateItem(Item item, Item baseItem) {
+    public ResponseMessage updateItem(Item item, Item baseItem) {
         ApiService service = startConnection();
-        Call<Object> callUpdateItem = service.updateItem(item, baseItem.getCode());
+        Call<ResponseMessage> callUpdateItem = service.updateItem(item, baseItem.getCode());
 
         try {
-            String res = new Gson().toJson(callUpdateItem.execute().body());
-            System.out.println(res);
+            ResponseMessage responseMessage = callUpdateItem.execute().body();
+            return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void createItem(Item item) {
+    public ResponseMessage createItem(Item item) {
         ApiService service = startConnection();
-        Call<Object> callCreateItem = service.createItem(item);
+        Call<ResponseMessage> callCreateItem = service.createItem(item);
 
         try {
-            String res = new Gson().toJson(callCreateItem.execute().body());
-            System.out.println(res);
+            ResponseMessage responseMessage = callCreateItem.execute().body();
+            return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
