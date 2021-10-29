@@ -50,11 +50,25 @@
             </HBox>
          </top>
          <center>
-            <Label text="[ รายละเอียดโปรแกรม ] \n [  ผู้จัดทำ ]" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="564.0" layoutY="125.0" text="แอพพลิเคชัน">
+                     <font>
+                        <Font size="96.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="710.0" layoutY="362.0" text="สำหรับ">
+                     <font>
+                        <Font size="72.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="454.0" layoutY="590.0" text="บริษัทนำเข้าสิ่งพิมพ์">
+                     <font>
+                        <Font size="96.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </center>
       </BorderPane>
    </children>
