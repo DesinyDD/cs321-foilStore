@@ -1,6 +1,7 @@
 package org.turkey.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.turkey.services.HTTPRequest.DBConnector;
 import org.turkey.services.NumberWithComma;
 
 import java.math.BigInteger;
@@ -101,5 +102,10 @@ public class Item {
                 ", amount=" + amount +
                 ", minAmount=" + minAmount +
                 '}';
+    }
+
+    public StatusInApp getOrderStatus() {
+        StatusInApp res = new DBConnector().getOrderStatus(getCode());
+        return res;
     }
 }
