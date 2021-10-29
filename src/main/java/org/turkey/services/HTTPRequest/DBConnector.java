@@ -218,4 +218,18 @@ public class DBConnector {
         }
         return null;
     }
+
+    public List<SaleOrder> getReport() {
+        ApiService service = startConnection();
+        Call<List<SaleOrder>> callGetReport = service.getReport();
+
+        try {
+            List<SaleOrder> saleOrderList = callGetReport.execute().body();
+            System.out.println(saleOrderList);
+            return saleOrderList;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

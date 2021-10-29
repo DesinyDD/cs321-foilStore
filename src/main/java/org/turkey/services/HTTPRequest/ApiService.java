@@ -53,4 +53,6 @@ public interface ApiService {
     @PUT("items/{code}")
     Call<ResponseMessage> updateItem(@Body Item item, @Path("code") String code);
 
+    @GET("report")
+    Call<List<SaleOrder>> getReport();
 }
