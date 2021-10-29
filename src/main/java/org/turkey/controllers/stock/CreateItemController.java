@@ -107,7 +107,7 @@ public class CreateItemController {
         list = FXCollections.observableArrayList(stock);
         table.setItems(list);
         codeF.setCellValueFactory(new PropertyValueFactory<>("code"));
-//        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        status.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         amountF.setCellValueFactory(new PropertyValueFactory<>("amountWithComma"));
     }
     @FXML public void failToCreateItem() throws IOException {

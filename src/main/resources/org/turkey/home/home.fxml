@@ -52,19 +52,39 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="564.0" layoutY="125.0" text="แอพพลิเคชัน">
+                  <Label layoutX="78.0" layoutY="38.0" text="แอพพลิเคชันสำหรับบริษัทนำเข้าสิ่งพิมพ์">
                      <font>
                         <Font size="96.0" />
                      </font>
                   </Label>
-                  <Label layoutX="710.0" layoutY="362.0" text="สำหรับ">
+                  <Label layoutX="90.0" layoutY="174.0" text="มีระบบดังนี้">
                      <font>
-                        <Font size="72.0" />
+                        <Font size="48.0" />
                      </font>
                   </Label>
-                  <Label layoutX="454.0" layoutY="590.0" text="บริษัทนำเข้าสิ่งพิมพ์">
+                  <Label layoutX="155.0" layoutY="255.0" text="- เพิ่ม/แก้ไขข้อมูลลูกค้า">
                      <font>
-                        <Font size="96.0" />
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="155.0" layoutY="330.0" text="- การสร้างและการเปลี่ยนสถานะใบสั่งขาย">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="155.0" layoutY="405.0" text="- การเพิ่ม/แก้ไขข้อมูลประเภทสินค้า">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="155.0" layoutY="480.0" text="- การสร้างและเปลี่ยนสถานะของใบสั่งซื้อ">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="155.0" layoutY="555.0" text="- การอัพเดทจำนวนคงเหลือของสินค้าเมื่อมีการซื้อและขาย">
+                     <font>
+                        <Font size="48.0" />
                      </font>
                   </Label>
                </children>

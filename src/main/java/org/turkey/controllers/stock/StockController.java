@@ -1,16 +1,22 @@
 package org.turkey.controllers.stock;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.turkey.models.Item;
 import org.turkey.models.StatusInApp;
 import org.turkey.services.HTTPRequest.DBConnector;
@@ -18,6 +24,7 @@ import org.turkey.services.NavBarService;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StockController {
@@ -30,19 +37,46 @@ public class StockController {
     private ObservableList list;
 
     @FXML public void initialize() {
-        table.setRowFactory( tv -> {
-            TableRow<Item> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-                    Item rowData = row.getItem();
-                    try {
-                        editItem(rowData);
-                    } catch (IOException e) {
-//                         do nothing . . .
+//        table.setRowFactory( tv -> {
+//            TableRow<Item> row = new TableRow<>();
+//            row.setOnMouseClicked(event -> {
+//                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+//                    Item rowData = row.getItem();
+//                    try {
+//                        editItem(rowData);
+//                    } catch (IOException e) {
+////                         do nothing . . .
+//                    }
+//                }
+//            });
+//
+//            return row;
+//        });
+        table.setRowFactory(new Callback<TableView<Item>, TableRow<Item>>() {
+            @Override
+            public TableRow<Item> call(TableView<Item> itemTableView) {
+                final TableRow<Item> row  = new TableRow<>() {
+                    protected void updateItem(Item item, boolean empty){
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            if (item.getAmount().compareTo(item.getMinAmount()) < 1 && item.getOrderStatus().equals(StatusInApp.ไม่มีการสั่งสินค้า)) {
+                                setStyle("-fx-background-color: #cd5c5c;");
+                            }
+                        }
                     }
-                }
-            });
-            return row;
+                };
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+                        Item rowData = row.getItem();
+                        try {
+                            editItem(rowData);
+                        } catch (IOException e) {
+    //                         do nothing . . .
+                        }
+                    }
+                });
+                return row;
+            }
         });
 
 //        stock = new ArrayList<>();
@@ -96,23 +130,25 @@ public class StockController {
 //        createPurchaseOrderPage.show();
 //    }
 
-//    public void setItemTable(){
-//        code.setSortable(true);
-//        table.getItems().clear();
-//        for(Item item: stock){
-//            table.getItems().add(item);
-//            code.setCellValueFactory(new PropertyValueFactory<>("colorCode"));
-//            status.setCellValueFactory(new PropertyValueFactory<>("status"));
-//            amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-//        }
-//        table.getSortOrder().add(code);
-//        code.setSortable(false);
-//        status.setSortable(false);
-//        amount.setSortable(false);
-//    }
     public void setItemTable(){
         list = FXCollections.observableArrayList(stock);
         table.setItems(list);
+//        table.setRowFactory(new Callback<TableView<Item>, TableRow<Item>>() {
+//            @Override
+//            public TableRow<Item> call(TableView<Item> itemTableView) {
+//                final TableRow<Item> row  = new TableRow<>() {
+//                    protected void updateItem(Item item, boolean empty){
+//                        super.updateItem(item, empty);
+//                        if (item != null) {
+//                            if (item.getAmount().compareTo(item.getMinAmount()) < 1 && item.getOrderStatus().equals(StatusInApp.ไม่มีการสั่งสินค้า)) {
+//                                setStyle("-fx-background-color: #cd5c5c;");
+//                            }
+//                        }
+//                    }
+//                };
+//            return row;
+//            }
+//        });
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
         status.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
