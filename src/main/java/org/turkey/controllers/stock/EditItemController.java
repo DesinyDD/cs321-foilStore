@@ -71,7 +71,7 @@ public class EditItemController {
             System.out.println(thisItem);
             System.out.println(beforeEdit);
             // edit item on database
-            new DBConnector().updateItem(thisItem);
+            new DBConnector().updateItem(thisItem, beforeEdit);
 
             // ดึงข้อมูล item หลังแก้จาก database
             List<Item> stock = new DBConnector().getItem();

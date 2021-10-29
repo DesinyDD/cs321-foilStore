@@ -70,6 +70,7 @@ public class CreateItemController {
             Item item = new Item(code.getText().trim(), Float.parseFloat(price.getText().trim()), new BigInteger(min.getText()));
             stock.add(item);
             System.out.println(item);
+            new DBConnector().createItem(item);
             setItemTable();
             // alert
             Stage createItemAlertPage = new Stage();
