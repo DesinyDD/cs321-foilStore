@@ -68,7 +68,7 @@
                                     <Font size="48.0" />
                                  </font>
                               </Label>
-                              <Label text="ยอดรวม 0.00 บาท">
+                              <Label fx:id="total" text="ยอดรวม 0.00 บาท">
                                  <font>
                                     <Font size="48.0" />
                                  </font>
@@ -85,7 +85,7 @@
                                           <Font size="48.0" />
                                        </font>
                                     </Label>
-                                    <Label text="&lt; รายการสั่งซื้อ &gt;">
+                                    <Label fx:id="code" text="&lt; รายการสั่งซื้อ &gt;">
                                        <font>
                                           <Font size="36.0" />
                                        </font>
@@ -99,7 +99,7 @@
                                           <Font size="48.0" />
                                        </font>
                                     </Label>
-                                    <Label text="&lt; ราคา &gt;">
+                                    <Label fx:id="price" text="&lt; ราคา &gt;">
                                        <font>
                                           <Font size="36.0" />
                                        </font>
