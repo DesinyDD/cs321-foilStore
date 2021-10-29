@@ -27,7 +27,7 @@ public class CreateSaleOrderController {
     @FXML private ComboBox code1, code2, code3, customerBox, payment;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder, String> codeCol,customerCol;
-    @FXML private TableColumn<SaleOrder, Float> price;
+    @FXML private TableColumn<SaleOrder, String> price;
     @FXML private Label amount1, amount2, amount3;
     private List<Item> stock = new DBConnector().getItem();
     private List<Customer> customers = new DBConnector().getCustomer();
@@ -66,7 +66,7 @@ public class CreateSaleOrderController {
         quantityField_1.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_1.setText(oldValue);
                 }
             }
@@ -74,7 +74,7 @@ public class CreateSaleOrderController {
         quantityField_2.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_2.setText(oldValue);
                 }
             }
@@ -82,7 +82,7 @@ public class CreateSaleOrderController {
         quantityField_3.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_3.setText(oldValue);
                 }
             }
@@ -223,7 +223,7 @@ public class CreateSaleOrderController {
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), Integer.parseInt(quantityField_3.getText()), item);
+                        orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()), item);
                         System.out.println(orderLine);
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_3.getText())*price);
@@ -237,7 +237,7 @@ public class CreateSaleOrderController {
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code2.getValue().toString(), Integer.parseInt(quantityField_2.getText()), item);
+                        orderLine = new SaleOrderLine(code.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()), item);
                         System.out.println(orderLine.toString());
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_2.getText())*price);
@@ -251,7 +251,7 @@ public class CreateSaleOrderController {
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), Integer.parseInt(quantityField_1.getText()), item);
+                        orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()), item);
                         System.out.println(orderLine.toString());
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_1.getText())*price);
@@ -259,6 +259,8 @@ public class CreateSaleOrderController {
                     waitPay.add(order);
                     setSOTable(waitPay);
                     System.out.println(order);
+
+                    new DBConnector().createSaleOrder(order);
 
                     // Alert Box
                     Stage createItemPage = new Stage();
@@ -291,7 +293,7 @@ public class CreateSaleOrderController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         codeCol.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         customerCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
 
@@ -320,7 +322,7 @@ public class CreateSaleOrderController {
         this.customerCol = customerCol;
     }
 
-    public void setPrice(TableColumn<SaleOrder, Float> price) {
+    public void setPrice(TableColumn<SaleOrder, String> price) {
         this.price = price;
     }
 

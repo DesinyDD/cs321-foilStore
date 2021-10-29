@@ -19,7 +19,7 @@ public class UpdatePurchaseOrderToWaitPayController {
     @FXML private JFXButton cancelBtn;
     @FXML private TableView<Po> table;
     @FXML private TableColumn<Po, String> code,supplier;
-    @FXML private TableColumn<Po, Float> price;
+    @FXML private TableColumn<Po, String> price;
     private Po po;
 
     public void initialize(){
@@ -66,7 +66,7 @@ public class UpdatePurchaseOrderToWaitPayController {
         this.code = code;
     }
 
-    public void setPrice(TableColumn<Po, Float> price) {
+    public void setPrice(TableColumn<Po, String> price) {
         this.price = price;
     }
 

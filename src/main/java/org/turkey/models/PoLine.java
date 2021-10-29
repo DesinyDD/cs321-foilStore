@@ -3,6 +3,7 @@ package org.turkey.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.turkey.services.NumberWithComma;
 
 import java.math.BigInteger;
 
@@ -106,6 +107,14 @@ public class PoLine {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public String getQuantityWithComma(){
+        return NumberWithComma.addComma(quantity);
+    }
+
+    public String getPricePerUnitWithComma(){
+        return NumberWithComma.addComma(pricePerUnit);
     }
 
 }

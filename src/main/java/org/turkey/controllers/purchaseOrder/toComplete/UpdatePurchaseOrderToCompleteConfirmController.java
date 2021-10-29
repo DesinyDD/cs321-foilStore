@@ -20,22 +20,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdatePurchaseOrderToCompleteConfirmController {
-    @FXML private JFXButton cancelBtn;
-    @FXML private TableView<Po> table;
-    @FXML private TableColumn<Po, String> code,supplier;
-    @FXML private TableColumn<Po, Float> price;
+    @FXML
+    private JFXButton cancelBtn;
+    @FXML
+    private TableView<Po> table;
+    @FXML
+    private TableColumn<Po, String> code, supplier;
+    @FXML
+    private TableColumn<Po, String> price;
     private Po po;
     private ObservableList list;
 
-    @FXML private void confirm() throws IOException {
+    @FXML
+    private void confirm() throws IOException {
         //edit status api
-
+        new DBConnector().poToComplete(po);
 
         //fetch data
         List<Po> poList = new DBConnector().getPO();
         ArrayList<Po> arrayList = new ArrayList<>();
-        for (Po po1: poList){
-            if(po1.getStatus().equals(PurchaseStatus.WaitPay)){
+        for (Po po1 : poList) {
+            if (po1.getStatus().equals(PurchaseStatus.WaitPay)) {
                 arrayList.add(po1);
             }
         }
@@ -55,16 +60,18 @@ public class UpdatePurchaseOrderToCompleteConfirmController {
         this.close();
     }
 
-    @FXML private void close() {
+    @FXML
+    private void close() {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
-    public void setPOTable(ArrayList<Po> arrayList){
+
+    public void setPOTable(ArrayList<Po> arrayList) {
         table.getItems().clear();
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         supplier.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
@@ -80,7 +87,7 @@ public class UpdatePurchaseOrderToCompleteConfirmController {
         this.supplier = supplier;
     }
 
-    public void setPrice(TableColumn<Po, Float> price) {
+    public void setPrice(TableColumn<Po, String> price) {
         this.price = price;
     }
 

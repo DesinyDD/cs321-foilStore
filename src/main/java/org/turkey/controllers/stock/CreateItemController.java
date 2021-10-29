@@ -29,7 +29,7 @@ public class CreateItemController {
     @FXML private TextField code, price, min;
     @FXML private TableView<Item> table;
     @FXML private TableColumn<Item, String> codeF;
-    @FXML private TableColumn<Item, BigInteger> amountF;
+    @FXML private TableColumn<Item, String> amountF;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
@@ -96,7 +96,7 @@ public class CreateItemController {
         table.setItems(list);
         codeF.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        amountF.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        amountF.setCellValueFactory(new PropertyValueFactory<>("amountWithComma"));
     }
     @FXML public void failToCreateItem() throws IOException {
         Stage stage1 = new Stage();
@@ -115,7 +115,7 @@ public class CreateItemController {
         this.table = table;
     }
 
-    public void setAmountF(TableColumn<Item, BigInteger> amountF) {
+    public void setAmountF(TableColumn<Item, String> amountF) {
         this.amountF = amountF;
     }
 
