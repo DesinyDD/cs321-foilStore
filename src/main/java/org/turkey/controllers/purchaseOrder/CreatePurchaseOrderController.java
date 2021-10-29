@@ -1,6 +1,7 @@
 package org.turkey.controllers.purchaseOrder;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,7 +42,12 @@ public class CreatePurchaseOrderController {
     private PoLine poLine;
     private Supplier supp;
     @FXML public void initialize() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clearAlert();
+            }
+        });
         for (Item item : stock){
             color.add(item.getCode());
         }
@@ -108,13 +114,14 @@ public class CreatePurchaseOrderController {
     }
 
     @FXML public void createPO(ActionEvent event) throws IOException {
+        clearAlert();
         if(!codeF.getText().trim().equals("")){
             // มี code
             if ((code1.getValue() != null && !quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals(""))||
                     (code2.getValue() != null && !quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals(""))||
                     (code3.getValue() != null && !quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals(""))){
                 // มีสั่งสินค้า
-                Boolean sup = false, notComp = false;
+                Boolean sup = false, notComp = false, row1 = false, row2 = false, row3 = false;
                 if(supplier.getValue()==null){
                     sup = true;
                 }
@@ -125,6 +132,7 @@ public class CreatePurchaseOrderController {
                         (code1.getValue() == null && !quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals(""))||
                         (code1.getValue() == null && quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals(""))){
                     // รายการแรกไม่สมบูรณ์
+                    row1 = true;
                     notComp = true;
                 }
                 if((code2.getValue() != null && quantityField_2.getText().trim().equals("") && priceField_2.getText().trim().equals(""))||
@@ -134,6 +142,7 @@ public class CreatePurchaseOrderController {
                         (code2.getValue() == null && !quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals(""))||
                         (code2.getValue() == null && quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals(""))){
                     // รายการสองไม่สมบูรณ์
+                    row2 = true;
                     notComp = true;
                 }
                 if((code3.getValue() != null && quantityField_3.getText().trim().equals("") && priceField_3.getText().trim().equals(""))||
@@ -143,14 +152,24 @@ public class CreatePurchaseOrderController {
                         (code3.getValue() == null && !quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals(""))||
                         (code3.getValue() == null && quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals(""))){
                     // รายการสามไม่สมบูรณ์
+                    row3 = true;
                     notComp = true;
                 }
                 if(sup || notComp){
                     if (sup){
-                        // ไม่มี supplier
+                        supplierAlert.setText("กรุณาเลือกบริษัทที่ผลิต");
                     }
                     if (notComp){
                         // มีบางรายการกรอกข้อมูลสินค้าไม่ครบ
+                        if (row1){
+                            item1Alert.setText("กรุณากรอกข้อมูลการสั่งสินค้าแถวที่ 1 ให้สมบูรณ์");
+                        }
+                        if (row2){
+                            item2Alert.setText("กรุณากรอกข้อมูลการสั่งสินค้าแถวที่ 2 ให้สมบูรณ์");
+                        }
+                        if (row3){
+                            item3Alert.setText("กรุณากรอกข้อมูลการสั่งสินค้าแถวที่ 3 ให้สมบูรณ์");
+                        }
                     }
                     failToCreatePO();
                 }else{
@@ -213,11 +232,13 @@ public class CreatePurchaseOrderController {
             }else{
                 // ไมมีสินค้าที่สั่ง
                 failToCreatePO();
-                System.out.println(1);
+                item1Alert.setText("กรุณาสั่งซื้อสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
+                item2Alert.setText("กรุณาสั่งซื้อสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
+                item3Alert.setText("กรุณาสั่งซื้อสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
             }
         }else{
             failToCreatePO();
-            System.out.println(2);
+            codeAlert.setText("กรุณากรอกเลขกำกับใบสั่งซื้อ");
         }
     }
 
