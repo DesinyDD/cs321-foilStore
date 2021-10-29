@@ -55,4 +55,7 @@ public interface ApiService {
 
     @GET("report")
     Call<List<SaleOrder>> getReport();
+
+    @GET("items/findwait/{code}")
+    Call<ResponseMessage> getOrderStatus(@Path("code") String code);
 }

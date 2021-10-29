@@ -116,6 +116,7 @@ public class StockController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        status.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amountWithComma"));
     }
 

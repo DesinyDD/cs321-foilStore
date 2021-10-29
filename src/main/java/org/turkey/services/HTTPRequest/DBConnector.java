@@ -225,8 +225,23 @@ public class DBConnector {
 
         try {
             List<SaleOrder> saleOrderList = callGetReport.execute().body();
-            System.out.println(saleOrderList);
             return saleOrderList;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public StatusInApp getOrderStatus(String code) {
+        ApiService service = startConnection();
+        Call<ResponseMessage> callGetOrderStatus = service.getOrderStatus(code);
+
+        try {
+            ResponseMessage responseMessage = callGetOrderStatus.execute().body();
+            if(responseMessage.getStatus().equals("success")){
+                return StatusInApp.อยู่ระหว่างการจัดส่ง;
+            }
+            return  StatusInApp.ไม่มีการสั่งสินค้า;
         } catch (IOException e) {
             e.printStackTrace();
         }
