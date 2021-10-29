@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import org.turkey.models.SaleOrder;
 import org.turkey.services.HTTPRequest.DBConnector;
 import org.turkey.services.NavBarService;
@@ -25,7 +26,6 @@ public class ReportController {
             @Override
             public void run() {
                 List<SaleOrder> saleOrderList = new DBConnector().getReport();
-                System.out.println("INCONTROLLER");
                 createLabel(saleOrderList);
                 totalLb.setText("ยอดขายรวม " + getTotalPriceLastWeek(saleOrderList) + " บาท");
             }
@@ -37,6 +37,8 @@ public class ReportController {
         for (SaleOrder saleOrder : saleOrderList) {
             Label codeLb = new Label(saleOrder.getCode());
             Label totalLb = new Label(saleOrder.getTotalPriceWithComma());
+            codeLb.setFont(Font.font(32));
+            totalLb.setFont(Font.font(32));
             orderVBox.getChildren().add(codeLb);
             totalVBox.getChildren().add(totalLb);
         }

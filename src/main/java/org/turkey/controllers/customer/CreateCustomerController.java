@@ -52,7 +52,6 @@ public class CreateCustomerController {
 
             customers.add(customer);
             setCustomerTable();
-            System.out.println(customer);
             // Alert Box
             Stage createCustomerAlertPage = new Stage();
             createCustomerAlertPage.initModality(Modality.APPLICATION_MODAL);

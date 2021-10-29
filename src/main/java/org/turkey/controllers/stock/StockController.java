@@ -40,7 +40,6 @@ public class StockController {
                     } catch (IOException e) {
 //                         do nothing . . .
                     }
-                    System.out.println(rowData);
                 }
             });
             return row;

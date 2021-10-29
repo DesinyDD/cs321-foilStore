@@ -178,20 +178,17 @@ public class CreateSaleOrderController {
             if ((code1.getValue() != null && !quantityField_1.getText().trim().equals("")) ||
                     (code2.getValue() != null && !quantityField_2.getText().trim().equals("")) ||
                     (code3.getValue() != null && !quantityField_3.getText().trim().equals(""))) {
-                System.out.println("have order line");
                 boolean err = false, payMethod = false, custBox = false, row1 = false, row2 = false, row3 = false;
                 // 3 เงื่อนไขข้างล่างให้เช็คว่าเเมื่อช่องใดเป็นว่างแต่ถ้า 2 ช่องไม่ต้องแสดง
                 //ช่องแรกกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
                 if ((code1.getValue() == null && !quantityField_1.getText().trim().equals("")) ||
                         (code1.getValue() != null && quantityField_1.getText().trim().equals(""))) {
-                    System.out.println(1);
                     row1 = true;
                     err = true;
                 }
                 //ช่องสองกรอกข้อมูลไม่ครบ(ไม่นับไม่กรอก)
                 if ((code2.getValue() == null && !quantityField_2.getText().trim().equals("")) ||
                         (code2.getValue() != null && quantityField_2.getText().trim().equals(""))) {
-                    System.out.println(2);
                     row2 = true;
                     err = true;
                 }
@@ -199,12 +196,10 @@ public class CreateSaleOrderController {
                 if ((code3.getValue() == null && !quantityField_3.getText().trim().equals("")) ||
                         (code3.getValue() != null && quantityField_3.getText().trim().equals(""))) {
                     err = true;
-                    System.out.println(3);
                     row3 = true;
                 }
                 if (payment.getValue() == null) {
                     payMethod = true;
-                    System.out.println("no method selected");
                 }
                 //ไม่เลือกลูกค้า
                 if (customerBox.getValue() == null) {
@@ -213,7 +208,6 @@ public class CreateSaleOrderController {
                 if (err == true || payMethod == true || custBox == true) {
                     // เลือกลูกค้าแต่ช่องสินค้ายังกรอกไม่่ดี
                     if (err) {
-                        System.out.println("order not complete");
                         if (row1) {
                             item1Alert.setText("กรุณากรอกสินค้ารายการที่ 1 ให้สมบูรณ์");
                         }
@@ -226,16 +220,13 @@ public class CreateSaleOrderController {
                     }
                     if (payMethod) {
                         paymentAlert.setText("กรุณาเลือกรูปแบบการชำระเงิน");
-                        System.out.println("No payment");
                     }
                     if (custBox) {
                         customerAlert.setText("กรุณาเลือกลูกค้าที่สั่งซื้อ");
-                        System.out.println("No customer");
                     }
                     failToCreateSO();
                 } else {
                     // เสดหมด
-                    System.out.println("success");
                     for (Customer customer1 : customers) {
                         if (customer1.getName().equals(customerBox.getValue().toString())) {
                             customer = customer1;
@@ -243,7 +234,6 @@ public class CreateSaleOrderController {
                         }
                     }
                     order = new SaleOrder(code.getText(), customerID, customer, payment.getValue().toString());
-                    System.out.println(order);
 //                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
                     if (code1.getValue() != null && !quantityField_1.getText().trim().equals("")) {
                         float price = 0;
@@ -255,7 +245,6 @@ public class CreateSaleOrderController {
                             }
                         }
                         orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()), item);
-                        System.out.println(orderLine.toString());
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_1.getText()) * price);
                     }
@@ -269,7 +258,6 @@ public class CreateSaleOrderController {
                             }
                         }
                         orderLine = new SaleOrderLine(code.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()), item);
-                        System.out.println(orderLine.toString());
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_2.getText()) * price);
                     }
@@ -283,13 +271,11 @@ public class CreateSaleOrderController {
                             }
                         }
                         orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()), item);
-                        System.out.println(orderLine);
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_3.getText()) * price);
                     }
                     waitPay.add(order);
                     setSOTable(waitPay);
-                    System.out.println(order);
 
 //                    Create SaleOrder res
                     ResponseMessage res = new DBConnector().createSaleOrder(order);
@@ -310,14 +296,12 @@ public class CreateSaleOrderController {
                 }
             } else {
                 failToCreateSO();
-                System.out.println("no order");
                 item1Alert.setText("กรุณาสั่งขายสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
                 item2Alert.setText("กรุณาสั่งขายสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
                 item3Alert.setText("กรุณาสั่งขายสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
             }
         } else {
             failToCreateSO();
-            System.out.println("no code");
             codeAlert.setText("กรุณากรอกเลขกำกับใบสั่งขาย");
         }
     }

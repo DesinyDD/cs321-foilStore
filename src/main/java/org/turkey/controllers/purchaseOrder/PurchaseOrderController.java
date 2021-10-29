@@ -49,9 +49,8 @@ public class PurchaseOrderController {
                             this.showOrderComplete(rowData);
                         }
                     } catch (IOException e) {
-                        System.err.println(e);
+                        e.printStackTrace();
                     }
-                    System.out.println(rowData);
                 }
             });
             return row;
@@ -144,7 +143,6 @@ public class PurchaseOrderController {
                 arrayList.add(order);
             }
         }
-        System.out.println(arrayList);
         setPOTable(arrayList);
     }
 

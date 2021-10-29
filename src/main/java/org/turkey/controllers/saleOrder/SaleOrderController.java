@@ -51,7 +51,6 @@ public class SaleOrderController {
                     } catch (IOException e) {
                         // do nothing . . .
                     }
-                    System.out.println(rowData);
                 }
             });
             return row;
@@ -147,7 +146,6 @@ public class SaleOrderController {
 
     @FXML private void showWaitPay() {
         if (check){
-            System.out.println("check");
             orders = new DBConnector().getSaleOrder();
             check = false;
         }
@@ -164,7 +162,6 @@ public class SaleOrderController {
 
     @FXML private void showDone() {
         if (check){
-            System.out.println("check");
             orders = new DBConnector().getSaleOrder();
             check = false;
         }

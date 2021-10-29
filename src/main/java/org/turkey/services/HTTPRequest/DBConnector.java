@@ -111,7 +111,6 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callSaleOrder.execute().body();
-            System.out.println(responseMessage);
             return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,7 +137,6 @@ public class DBConnector {
 
         try {
             String res = new Gson().toJson(callToWaitPay.execute().body());
-            System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -150,7 +148,6 @@ public class DBConnector {
 
         try {
             String res = new Gson().toJson(callToComplete.execute().body());
-            System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,7 +159,6 @@ public class DBConnector {
 
         try {
             String res = new Gson().toJson(callToComplete.execute().body());
-            System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -174,7 +170,6 @@ public class DBConnector {
 
         try {
             String res = new Gson().toJson(callCreateCustomer.execute().body());
-            System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,8 +181,6 @@ public class DBConnector {
 
         try {
             String res = new Gson().toJson(callUpdateCustomer.execute().body());
-            System.out.println("TO COMPLETE DBCONNECTOR");
-            System.out.println(res);
         } catch (IOException e) {
             e.printStackTrace();
         }
