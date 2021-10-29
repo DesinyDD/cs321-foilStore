@@ -19,7 +19,7 @@ public class UpdateSaleOrderToCompleteController {
     @FXML private Label label;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder,String> code,customer;
-    @FXML private TableColumn<SaleOrder, Float> price;
+    @FXML private TableColumn<SaleOrder, String> price;
     private SaleOrder saleOrder;
 
     public void initialize(){
@@ -67,7 +67,7 @@ public class UpdateSaleOrderToCompleteController {
         this.code = code;
     }
 
-    public void setPrice(TableColumn<SaleOrder, Float> price) {
+    public void setPrice(TableColumn<SaleOrder, String> price) {
         this.price = price;
     }
 

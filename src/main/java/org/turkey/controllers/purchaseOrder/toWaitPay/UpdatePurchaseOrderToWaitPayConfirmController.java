@@ -23,7 +23,7 @@ public class UpdatePurchaseOrderToWaitPayConfirmController {
     @FXML private JFXButton cancelBtn;
     @FXML private TableView<Po> table;
     @FXML private TableColumn<Po, String> code,supplier;
-    @FXML private TableColumn<Po, Float> price;
+    @FXML private TableColumn<Po, String> price;
     private Po po;
     private ObservableList list;
 
@@ -65,7 +65,7 @@ public class UpdatePurchaseOrderToWaitPayConfirmController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         supplier.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
@@ -81,7 +81,7 @@ public class UpdatePurchaseOrderToWaitPayConfirmController {
         this.code = code;
     }
 
-    public void setPrice(TableColumn<Po, Float> price) {
+    public void setPrice(TableColumn<Po, String> price) {
         this.price = price;
     }
 

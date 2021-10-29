@@ -29,7 +29,7 @@ public class EditItemController {
     @FXML private TextField codeF, priceF, minF;
     @FXML private TableView<Item> table;
     @FXML private TableColumn<Item, String> code;
-    @FXML private TableColumn<Item, BigInteger> amount;
+    @FXML private TableColumn<Item, String> amount;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private Item thisItem, beforeEdit;
     private ObservableList list;
@@ -127,7 +127,7 @@ public class EditItemController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        amount.setCellValueFactory(new PropertyValueFactory<>("amountWithComma"));
     }
 
     public void setThisItem(Item thisItem) {
@@ -146,7 +146,7 @@ public class EditItemController {
         this.status = status;
     }
 
-    public void setAmount(TableColumn<Item, BigInteger> amount) {
+    public void setAmount(TableColumn<Item, String> amount) {
         this.amount = amount;
     }
 }

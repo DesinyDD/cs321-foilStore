@@ -26,7 +26,7 @@ public class SaleOrderController {
     @FXML private JFXButton waitCreateBillBtn, waitPayBtn, doneBtn;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder,String> code,customer;
-    @FXML private TableColumn<SaleOrder, Float> price;
+    @FXML private TableColumn<SaleOrder, String> price;
     private List<SaleOrder> orders = new DBConnector().getSaleOrder();
 //    private List<SaleOrder> saleOrder = new HttpManage().getSaleOrder();
     private SaleOrder order;
@@ -190,7 +190,7 @@ public class SaleOrderController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         customer.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
     // Page Switcher

@@ -24,7 +24,7 @@ public class StockController {
 
     @FXML private TableView<Item> table;
     @FXML private TableColumn<Item, String> code;
-    @FXML private TableColumn<Item, BigInteger> amount;
+    @FXML private TableColumn<Item, String> amount;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
     private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
@@ -116,7 +116,7 @@ public class StockController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        amount.setCellValueFactory(new PropertyValueFactory<>("amountWithComma"));
     }
 
     // Page Switcher

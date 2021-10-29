@@ -2,6 +2,7 @@ package org.turkey.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.turkey.services.NumberWithComma;
 
 import java.math.BigInteger;
 
@@ -18,7 +19,7 @@ public class SaleOrderLine {
     private String colorCode;
     @SerializedName("quantity")
     @Expose
-    private Integer quantity;
+    private BigInteger quantity;
     @SerializedName("item")
     @Expose
     private Item item;
@@ -38,7 +39,7 @@ public class SaleOrderLine {
      * @param colorCode
      * @param id
      */
-    public SaleOrderLine(BigInteger id, String saleOrderCode, String colorCode, Integer quantity, Item item) {
+    public SaleOrderLine(BigInteger id, String saleOrderCode, String colorCode, BigInteger quantity, Item item) {
         super();
         this.id = id;
         this.saleOrderCode = saleOrderCode;
@@ -46,7 +47,7 @@ public class SaleOrderLine {
         this.quantity = quantity;
         this.item = item;
     }
-    public SaleOrderLine(String saleOrderCode, String colorCode, Integer quantity, Item item) {
+    public SaleOrderLine(String saleOrderCode, String colorCode, BigInteger quantity, Item item) {
         this.saleOrderCode = saleOrderCode;
         this.colorCode = colorCode;
         this.quantity = quantity;
@@ -77,11 +78,11 @@ public class SaleOrderLine {
         this.colorCode = colorCode;
     }
 
-    public Integer getQuantity() {
+    public BigInteger getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
     }
 
@@ -91,6 +92,10 @@ public class SaleOrderLine {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public String getQuantityWithComma(){
+        return NumberWithComma.addComma(quantity);
     }
 
     @Override

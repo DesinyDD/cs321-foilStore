@@ -23,7 +23,7 @@ public class UpdateSaleOrderToCompleteConfirmController {
     @FXML private JFXButton cancelBtn;
     @FXML private TableView<SaleOrder> table;
     @FXML private TableColumn<SaleOrder,String> code,customer;
-    @FXML private TableColumn<SaleOrder, Float> price;
+    @FXML private TableColumn<SaleOrder, String> price;
     private ObservableList list;
     private SaleOrder saleOrder;
 
@@ -64,7 +64,7 @@ public class UpdateSaleOrderToCompleteConfirmController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         customer.setCellValueFactory(new PropertyValueFactory<>("customerName"));
     }
 
@@ -80,7 +80,7 @@ public class UpdateSaleOrderToCompleteConfirmController {
         this.code = code;
     }
 
-    public void setPrice(TableColumn<SaleOrder, Float> price) {
+    public void setPrice(TableColumn<SaleOrder, String> price) {
         this.price = price;
     }
 

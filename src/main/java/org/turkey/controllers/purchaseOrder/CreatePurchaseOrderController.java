@@ -30,7 +30,7 @@ public class CreatePurchaseOrderController {
     @FXML private JFXButton cancel;
     @FXML private TableView<Po> table;
     @FXML private TableColumn<Po, String> code;
-    @FXML private TableColumn<Po, Float> totalPriceCol;
+    @FXML private TableColumn<Po, String> totalPriceCol;
     @FXML private TableColumn<Po, String> supplierCol;
     private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
@@ -60,7 +60,7 @@ public class CreatePurchaseOrderController {
         quantityField_1.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_1.setText(oldValue);
                 }
             }
@@ -68,7 +68,7 @@ public class CreatePurchaseOrderController {
         quantityField_2.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_2.setText(oldValue);
                 }
             }
@@ -76,7 +76,7 @@ public class CreatePurchaseOrderController {
         quantityField_3.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_3.setText(oldValue);
                 }
             }
@@ -161,7 +161,7 @@ public class CreatePurchaseOrderController {
                         //แถว 1 ครบ
                         price = Integer.parseInt(quantityField_1.getText())* Float.parseFloat(priceField_1.getText());
                         poLine = new PoLine(codeF.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()),
-                                price);
+                                Float.parseFloat(priceField_1.getText()));
                         po.addPoLine(poLine);
                         po.addTotalPrice(price);
                     }
@@ -169,7 +169,7 @@ public class CreatePurchaseOrderController {
                         //แถว 2 ครบ
                         price = Integer.parseInt(quantityField_2.getText())* Float.parseFloat(priceField_2.getText());
                         poLine = new PoLine(codeF.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()),
-                                price);
+                                Float.parseFloat(priceField_2.getText()));
                         po.addPoLine(poLine);
                         po.addTotalPrice(price);
                     }
@@ -177,7 +177,7 @@ public class CreatePurchaseOrderController {
                         //แถว 3 ครบ
                         price = Integer.parseInt(quantityField_3.getText())* Float.parseFloat(priceField_3.getText());
                         poLine = new PoLine(codeF.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()),
-                                price);
+                                Float.parseFloat(priceField_3.getText()));
                         po.addPoLine(poLine);
                         po.addTotalPrice(price);
                     }
@@ -226,7 +226,7 @@ public class CreatePurchaseOrderController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
@@ -278,7 +278,7 @@ public class CreatePurchaseOrderController {
         this.code = code;
     }
 
-    public void setTotalPriceCol(TableColumn<Po, Float> totalPriceCol) {
+    public void setTotalPriceCol(TableColumn<Po, String> totalPriceCol) {
         this.totalPriceCol = totalPriceCol;
     }
 

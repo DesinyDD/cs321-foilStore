@@ -27,7 +27,7 @@ public class PurchaseOrderController {
     @FXML private JFXButton waitDeliveryBtn, waitPayBtn, doneBtn;
     @FXML private TableView<Po> table;
     @FXML private TableColumn<Po, String> code,supplier;
-    @FXML private TableColumn<Po, Float> price;
+    @FXML private TableColumn<Po, String> price;
     private ObservableList list;
     private Po order;
     private PoLine orderLine;
@@ -190,7 +190,7 @@ public class PurchaseOrderController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         supplier.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
