@@ -27,7 +27,7 @@ public class UpdatePurchaseOrderToCompleteConfirmController {
     @FXML
     private TableColumn<Po, String> code, supplier;
     @FXML
-    private TableColumn<Po, Float> price;
+    private TableColumn<Po, String> price;
     private Po po;
     private ObservableList list;
 
@@ -71,7 +71,7 @@ public class UpdatePurchaseOrderToCompleteConfirmController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        price.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         supplier.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
@@ -87,7 +87,7 @@ public class UpdatePurchaseOrderToCompleteConfirmController {
         this.supplier = supplier;
     }
 
-    public void setPrice(TableColumn<Po, Float> price) {
+    public void setPrice(TableColumn<Po, String> price) {
         this.price = price;
     }
 

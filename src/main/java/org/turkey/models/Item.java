@@ -1,6 +1,7 @@
 package org.turkey.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.turkey.services.NumberWithComma;
 
 import java.math.BigInteger;
 
@@ -78,6 +79,18 @@ public class Item {
 
     public void setMinAmount(BigInteger minAmount) {
         this.minAmount = minAmount;
+    }
+
+    public String getPriceWithComma(){
+        return NumberWithComma.addComma(price);
+    }
+
+    public String getAmountWithComma(){
+        return NumberWithComma.addComma(amount);
+    }
+
+    public String getMinAmountWithComma(){
+        return NumberWithComma.addComma(minAmount);
     }
 
     @Override

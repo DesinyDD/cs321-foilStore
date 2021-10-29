@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,8 +30,9 @@ public class EditItemController {
     @FXML private TextField codeF, priceF, minF;
     @FXML private TableView<Item> table;
     @FXML private TableColumn<Item, String> code;
-    @FXML private TableColumn<Item, BigInteger> amount;
+    @FXML private TableColumn<Item, String> amount;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
+    @FXML private Label codeAlert, priceAlert, minAlert;
     private Item thisItem, beforeEdit;
     private ObservableList list;
 
@@ -38,6 +40,7 @@ public class EditItemController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                clearAlert();
                 codeF.setText(thisItem.getCode());
                 priceF.setText(thisItem.getPrice()+"");
                 minF.setText(thisItem.getMinAmount()+"");
@@ -64,6 +67,7 @@ public class EditItemController {
 
     @FXML
     private void editItem() throws IOException {
+        clearAlert();
         if (!codeF.getText().trim().equals("") && !priceF.getText().trim().equals("") && !minF.getText().trim().equals("")) {
             thisItem.setCode(codeF.getText().trim());
             thisItem.setPrice(Float.parseFloat(priceF.getText().trim()));
@@ -91,13 +95,13 @@ public class EditItemController {
         } else {
             failToEditItem();
             if (codeF.getText().trim().equals("")) {
-                // code alert
+                codeAlert.setText("กรุณากรอกชื่อรหัสสี");
             }
             if (priceF.getText().trim().equals("")) {
-                // price alert
+                priceAlert.setText("กรุณาใส่ราคารขายต่อม้วน");
             }
             if (minF.getText().trim().equals("")) {
-                // min alert
+                minAlert.setText("กรุณาใส่จำนวนคงเหลือขั้นต่ำ");
             }
         }
     }
@@ -127,7 +131,12 @@ public class EditItemController {
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        amount.setCellValueFactory(new PropertyValueFactory<>("amountWithComma"));
+    }
+    @FXML public void clearAlert(){
+        codeAlert.setText("");
+        priceAlert.setText("");
+        minAlert.setText("");
     }
 
     public void setThisItem(Item thisItem) {
@@ -146,7 +155,7 @@ public class EditItemController {
         this.status = status;
     }
 
-    public void setAmount(TableColumn<Item, BigInteger> amount) {
+    public void setAmount(TableColumn<Item, String> amount) {
         this.amount = amount;
     }
 }

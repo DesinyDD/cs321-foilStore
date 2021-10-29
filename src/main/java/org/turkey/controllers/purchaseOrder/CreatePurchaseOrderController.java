@@ -1,6 +1,7 @@
 package org.turkey.controllers.purchaseOrder;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,14 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreatePurchaseOrderController {
-    @FXML private Label phone;
+    @FXML private Label phone, supplierAlert, codeAlert, item1Alert, item2Alert, item3Alert;
     @FXML private ComboBox code1, code2, code3, supplier;
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, codeF;
     @FXML private TextField priceField_1, priceField_2, priceField_3;
     @FXML private JFXButton cancel;
     @FXML private TableView<Po> table;
     @FXML private TableColumn<Po, String> code;
-    @FXML private TableColumn<Po, Float> totalPriceCol;
+    @FXML private TableColumn<Po, String> totalPriceCol;
     @FXML private TableColumn<Po, String> supplierCol;
     private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
@@ -41,7 +42,12 @@ public class CreatePurchaseOrderController {
     private PoLine poLine;
     private Supplier supp;
     @FXML public void initialize() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clearAlert();
+            }
+        });
         for (Item item : stock){
             color.add(item.getCode());
         }
@@ -60,7 +66,7 @@ public class CreatePurchaseOrderController {
         quantityField_1.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_1.setText(oldValue);
                 }
             }
@@ -68,7 +74,7 @@ public class CreatePurchaseOrderController {
         quantityField_2.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_2.setText(oldValue);
                 }
             }
@@ -76,7 +82,7 @@ public class CreatePurchaseOrderController {
         quantityField_3.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,4}?")) {
                     quantityField_3.setText(oldValue);
                 }
             }
@@ -108,13 +114,14 @@ public class CreatePurchaseOrderController {
     }
 
     @FXML public void createPO(ActionEvent event) throws IOException {
+        clearAlert();
         if(!codeF.getText().trim().equals("")){
             // มี code
             if ((code1.getValue() != null && !quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals(""))||
                     (code2.getValue() != null && !quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals(""))||
                     (code3.getValue() != null && !quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals(""))){
                 // มีสั่งสินค้า
-                Boolean sup = false, notComp = false;
+                Boolean sup = false, notComp = false, row1 = false, row2 = false, row3 = false;
                 if(supplier.getValue()==null){
                     sup = true;
                 }
@@ -125,6 +132,7 @@ public class CreatePurchaseOrderController {
                         (code1.getValue() == null && !quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals(""))||
                         (code1.getValue() == null && quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals(""))){
                     // รายการแรกไม่สมบูรณ์
+                    row1 = true;
                     notComp = true;
                 }
                 if((code2.getValue() != null && quantityField_2.getText().trim().equals("") && priceField_2.getText().trim().equals(""))||
@@ -134,6 +142,7 @@ public class CreatePurchaseOrderController {
                         (code2.getValue() == null && !quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals(""))||
                         (code2.getValue() == null && quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals(""))){
                     // รายการสองไม่สมบูรณ์
+                    row2 = true;
                     notComp = true;
                 }
                 if((code3.getValue() != null && quantityField_3.getText().trim().equals("") && priceField_3.getText().trim().equals(""))||
@@ -143,14 +152,24 @@ public class CreatePurchaseOrderController {
                         (code3.getValue() == null && !quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals(""))||
                         (code3.getValue() == null && quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals(""))){
                     // รายการสามไม่สมบูรณ์
+                    row3 = true;
                     notComp = true;
                 }
                 if(sup || notComp){
                     if (sup){
-                        // ไม่มี supplier
+                        supplierAlert.setText("กรุณาเลือกบริษัทที่ผลิต");
                     }
                     if (notComp){
                         // มีบางรายการกรอกข้อมูลสินค้าไม่ครบ
+                        if (row1){
+                            item1Alert.setText("กรุณากรอกข้อมูลการสั่งสินค้าแถวที่ 1 ให้สมบูรณ์");
+                        }
+                        if (row2){
+                            item2Alert.setText("กรุณากรอกข้อมูลการสั่งสินค้าแถวที่ 2 ให้สมบูรณ์");
+                        }
+                        if (row3){
+                            item3Alert.setText("กรุณากรอกข้อมูลการสั่งสินค้าแถวที่ 3 ให้สมบูรณ์");
+                        }
                     }
                     failToCreatePO();
                 }else{
@@ -161,7 +180,7 @@ public class CreatePurchaseOrderController {
                         //แถว 1 ครบ
                         price = Integer.parseInt(quantityField_1.getText())* Float.parseFloat(priceField_1.getText());
                         poLine = new PoLine(codeF.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()),
-                                price);
+                                Float.parseFloat(priceField_1.getText()));
                         po.addPoLine(poLine);
                         po.addTotalPrice(price);
                     }
@@ -169,7 +188,7 @@ public class CreatePurchaseOrderController {
                         //แถว 2 ครบ
                         price = Integer.parseInt(quantityField_2.getText())* Float.parseFloat(priceField_2.getText());
                         poLine = new PoLine(codeF.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()),
-                                price);
+                                Float.parseFloat(priceField_2.getText()));
                         po.addPoLine(poLine);
                         po.addTotalPrice(price);
                     }
@@ -177,7 +196,7 @@ public class CreatePurchaseOrderController {
                         //แถว 3 ครบ
                         price = Integer.parseInt(quantityField_3.getText())* Float.parseFloat(priceField_3.getText());
                         poLine = new PoLine(codeF.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()),
-                                price);
+                                Float.parseFloat(priceField_3.getText()));
                         po.addPoLine(poLine);
                         po.addTotalPrice(price);
                     }
@@ -213,11 +232,13 @@ public class CreatePurchaseOrderController {
             }else{
                 // ไมมีสินค้าที่สั่ง
                 failToCreatePO();
-                System.out.println(1);
+                item1Alert.setText("กรุณาสั่งซื้อสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
+                item2Alert.setText("กรุณาสั่งซื้อสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
+                item3Alert.setText("กรุณาสั่งซื้อสินค้าให้สมบูรณ์อย่างน้อย 1 รายการ");
             }
         }else{
             failToCreatePO();
-            System.out.println(2);
+            codeAlert.setText("กรุณากรอกเลขกำกับใบสั่งซื้อ");
         }
     }
 
@@ -226,7 +247,7 @@ public class CreatePurchaseOrderController {
         list = FXCollections.observableArrayList(arrayList);
         table.setItems(list);
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
-        totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPriceWithComma"));
         supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
@@ -258,6 +279,15 @@ public class CreatePurchaseOrderController {
         stage1.show();
 
     }
+
+    @FXML public void clearAlert(){
+        codeAlert.setText("");
+        item1Alert.setText("");
+        item2Alert.setText("");
+        item3Alert.setText("");
+        supplierAlert.setText("");
+    }
+
     @FXML public void clear1(ActionEvent event){
         code1.getSelectionModel().clearSelection();
     }
@@ -278,7 +308,7 @@ public class CreatePurchaseOrderController {
         this.code = code;
     }
 
-    public void setTotalPriceCol(TableColumn<Po, Float> totalPriceCol) {
+    public void setTotalPriceCol(TableColumn<Po, String> totalPriceCol) {
         this.totalPriceCol = totalPriceCol;
     }
 

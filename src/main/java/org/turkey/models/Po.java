@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.turkey.services.NumberWithComma;
 
 public class Po {
 
@@ -115,6 +116,10 @@ public class Po {
 
     public void addPoLine(PoLine poLine) {this.poLines.add(poLine);}
 
+    public String getTotalPriceWithComma(){
+        return NumberWithComma.addComma(totalPrice);
+    }
+
     @Override
     public String toString() {
         return "Po{" +
@@ -130,10 +135,10 @@ public class Po {
     public String showLabel(){
         String order="";
         for (PoLine poLine : poLines){
-            order = order+poLine.getColorCode()+" ราคา "+poLine.getPricePerUnit()+" /ม้วน จำนวน"+poLine.getQuantity()+" ม้วน\n";
+            order = order+poLine.getColorCode()+" ราคา "+poLine.getPricePerUnitWithComma()+"/ม้วน จำนวน "+poLine.getQuantityWithComma()+" ม้วน\n";
         }
-        return "รหัสใบสั่งขาย : "+code+"\n"+
+        return "รหัสใบสั่งซื้อ : "+code+"\n"+
                 "บริษัทที่สั่งซื้อ : "+ supplier.getName() +"\n"+
-                "รายการที่สั่งซื้อ\n" + order + "ยอดรวม : " + totalPrice+" บาท";
+                "รายการที่สั่งซื้อ\n" + order + "ยอดรวม : " + NumberWithComma.addComma(totalPrice)+" บาท";
     }
 }

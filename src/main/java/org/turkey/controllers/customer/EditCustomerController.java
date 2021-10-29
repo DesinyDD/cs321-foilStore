@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,11 +31,13 @@ public class EditCustomerController {
     private TableColumn<Customer, String> nameCol, phoneCol, addressCol;
     private Customer thisCustomer;
     private ObservableList list;
+    @FXML private Label nameAlert, addressAlert, phoneAlert;
 
     public void initialize() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                clearAlert();
                 nameF.setText(thisCustomer.getName());
                 addressF.setText(thisCustomer.getAddress());
                 phoneF.setText(thisCustomer.getPhoneNo());
@@ -77,13 +76,13 @@ public class EditCustomerController {
         } else {
             failToEditCustomer();
             if (nameF.getText().trim().equals("")) {
-                // alert name
+                nameAlert.setText("กรุณากรอกชื่อ");
             }
             if (addressF.getText().trim().equals("")) {
-                // alert address
+                addressAlert.setText("กรุณากรอกที่อยู่");
             }
             if (phoneF.getText().trim().equals("")) {
-                // alert phone
+                phoneAlert.setText("กรุณากรอกเบอร์ติดต่อ");
             }
         }
     }
@@ -108,6 +107,11 @@ public class EditCustomerController {
         fa.setFrom("แก้ไขข้อมูลลูกค้าไม่สำเร็จไม่สำเร็จ");
         stage1.show();
 
+    }
+    @FXML public void clearAlert(){
+        nameAlert.setText("");
+        addressAlert.setText("");
+        phoneAlert.setText("");
     }
 
     public void setThisCustomer(Customer thisCustomer) {

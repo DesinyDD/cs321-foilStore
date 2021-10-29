@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.turkey.services.NumberWithComma;
 
 public class SaleOrder {
 
@@ -168,6 +169,10 @@ public class SaleOrder {
     public void addToTotal(Float price){
         this.totalPrice += price;
     }
+
+    public String getTotalPriceWithComma(){
+        return NumberWithComma.addComma(totalPrice);
+    }
     @Override
     public String toString() {
         return "SaleOrder{" +
@@ -186,11 +191,11 @@ public class SaleOrder {
     public String showLabel(){
         String order = "";
         for(SaleOrderLine saleOrderLine : saleOrderLines){
-            order = order+saleOrderLine.getColorCode()+" จำนวน "+ saleOrderLine.getQuantity()+" ม้วน\n";
+            order = order+saleOrderLine.getColorCode()+" จำนวน "+ saleOrderLine.getQuantityWithComma()+" ม้วน\n";
         }
         return "รหัสใบสั่งขาย : "+code+"\n"+
                 "ชื่อลูกค้า : "+ customer.getName()+"\n"+
                 "รูปแบบการจ่ายเงิน : "+ paymentMethod +"\n"+
-                "รายการที่สั่งซื้อ\n" + order+ "ราคารวม : " + totalPrice+ " บาท";
+                "รายการที่สั่งขาย\n" + order+ "ราคารวม : " + NumberWithComma.addComma(totalPrice)+ " บาท";
     }
 }

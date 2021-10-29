@@ -31,6 +31,11 @@
                               <Font size="24.0" />
                            </font>
                         </TextField>
+                        <Label fx:id="codeAlert" text="&lt; Alert &gt;" textFill="RED">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
@@ -49,6 +54,11 @@
                               <Font size="24.0" />
                            </font>
                         </TextField>
+                        <Label fx:id="priceAlert" text="&lt; Alert &gt;" textFill="RED">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
@@ -67,15 +77,15 @@
                               <Font size="24.0" />
                            </font>
                         </TextField>
+                        <Label fx:id="minAlert" text="&lt; Alert &gt;" textFill="RED">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Label text="&lt; Alert &gt;" textFill="RED">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
                   <JFXButton buttonType="RAISED" onAction="#editItem" style="-fx-background-color: #68d391; -fx-background-radius: 50;" text="แก้ไข">
