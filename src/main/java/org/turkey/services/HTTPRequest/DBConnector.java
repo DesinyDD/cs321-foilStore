@@ -111,12 +111,7 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callSaleOrder.execute().body();
-            if (responseMessage.isSuccess()) {
-                System.out.println("SUCCESS");
-            }else {
-                System.out.println("FAILED");
-            }
-            System.out.println(responseMessage);
+     
             return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,7 +125,6 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callPo.execute().body();
-            System.out.println(responseMessage);
             return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -212,7 +206,6 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callCreateItem.execute().body();
-            System.out.println(responseMessage.getError());
             return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
