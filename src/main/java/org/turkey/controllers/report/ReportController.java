@@ -26,7 +26,6 @@ public class ReportController {
             @Override
             public void run() {
                 List<SaleOrder> saleOrderList = new DBConnector().getReport();
-                System.out.println("INCONTROLLER");
                 createLabel(saleOrderList);
                 totalLb.setText("ยอดขายรวม " + getTotalPriceLastWeek(saleOrderList) + " บาท");
             }

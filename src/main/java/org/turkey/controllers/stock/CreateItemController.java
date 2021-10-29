@@ -65,7 +65,6 @@ public class CreateItemController {
     @FXML private void createItem() throws IOException {
         clearAlert();
         if(code.getText().trim().equals("") || price.getText().trim().equals("") || min.getText().trim().equals("")){
-            System.out.println("create fail");
             failToCreateItem();
             if (code.getText().trim().equals("")){
                 codeAlert.setText("กรุณากรอกชื่อรหัสสี");
@@ -79,7 +78,6 @@ public class CreateItemController {
         }else{
             Item item = new Item(code.getText().trim(), Float.parseFloat(price.getText().trim()), new BigInteger(min.getText()));
             stock.add(item);
-            System.out.println(item);
 
 //            Create Item API response
             ResponseMessage res =  new DBConnector().createItem(item);

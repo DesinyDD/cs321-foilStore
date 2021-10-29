@@ -62,7 +62,6 @@ public class EditCustomerController {
             thisCustomer.setName(nameF.getText().trim());
             thisCustomer.setAddress(addressF.getText().trim());
             thisCustomer.setPhoneNo(phoneF.getText().trim());
-            System.out.println(thisCustomer);
             // edit ที่ database
             new DBConnector().updateCustomer(thisCustomer);
 

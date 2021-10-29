@@ -73,8 +73,6 @@ public class EditItemController {
             thisItem.setCode(codeF.getText().trim());
             thisItem.setPrice(Float.parseFloat(priceF.getText().trim()));
             thisItem.setMinAmount(new BigInteger(minF.getText().trim()));
-            System.out.println(thisItem);
-            System.out.println(beforeEdit);
             // edit item on database
             ResponseMessage res =  new DBConnector().updateItem(thisItem, beforeEdit);
 
