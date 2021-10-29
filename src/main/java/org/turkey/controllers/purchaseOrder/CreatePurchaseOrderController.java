@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreatePurchaseOrderController {
-    @FXML private Label phone;
+    @FXML private Label phone, supplierAlert, codeAlert, item1Alert, item2Alert, item3Alert;
     @FXML private ComboBox code1, code2, code3, supplier;
     @FXML private TextField quantityField_1, quantityField_2, quantityField_3, codeF;
     @FXML private TextField priceField_1, priceField_2, priceField_3;
@@ -258,6 +258,15 @@ public class CreatePurchaseOrderController {
         stage1.show();
 
     }
+
+    @FXML public void clearAlert(){
+        codeAlert.setText("");
+        item1Alert.setText("");
+        item2Alert.setText("");
+        item3Alert.setText("");
+        supplierAlert.setText("");
+    }
+
     @FXML public void clear1(ActionEvent event){
         code1.getSelectionModel().clearSelection();
     }

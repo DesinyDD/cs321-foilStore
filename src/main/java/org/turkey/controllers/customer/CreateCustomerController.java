@@ -1,5 +1,6 @@
 package org.turkey.controllers.customer;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,9 +29,20 @@ public class CreateCustomerController {
     private TextField nameF, phoneF;
     @FXML
     private TextArea addressF;
+    @FXML private Label nameAlert, addressAlert, phoneAlert;
+
+    public void initialize(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clearAlert();
+            }
+        });
+    }
 
     @FXML
     public void addCustomer(ActionEvent event) throws IOException {
+        clearAlert();
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
         if (!nameF.getText().trim().equals("") && !phoneF.getText().trim().equals("") && !addressF.getText().trim().equals("")) {
@@ -57,13 +69,13 @@ public class CreateCustomerController {
         } else {
             failToCreateCustomer();
             if (nameF.getText().trim().equals("")) {
-                // alert name
+                nameAlert.setText("กรุณากรอกชื่อ");
             }
             if (addressF.getText().trim().equals("")) {
-                // alert address
+                addressAlert.setText("กรุณากรอกที่อยู่");
             }
             if (phoneF.getText().trim().equals("")) {
-                // alert phone
+                phoneAlert.setText("กรุณากรอกเบอร์ติดต่อ");
             }
         }
     }
@@ -88,6 +100,12 @@ public class CreateCustomerController {
         fa.setFrom("เพิ่มข้อมูลลูกค้าไม่สำเร็จไม่สำเร็จ");
         stage1.show();
 
+    }
+
+    @FXML public void clearAlert(){
+        nameAlert.setText("");
+        addressAlert.setText("");
+        phoneAlert.setText("");
     }
 
     public void setAddress(TableColumn<Customer, String> address) {

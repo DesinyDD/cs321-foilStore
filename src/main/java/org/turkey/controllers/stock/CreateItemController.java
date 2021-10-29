@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,10 +32,17 @@ public class CreateItemController {
     @FXML private TableColumn<Item, String> codeF;
     @FXML private TableColumn<Item, String> amountF;
     @FXML private TableColumn<Item, Enum<StatusInApp>> status;
+    @FXML private Label codeAlert, priceAlert, minAlert;
     private List<Item> stock = new DBConnector().getItem();
     private ObservableList list;
 
     public void initialize(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clearAlert();
+            }
+        });
         price.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -54,17 +62,18 @@ public class CreateItemController {
     }
 
     @FXML private void createItem() throws IOException {
+        clearAlert();
         if(code.getText().trim().equals("") || price.getText().trim().equals("") || min.getText().trim().equals("")){
             System.out.println("create fail");
             failToCreateItem();
             if (code.getText().trim().equals("")){
-                // code alert
+                codeAlert.setText("กรุณากรอกชื่อรหัสสี");
             }
             if (price.getText().trim().equals("")){
-                // price alert
+                priceAlert.setText("กรุณาใส่ราคารขายต่อม้วน");
             }
             if (min.getText().trim().equals("")){
-                // min alert
+                minAlert.setText("กรุณาใส่จำนวนคงเหลือขั้นต่ำ");
             }
         }else{
             Item item = new Item(code.getText().trim(), Float.parseFloat(price.getText().trim()), new BigInteger(min.getText()));
@@ -109,6 +118,11 @@ public class CreateItemController {
         fa.setFrom("สร้างประเภทสินค้าใหม่ไม่สำเร็จ");
         stage1.show();
 
+    }
+    @FXML public void clearAlert(){
+        codeAlert.setText("");
+        priceAlert.setText("");
+        minAlert.setText("");
     }
 
     public void setTable(TableView<Item> table) {

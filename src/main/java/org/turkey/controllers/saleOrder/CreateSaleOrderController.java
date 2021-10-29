@@ -214,19 +214,19 @@ public class CreateSaleOrderController {
                     order = new SaleOrder(code.getText(), customerID, customer, payment.getValue().toString());
                     System.out.println(order);
 //                    //ยังไม่ได้ทำฟังก์ชันลดสินค้า
-                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
+                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
                         float price = 0;
                         for(Item item1: stock){
-                            if(item1.getCode().equals(code3.getValue().toString())){
+                            if(item1.getCode().equals(code1.getValue().toString())){
                                 item = item1;
                                 price = item1.getPrice();
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()), item);
-                        System.out.println(orderLine);
+                        orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()), item);
+                        System.out.println(orderLine.toString());
                         order.addSaleOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*price);
+                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*price);
                     }
                     if(code2.getValue() != null && !quantityField_2.getText().trim().equals("")){
                         float price = 0;
@@ -242,20 +242,20 @@ public class CreateSaleOrderController {
                         order.addSaleOrderLine(orderLine);
                         order.addToTotal(Float.parseFloat(quantityField_2.getText())*price);
                     }
-                    if(code1.getValue() != null && !quantityField_1.getText().trim().equals("")){
+                    if(code3.getValue() != null && !quantityField_3.getText().trim().equals("")){
                         float price = 0;
                         for(Item item1: stock){
-                            if(item1.getCode().equals(code1.getValue().toString())){
+                            if(item1.getCode().equals(code3.getValue().toString())){
                                 item = item1;
                                 price = item1.getPrice();
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()), item);
-                        System.out.println(orderLine.toString());
+                        orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()), item);
+                        System.out.println(orderLine);
                         order.addSaleOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_1.getText())*price);
-                }
+                        order.addToTotal(Float.parseFloat(quantityField_3.getText())*price);
+                    }
                     waitPay.add(order);
                     setSOTable(waitPay);
                     System.out.println(order);

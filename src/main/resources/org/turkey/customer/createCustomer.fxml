@@ -30,7 +30,7 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Label text="&lt; Alert &gt;" textFill="RED">
+                  <Label fx:id="nameAlert" text="&lt; Alert &gt;" textFill="RED">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -49,7 +49,7 @@
                         <Font size="24.0" />
                      </font>
                   </TextArea>
-                  <Label text="&lt; Alert &gt;" textFill="RED">
+                  <Label fx:id="addressAlert" text="&lt; Alert &gt;" textFill="RED">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Label prefWidth="538.0" text="&lt; Alert &gt;" textFill="RED">
+                  <Label fx:id="phoneAlert" prefWidth="538.0" text="&lt; Alert &gt;" textFill="RED">
                      <font>
                         <Font size="18.0" />
                      </font>
