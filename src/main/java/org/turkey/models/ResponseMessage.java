@@ -10,7 +10,7 @@ public class ResponseMessage {
     private String status;
     @SerializedName("error")
     @Expose
-    private String error;
+    private Error error;
 
     /**
      * No args constructor for use in serialization
@@ -24,7 +24,7 @@ public class ResponseMessage {
      * @param error
      * @param status
      */
-    public ResponseMessage(String status, String error) {
+    public ResponseMessage(String status, Error error) {
         super();
         this.status = status;
         this.error = error;
@@ -38,19 +38,22 @@ public class ResponseMessage {
         this.status = status;
     }
 
-    public String getError() {
+    public Error getError() {
         return error;
     }
 
-    public void setError(String error) {
+    public void setError(Error error) {
         this.error = error;
     }
 
+    public boolean isSuccess() {
+        return getStatus().equals("success");
+    }
     @Override
     public String toString() {
         return "ResponseMessage{" +
                 "status='" + status + '\'' +
-                ", error='" + error + '\'' +
+                ", error=" + error +
                 '}';
     }
 }
