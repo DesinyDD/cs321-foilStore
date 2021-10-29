@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.controllers.FailAlertController;
 import org.turkey.models.Item;
+import org.turkey.models.ResponseMessage;
 import org.turkey.models.StatusInApp;
 import org.turkey.services.HTTPRequest.DBConnector;
 
@@ -75,7 +76,7 @@ public class EditItemController {
             System.out.println(thisItem);
             System.out.println(beforeEdit);
             // edit item on database
-            new DBConnector().updateItem(thisItem);
+            ResponseMessage res =  new DBConnector().updateItem(thisItem, beforeEdit);
 
             // ดึงข้อมูล item หลังแก้จาก database
             List<Item> stock = new DBConnector().getItem();

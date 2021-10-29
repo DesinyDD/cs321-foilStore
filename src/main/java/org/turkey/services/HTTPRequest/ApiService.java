@@ -15,7 +15,7 @@ public interface ApiService {
     Call<Item> showItem(@Path("code") String code);
 
     @POST("items")
-    Call<Object> createItem(@Body Item item);
+    Call<ResponseMessage> createItem(@Body Item item);
 
     @GET("customers")
     Call<List<Customer>> listCustomers();
@@ -30,10 +30,10 @@ public interface ApiService {
     Call<List<Supplier>> listSupplier();
 
     @POST("sale_order")
-    Call<Object> createSaleOrder(@Body SaleOrder saleOrder);
+    Call<ResponseMessage> createSaleOrder(@Body SaleOrder saleOrder);
 
     @POST("po")
-    Call<Object> createPO(@Body Po po);
+    Call<ResponseMessage> createPO(@Body Po po);
 
     @POST("po/to_wait_pay/{code}")
     Call<Object> poToWaitPay(@Path("code") String code);
@@ -51,5 +51,8 @@ public interface ApiService {
     Call<Object> updateCustomer(@Body Customer customer, @Path("id") BigInteger id);
 
     @PUT("items/{code}")
-    Call<Object> updateItem(@Body Item item, @Path("code") String code);
+    Call<ResponseMessage> updateItem(@Body Item item, @Path("code") String code);
+
+    @GET("report")
+    Call<List<SaleOrder>> getReport();
 }

@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.turkey.controllers.FailAlertController;
 import org.turkey.models.Item;
+import org.turkey.models.ResponseMessage;
 import org.turkey.models.StatusInApp;
 import org.turkey.services.HTTPRequest.DBConnector;
 
@@ -79,6 +80,10 @@ public class CreateItemController {
             Item item = new Item(code.getText().trim(), Float.parseFloat(price.getText().trim()), new BigInteger(min.getText()));
             stock.add(item);
             System.out.println(item);
+
+//            Create Item API response
+            ResponseMessage res =  new DBConnector().createItem(item);
+
             setItemTable();
             // alert
             Stage createItemAlertPage = new Stage();

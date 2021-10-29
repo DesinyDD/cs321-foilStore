@@ -68,7 +68,7 @@
                                     <Font size="48.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="total" text="ยอดรวม 0.00 บาท">
+                              <Label fx:id="totalLb" text="ยอดขายรวม 0.00 บาท">
                                  <font>
                                     <Font size="48.0" />
                                  </font>
@@ -78,30 +78,20 @@
                         <HBox prefHeight="769.0" prefWidth="1585.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="300.0" />
-                              <VBox prefHeight="200.0" prefWidth="792.5" spacing="20.0">
+                              <VBox fx:id="orderVBox" prefHeight="200.0" prefWidth="792.5" spacing="20.0">
                                  <children>
-                                    <Label text="รายการสั่งซื้อ">
+                                    <Label text="รายการ">
                                        <font>
                                           <Font size="48.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="code" text="&lt; รายการสั่งซื้อ &gt;">
-                                       <font>
-                                          <Font size="36.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="792.5" spacing="20.0">
+                              <VBox fx:id="totalVBox" alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="792.5" spacing="20.0">
                                  <children>
-                                    <Label text="ราคา">
+                                    <Label text="ยอดขาย (บาท)">
                                        <font>
                                           <Font size="48.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="price" text="&lt; ราคา &gt;">
-                                       <font>
-                                          <Font size="36.0" />
                                        </font>
                                     </Label>
                                  </children>
