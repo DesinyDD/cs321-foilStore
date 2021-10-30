@@ -45,7 +45,7 @@ public class EditItemController {
                 codeF.setText(thisItem.getCode());
                 priceF.setText(thisItem.getPrice()+"");
                 minF.setText(thisItem.getMinAmount()+"");
-                beforeEdit = new Item(thisItem.getCode(), thisItem.getPrice(), thisItem.getAmount(), thisItem.getMinAmount());
+                beforeEdit = new Item(thisItem.getCode(), thisItem.getPrice(), thisItem.getAmount(), thisItem.getMinAmount(), thisItem.getNoPoLine());
             }
         });
         priceF.textProperty().addListener(new ChangeListener<String>() {

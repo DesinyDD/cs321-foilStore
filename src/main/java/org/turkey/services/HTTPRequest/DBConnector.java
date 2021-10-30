@@ -125,6 +125,7 @@ public class DBConnector {
 
         try {
             ResponseMessage responseMessage = callPo.execute().body();
+            System.out.println(responseMessage);
             return responseMessage;
         } catch (IOException e) {
             e.printStackTrace();
