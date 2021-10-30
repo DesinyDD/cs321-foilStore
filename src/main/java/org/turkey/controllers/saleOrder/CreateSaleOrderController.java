@@ -100,18 +100,21 @@ public class CreateSaleOrderController {
     @FXML
     public void clear1(ActionEvent event) {
         code1.getSelectionModel().clearSelection();
+        quantityField_1.setText("");
         amount1.setText("");
     }
 
     @FXML
     public void clear2(ActionEvent event) {
         code2.getSelectionModel().clearSelection();
+        quantityField_2.setText("");
         amount2.setText("");
     }
 
     @FXML
     public void clear3(ActionEvent event) {
         code3.getSelectionModel().clearSelection();
+        quantityField_3.setText("");
         amount3.setText("");
     }
 
@@ -227,6 +230,7 @@ public class CreateSaleOrderController {
                     failToCreateSO();
                 } else {
                     // เสดหมด
+                    Boolean newErr = false;
                     for (Customer customer1 : customers) {
                         if (customer1.getName().equals(customerBox.getValue().toString())) {
                             customer = customer1;
@@ -244,9 +248,17 @@ public class CreateSaleOrderController {
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()), item);
-                        order.addSaleOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_1.getText()) * price);
+                        if (Integer.parseInt(quantityField_1.getText())<1){
+                            item1Alert.setText("จำนวนสินค้าที่สั่งต้องเป็น 1 ขึ้นไป");
+                            newErr = true;
+                        }else if(new BigInteger(quantityField_1.getText()).compareTo(item.getAmount())==1){
+                            item1Alert.setText("จำนวนสินค้าที่สั่งต้องไม่มากกว่าจำนวนคงเหลือ");
+                            newErr = true;
+                        }else{
+                            orderLine = new SaleOrderLine(code.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()), item);
+                            order.addSaleOrderLine(orderLine);
+                            order.addToTotal(Float.parseFloat(quantityField_1.getText()) * price);
+                        }
                     }
                     if (code2.getValue() != null && !quantityField_2.getText().trim().equals("")) {
                         float price = 0;
@@ -257,9 +269,17 @@ public class CreateSaleOrderController {
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()), item);
-                        order.addSaleOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_2.getText()) * price);
+                        if (Integer.parseInt(quantityField_2.getText())<1){
+                            item2Alert.setText("จำนวนสินค้าที่สั่งต้องเป็น 1 ขึ้นไป");
+                            newErr = true;
+                        }else if(new BigInteger(quantityField_2.getText()).compareTo(item.getAmount())==1){
+                            item2Alert.setText("จำนวนสินค้าที่สั่งต้องไม่มากกว่าจำนวนคงเหลือ");
+                            newErr = true;
+                        }else {
+                            orderLine = new SaleOrderLine(code.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()), item);
+                            order.addSaleOrderLine(orderLine);
+                            order.addToTotal(Float.parseFloat(quantityField_2.getText()) * price);
+                        }
                     }
                     if (code3.getValue() != null && !quantityField_3.getText().trim().equals("")) {
                         float price = 0;
@@ -270,29 +290,46 @@ public class CreateSaleOrderController {
                                 break;
                             }
                         }
-                        orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()), item);
-                        order.addSaleOrderLine(orderLine);
-                        order.addToTotal(Float.parseFloat(quantityField_3.getText()) * price);
+                        if (Integer.parseInt(quantityField_3.getText())<1){
+                            item3Alert.setText("จำนวนสินค้าที่สั่งต้องเป็น 1 ขึ้นไป");
+                            newErr = true;
+                        }else if(new BigInteger(quantityField_3.getText()).compareTo(item.getAmount())==1){
+                            item3Alert.setText("จำนวนสินค้าที่สั่งต้องไม่มากกว่าจำนวนคงเหลือ");
+                            newErr = true;
+                        }else {
+                            orderLine = new SaleOrderLine(code.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()), item);
+                            order.addSaleOrderLine(orderLine);
+                            order.addToTotal(Float.parseFloat(quantityField_3.getText()) * price);
+                        }
                     }
-                    waitPay.add(order);
-                    setSOTable(waitPay);
-
+                    if (newErr){
+                        failToCreateSO();
+                    }else {
 //                    Create SaleOrder res
-                    ResponseMessage res = new DBConnector().createSaleOrder(order);
+                            ResponseMessage res = new DBConnector().createSaleOrder(order);
+                            if (res.isSuccess()) {
+                                // Alert Box
+                                waitPay.add(order);
+                                setSOTable(waitPay);
+                                Stage createItemPage = new Stage();
+                                createItemPage.initModality(Modality.APPLICATION_MODAL);
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/createSaleOrderAlert.fxml"));
+                                Scene scene = new Scene(loader.load());
+                                createItemPage.setScene(scene);
+                                createItemPage.setTitle("สำเร็จ");
+                                createItemPage.setResizable(false);
+                                CreateSaleOrderAlertController ca = loader.getController();
+                                ca.setSaleCode(code.getText());
+                                createItemPage.show();
 
-                    // Alert Box
-                    Stage createItemPage = new Stage();
-                    createItemPage.initModality(Modality.APPLICATION_MODAL);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/saleOrder/createSaleOrderAlert.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    createItemPage.setScene(scene);
-                    createItemPage.setTitle("สำเร็จ");
-                    createItemPage.setResizable(false);
-                    CreateSaleOrderAlertController ca = loader.getController();
-                    ca.setSaleCode(code.getText());
-                    createItemPage.show();
-
-                    stage.close();
+                                stage.close();
+                            } else {
+                                failToCreateSO();
+                                if (res.getError().getCode() != null) {
+                                    codeAlert.setText(res.getError().getCode().get(0));
+                                }
+                            }
+                        }
                 }
             } else {
                 failToCreateSO();

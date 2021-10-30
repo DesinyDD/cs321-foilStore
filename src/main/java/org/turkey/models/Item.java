@@ -106,6 +106,9 @@ public class Item {
 
     public StatusInApp getOrderStatus() {
         StatusInApp res = new DBConnector().getOrderStatus(getCode());
+        if (res.equals(StatusInApp.ไม่มีการสั่งสินค้า) && amount.compareTo(minAmount)<1){
+            return StatusInApp.จำนวนคงเหลือน้อยกว่าที่กำหนด;
+        }
         return res;
     }
 }

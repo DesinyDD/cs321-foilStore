@@ -174,59 +174,113 @@ public class CreatePurchaseOrderController {
                     failToCreatePO();
                 }else{
                     // ครบหมดถ้าสดชื่น
+                    Boolean newErr = false;
                     float price;
                     Po po = new Po(codeF.getText(), supplier_id, 0, supp);
                     if(code1.getValue() != null && !quantityField_1.getText().trim().equals("") && !priceField_1.getText().trim().equals("")){
                         //แถว 1 ครบ
-                        price = Integer.parseInt(quantityField_1.getText())* Float.parseFloat(priceField_1.getText());
-                        poLine = new PoLine(codeF.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()),
-                                Float.parseFloat(priceField_1.getText()));
-                        po.addPoLine(poLine);
-                        po.addTotalPrice(price);
+                        if (Integer.parseInt(quantityField_1.getText())<1 && Integer.parseInt(priceField_1.getText())<1){
+                            // จำนวนน้อบกว่า 1 และ ราคาน้อยกว่า 1
+                            newErr = true;
+                            item1Alert.setText("จำนวนสินค้าและราคาต่อม้วนต้องเป็น 1 ขึ้นไป");
+                        }else if(Integer.parseInt(quantityField_1.getText())<1){
+                            // จำนวนน้อยกว่า 1 อย่างเดียว
+                            newErr = true;
+                            item1Alert.setText("จำนวนสินค้าต้องเป็น 1 ขึ้นไป");
+                        }else if(Integer.parseInt(priceField_1.getText())<1){
+                            // ราคาน้อยกว่า 1 อย่างเดียว
+                            newErr = true;
+                            item1Alert.setText("ราคาต่อม้วนต้องเป็น 1 ขึ้นไป");
+                        }else{
+                            price = Integer.parseInt(quantityField_1.getText())* Float.parseFloat(priceField_1.getText());
+                            poLine = new PoLine(codeF.getText(), code1.getValue().toString(), new BigInteger(quantityField_1.getText()),
+                                    Float.parseFloat(priceField_1.getText()));
+                            po.addPoLine(poLine);
+                            po.addTotalPrice(price);
+                        }
                     }
                     if(code2.getValue() != null && !quantityField_2.getText().trim().equals("") && !priceField_2.getText().trim().equals("")){
                         //แถว 2 ครบ
-                        price = Integer.parseInt(quantityField_2.getText())* Float.parseFloat(priceField_2.getText());
-                        poLine = new PoLine(codeF.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()),
-                                Float.parseFloat(priceField_2.getText()));
-                        po.addPoLine(poLine);
-                        po.addTotalPrice(price);
+                        if (Integer.parseInt(quantityField_2.getText())<1 && Integer.parseInt(priceField_2.getText())<1){
+                            // จำนวนน้อบกว่า 1 และ ราคาน้อยกว่า 1
+                            newErr = true;
+                            item2Alert.setText("จำนวนสินค้าและราคาต่อม้วนต้องเป็น 1 ขึ้นไป");
+                        }else if(Integer.parseInt(quantityField_2.getText())<1){
+                            // จำนวนน้อยกว่า 1 อย่างเดียว
+                            newErr = true;
+                            item2Alert.setText("จำนวนสินค้าต้องเป็น 1 ขึ้นไป");
+                        }else if(Integer.parseInt(priceField_2.getText())<1){
+                            // ราคาน้อยกว่า 1 อย่างเดียว
+                            newErr = true;
+                            item2Alert.setText("ราคาต่อม้วนต้องเป็น 1 ขึ้นไป");
+                        }else {
+                            price = Integer.parseInt(quantityField_2.getText()) * Float.parseFloat(priceField_2.getText());
+                            poLine = new PoLine(codeF.getText(), code2.getValue().toString(), new BigInteger(quantityField_2.getText()),
+                                    Float.parseFloat(priceField_2.getText()));
+                            po.addPoLine(poLine);
+                            po.addTotalPrice(price);
+                        }
                     }
                     if(code3.getValue() != null && !quantityField_3.getText().trim().equals("") && !priceField_3.getText().trim().equals("")){
                         //แถว 3 ครบ
-                        price = Integer.parseInt(quantityField_3.getText())* Float.parseFloat(priceField_3.getText());
-                        poLine = new PoLine(codeF.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()),
-                                Float.parseFloat(priceField_3.getText()));
-                        po.addPoLine(poLine);
-                        po.addTotalPrice(price);
-                    }
-                    Button b = (Button) event.getSource();
-                    Stage stage = (Stage) b.getScene().getWindow();
-
-                    // Alert Box
-                    Stage purchaseOrderAlertPage = new Stage();
-                    purchaseOrderAlertPage.initModality(Modality.APPLICATION_MODAL);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrderAlert.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    purchaseOrderAlertPage.setScene(scene);
-                    purchaseOrderAlertPage.setTitle("สำเร็จ");
-                    purchaseOrderAlertPage.setResizable(false);
-                    CreatePurchaseOrderAlertController pa = loader.getController();
-                    pa.setPoCode(codeF.getText());
-                    purchaseOrderAlertPage.show();
-
-                    ArrayList<Po> arrayList = new ArrayList<>();
-                    for (Po po1 : poList){
-                        if (po1.getStatus().equals(PurchaseStatus.Wait)){
-                            arrayList.add(po1);
+                        if (Integer.parseInt(quantityField_3.getText())<1 && Integer.parseInt(priceField_3.getText())<1){
+                            // จำนวนน้อบกว่า 1 และ ราคาน้อยกว่า 1
+                            newErr = true;
+                            item3Alert.setText("จำนวนสินค้าและราคาต่อม้วนต้องเป็น 1 ขึ้นไป");
+                        }else if(Integer.parseInt(quantityField_3.getText())<1){
+                            // จำนวนน้อยกว่า 1 อย่างเดียว
+                            newErr = true;
+                            item3Alert.setText("จำนวนสินค้าต้องเป็น 1 ขึ้นไป");
+                        }else if(Integer.parseInt(priceField_3.getText())<1){
+                            // ราคาน้อยกว่า 1 อย่างเดียว
+                            newErr = true;
+                            item3Alert.setText("ราคาต่อม้วนต้องเป็น 1 ขึ้นไป");
+                        }else {
+                            price = Integer.parseInt(quantityField_3.getText()) * Float.parseFloat(priceField_3.getText());
+                            poLine = new PoLine(codeF.getText(), code3.getValue().toString(), new BigInteger(quantityField_3.getText()),
+                                    Float.parseFloat(priceField_3.getText()));
+                            po.addPoLine(poLine);
+                            po.addTotalPrice(price);
                         }
                     }
-                    arrayList.add(po);
+                    if (newErr){
+                        failToCreatePO();
+                    }else {
 //                    CALL POST API
-                    new DBConnector().createPO(po);
+                        ResponseMessage res = new DBConnector().createPO(po);
 
-                    setPOTable(arrayList);
-                    stage.close();
+                        if (res.isSuccess()) {
+                            Button b = (Button) event.getSource();
+                            Stage stage = (Stage) b.getScene().getWindow();
+
+                            // Alert Box
+                            Stage purchaseOrderAlertPage = new Stage();
+                            purchaseOrderAlertPage.initModality(Modality.APPLICATION_MODAL);
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/createPurchaseOrderAlert.fxml"));
+                            Scene scene = new Scene(loader.load());
+                            purchaseOrderAlertPage.setScene(scene);
+                            purchaseOrderAlertPage.setTitle("สำเร็จ");
+                            purchaseOrderAlertPage.setResizable(false);
+                            CreatePurchaseOrderAlertController pa = loader.getController();
+                            pa.setPoCode(codeF.getText());
+                            purchaseOrderAlertPage.show();
+
+                            ArrayList<Po> arrayList = new ArrayList<>();
+                            for (Po po1 : poList) {
+                                if (po1.getStatus().equals(PurchaseStatus.Wait)) {
+                                    arrayList.add(po1);
+                                }
+                            }
+                            arrayList.add(po);
+                            setPOTable(arrayList);
+                            stage.close();
+                        } else {
+                            failToCreatePO();
+                            if (res.getError().getCode() != null) {
+                                codeAlert.setText(res.getError().getCode().get(0));
+                            }
+                        }
+                    }
                 }
             }else{
                 // ไมมีสินค้าที่สั่ง
@@ -289,14 +343,20 @@ public class CreatePurchaseOrderController {
 
     @FXML public void clear1(ActionEvent event){
         code1.getSelectionModel().clearSelection();
+        quantityField_1.setText("");
+        priceField_1.setText("");
     }
 
     @FXML public void clear2(ActionEvent event){
         code2.getSelectionModel().clearSelection();
+        quantityField_2.setText("");
+        priceField_2.setText("");
     }
 
     @FXML public void clear3(ActionEvent event){
         code3.getSelectionModel().clearSelection();
+        quantityField_3.setText("");
+        priceField_3.setText("");
     }
 
     public void setTable(TableView<Po> table) {

@@ -37,46 +37,20 @@ public class StockController {
     private ObservableList list;
 
     @FXML public void initialize() {
-//        table.setRowFactory( tv -> {
-//            TableRow<Item> row = new TableRow<>();
-//            row.setOnMouseClicked(event -> {
-//                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-//                    Item rowData = row.getItem();
-//                    try {
-//                        editItem(rowData);
-//                    } catch (IOException e) {
-////                         do nothing . . .
-//                    }
-//                }
-//            });
-//
-//            return row;
-//        });
-        table.setRowFactory(new Callback<TableView<Item>, TableRow<Item>>() {
-            @Override
-            public TableRow<Item> call(TableView<Item> itemTableView) {
-                final TableRow<Item> row  = new TableRow<>() {
-                    protected void updateItem(Item item, boolean empty){
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            if (item.getAmount().compareTo(item.getMinAmount()) < 1 && item.getOrderStatus().equals(StatusInApp.ไม่มีการสั่งสินค้า)) {
-                                setStyle("-fx-background-color: #cd5c5c;");
-                            }
-                        }
+        table.setRowFactory( tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+                    Item rowData = row.getItem();
+                    try {
+                        editItem(rowData);
+                    } catch (IOException e) {
+//                         do nothing . . .
                     }
-                };
-                row.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-                        Item rowData = row.getItem();
-                        try {
-                            editItem(rowData);
-                        } catch (IOException e) {
-    //                         do nothing . . .
-                        }
-                    }
-                });
-                return row;
-            }
+                }
+            });
+
+            return row;
         });
 
 //        stock = new ArrayList<>();
@@ -133,22 +107,6 @@ public class StockController {
     public void setItemTable(){
         list = FXCollections.observableArrayList(stock);
         table.setItems(list);
-//        table.setRowFactory(new Callback<TableView<Item>, TableRow<Item>>() {
-//            @Override
-//            public TableRow<Item> call(TableView<Item> itemTableView) {
-//                final TableRow<Item> row  = new TableRow<>() {
-//                    protected void updateItem(Item item, boolean empty){
-//                        super.updateItem(item, empty);
-//                        if (item != null) {
-//                            if (item.getAmount().compareTo(item.getMinAmount()) < 1 && item.getOrderStatus().equals(StatusInApp.ไม่มีการสั่งสินค้า)) {
-//                                setStyle("-fx-background-color: #cd5c5c;");
-//                            }
-//                        }
-//                    }
-//                };
-//            return row;
-//            }
-//        });
         code.setCellValueFactory(new PropertyValueFactory<>("code"));
 //        status.setCellValueFactory(new PropertyValueFactory<>("status"));
         status.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));

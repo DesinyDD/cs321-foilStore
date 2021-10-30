@@ -81,20 +81,36 @@ public class CreateItemController {
 
 //            Create Item API response
             ResponseMessage res =  new DBConnector().createItem(item);
-
-            setItemTable();
-            // alert
-            Stage createItemAlertPage = new Stage();
-            createItemAlertPage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/createItemAlert.fxml"));
-            Scene scene = new Scene(loader.load());
-            createItemAlertPage.setScene(scene);
-            createItemAlertPage.setTitle("สำเร็จ");
-            createItemAlertPage.setResizable(false);
-            createItemAlertPage.show();
-            CreateItemAlertController ca = loader.getController();
-            ca.setColorCode(code.getText());
-            this.close();
+            if (res.isSuccess()){
+                stock = new DBConnector().getItem();
+                setItemTable();
+                // alert
+                Stage createItemAlertPage = new Stage();
+                createItemAlertPage.initModality(Modality.APPLICATION_MODAL);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/createItemAlert.fxml"));
+                Scene scene = new Scene(loader.load());
+                createItemAlertPage.setScene(scene);
+                createItemAlertPage.setTitle("สำเร็จ");
+                createItemAlertPage.setResizable(false);
+                createItemAlertPage.show();
+                CreateItemAlertController ca = loader.getController();
+                ca.setColorCode(code.getText());
+                this.close();
+            }else{
+                failToCreateItem();
+                if (res.getError().getCode() != null){
+                    // error code
+                    codeAlert.setText(res.getError().getCode().get(0));
+                }
+                if (res.getError().getPrice() != null){
+                    // error price
+                    priceAlert.setText(res.getError().getPrice().get(0));
+                }
+                if (res.getError().getMinAmount() != null){
+                    // error min
+                    minAlert.setText(res.getError().getMinAmount().get(0));
+                }
+            }
         }
     }
 

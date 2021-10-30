@@ -76,21 +76,33 @@ public class EditItemController {
             // edit item on database
             ResponseMessage res =  new DBConnector().updateItem(thisItem, beforeEdit);
 
-            // ดึงข้อมูล item หลังแก้จาก database
-            List<Item> stock = new DBConnector().getItem();
-            setItemTable(stock);
+            if (res.isSuccess()){
+                // ดึงข้อมูล item หลังแก้จาก database
+                List<Item> stock = new DBConnector().getItem();
+                setItemTable(stock);
 
-            Stage editItemConfirmPage = new Stage();
-            editItemConfirmPage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/editItemAlert.fxml"));
-            Scene scene = new Scene(loader.load());
-            editItemConfirmPage.setScene(scene);
-            editItemConfirmPage.setTitle("สำเร็จ");
-            editItemConfirmPage.setResizable(false);
-            editItemConfirmPage.show();
-            EditItemAlertController ea = loader.getController();
-            ea.setColorCode(codeF.getText());
-            this.close();
+                Stage editItemConfirmPage = new Stage();
+                editItemConfirmPage.initModality(Modality.APPLICATION_MODAL);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/stock/editItemAlert.fxml"));
+                Scene scene = new Scene(loader.load());
+                editItemConfirmPage.setScene(scene);
+                editItemConfirmPage.setTitle("สำเร็จ");
+                editItemConfirmPage.setResizable(false);
+                editItemConfirmPage.show();
+                EditItemAlertController ea = loader.getController();
+                ea.setColorCode(codeF.getText());
+                this.close();
+            }else{
+                failToEditItem();
+                if (res.getError().getCode() != null){
+                    //error code
+                    codeAlert.setText(res.getError().getCode().get(0));
+                }
+                if (res.getError().getPrice() != null){
+                    //error price
+                    priceAlert.setText(res.getError().getPrice().get(0));
+                }
+            }
         } else {
             failToEditItem();
             if (codeF.getText().trim().equals("")) {
@@ -121,6 +133,9 @@ public class EditItemController {
 
     @FXML
     private void close() {
+        thisItem.setCode(beforeEdit.getCode());
+        thisItem.setPrice(beforeEdit.getPrice());
+        thisItem.setMinAmount(beforeEdit.getMinAmount());
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
