@@ -262,7 +262,7 @@ public class CreatePurchaseOrderController {
                             purchaseOrderAlertPage.setTitle("สำเร็จ");
                             purchaseOrderAlertPage.setResizable(false);
                             CreatePurchaseOrderAlertController pa = loader.getController();
-                            pa.setPoCode(codeF.getText());
+                            pa.setPoCode(codeF.getText()+"\nยอดรวม "+po.getTotalPriceWithComma()+" บาท");
                             purchaseOrderAlertPage.show();
 
                             ArrayList<Po> arrayList = new ArrayList<>();
