@@ -96,7 +96,7 @@ public class CreateCustomerController {
         stage1.setTitle("แจ้งเตือน");
         stage1.setResizable(false);
         FailAlertController fa = loader.getController();
-        fa.setFrom("เพิ่มข้อมูลลูกค้าไม่สำเร็จไม่สำเร็จ");
+        fa.setFrom("เพิ่มข้อมูลลูกค้าไม่สำเร็จ");
         stage1.show();
 
     }

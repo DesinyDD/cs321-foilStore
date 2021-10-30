@@ -103,7 +103,7 @@ public class EditCustomerController {
         stage1.setTitle("แจ้งเตือน");
         stage1.setResizable(false);
         FailAlertController fa = loader.getController();
-        fa.setFrom("แก้ไขข้อมูลลูกค้าไม่สำเร็จไม่สำเร็จ");
+        fa.setFrom("แก้ไขข้อมูลลูกค้าไม่สำเร็จ");
         stage1.show();
 
     }
