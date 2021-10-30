@@ -20,6 +20,9 @@ public class Item {
     @SerializedName("min_amount")
     @Expose
     private BigInteger minAmount;
+    @SerializedName("no_po_line")
+    @Expose
+    private BigInteger noPoLine;
 
     /**
      * No args constructor for use in serialization
@@ -34,13 +37,15 @@ public class Item {
      * @param amount
      * @param code
      * @param price
+     * @param noPoLine
      */
-    public Item(String code, Float price, BigInteger amount, BigInteger minAmount) {
+    public Item(String code, Float price, BigInteger amount, BigInteger minAmount, BigInteger noPoLine) {
         super();
         this.code = code;
         this.price = price;
         this.amount = amount;
         this.minAmount = minAmount;
+        this.noPoLine = noPoLine;
     }
 
     public Item(String code, Float price, BigInteger minAmount) {
@@ -48,6 +53,14 @@ public class Item {
         this.price = price;
         this.amount = new BigInteger(0+"");
         this.minAmount = minAmount;
+    }
+
+public BigInteger getNoPoLine() {
+        return noPoLine;
+    }
+
+    public void setNoPoLine(BigInteger noPoLine) {
+        this.noPoLine = noPoLine;
     }
 
     public String getCode() {
@@ -101,6 +114,7 @@ public class Item {
                 ", price=" + price +
                 ", amount=" + amount +
                 ", minAmount=" + minAmount +
+                ", noPoLine=" + noPoLine +
                 '}';
     }
 
