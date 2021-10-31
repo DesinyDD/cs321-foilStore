@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.turkey.models.Customer</OriginalElement>
+  <nodes>
+    <node x="458.88602941176475" y="195.0">org.turkey.models.Item</node>
+    <node x="1169.0" y="906.0">org.turkey.models.Status</node>
+    <node x="239.5" y="1397.0">org.turkey.models.Po</node>
+    <node x="494.0" y="851.0">org.turkey.models.Supplier</node>
+    <node x="0.0" y="895.0">org.turkey.models.PurchaseStatus</node>
+    <node x="935.0" y="807.0">org.turkey.models.Customer</node>
+    <node x="900.5" y="1265.0">org.turkey.models.SaleOrder</node>
+    <node x="693.0" y="763.0">org.turkey.models.SaleOrderLine</node>
+    <node x="475.38602941176464" y="0.0">org.turkey.models.StatusInApp</node>
+    <node x="233.0" y="730.0">org.turkey.models.PoLine</node>
+    <node x="1379.0" y="0.0">org.turkey.models.Error</node>
+    <node x="1406.5" y="437.0">org.turkey.models.ResponseMessage</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.turkey.models.SaleOrderLine" target="org.turkey.models.Item" relationship="DEPENDENCY">
+      <point x="-55.5" y="-204.5" />
+      <point x="748.5" y="710.0" />
+      <point x="348.5" y="710.0" />
+      <point x="348.5" y="690.0" />
+      <point x="519.1360294117648" y="690.0" />
+      <point x="-60.25" y="237.5" />
+    </edge>
+    <edge source="org.turkey.models.Item" target="org.turkey.models.StatusInApp" relationship="DEPENDENCY">
+      <point x="-5.6843418860808015E-14" y="-237.5" />
+      <point x="0.0" y="72.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrder" target="org.turkey.models.Customer" relationship="TO_ONE">
+      <point x="-70.75" y="-413.5" />
+      <point x="971.25" y="1245.0" />
+      <point x="1037.0" y="1245.0" />
+      <point x="1037.0" y="1235.0" />
+      <point x="988.5" y="1235.0" />
+      <point x="-53.5" y="160.5" />
+    </edge>
+    <edge source="org.turkey.models.PoLine" target="org.turkey.models.Item" relationship="TO_ONE">
+      <point x="60.25" y="-237.5" />
+      <point x="413.75" y="700.0" />
+      <point x="809.0" y="700.0" />
+      <point x="809.0" y="690.0" />
+      <point x="639.6360294117648" y="690.0" />
+      <point x="60.25" y="237.5" />
+    </edge>
+    <edge source="org.turkey.models.Po" target="org.turkey.models.PoLine" relationship="TO_MANY">
+      <point x="-57.0" y="-281.5" />
+      <point x="296.5" y="1245.0" />
+      <point x="348.5" y="1245.0" />
+      <point x="348.5" y="1235.0" />
+      <point x="293.25" y="1235.0" />
+      <point x="-60.25" y="237.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrderLine" target="org.turkey.models.Item" relationship="TO_ONE">
+      <point x="55.5" y="-204.5" />
+      <point x="859.5" y="700.0" />
+      <point x="809.0" y="700.0" />
+      <point x="809.0" y="690.0" />
+      <point x="639.6360294117648" y="690.0" />
+      <point x="60.25" y="237.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrder" target="org.turkey.models.Status" relationship="TO_ONE">
+      <point x="-70.75" y="-413.5" />
+      <point x="971.25" y="1245.0" />
+      <point x="1037.0" y="1245.0" />
+      <point x="1037.0" y="1235.0" />
+      <point x="1210.25" y="1235.0" />
+      <point x="-41.25" y="61.5" />
+    </edge>
+    <edge source="org.turkey.models.Po" target="org.turkey.models.PoLine" relationship="DEPENDENCY">
+      <point x="57.0" y="-281.5" />
+      <point x="410.5" y="1245.0" />
+      <point x="358.5" y="1245.0" />
+      <point x="358.5" y="1225.0" />
+      <point x="413.75" y="1225.0" />
+      <point x="60.25" y="237.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrder" target="org.turkey.models.SaleOrderLine" relationship="DEPENDENCY">
+      <point x="70.75" y="-413.5" />
+      <point x="1112.75" y="1245.0" />
+      <point x="1047.0" y="1245.0" />
+      <point x="1047.0" y="1225.0" />
+      <point x="859.5" y="1225.0" />
+      <point x="55.5" y="204.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrder" target="org.turkey.models.Customer" relationship="DEPENDENCY">
+      <point x="70.75" y="-413.5" />
+      <point x="1112.75" y="1245.0" />
+      <point x="1047.0" y="1245.0" />
+      <point x="1047.0" y="1225.0" />
+      <point x="1095.5" y="1225.0" />
+      <point x="53.5" y="160.5" />
+    </edge>
+    <edge source="org.turkey.models.Po" target="org.turkey.models.PurchaseStatus" relationship="DEPENDENCY">
+      <point x="57.0" y="-281.5" />
+      <point x="410.5" y="1245.0" />
+      <point x="358.5" y="1245.0" />
+      <point x="358.5" y="1225.0" />
+      <point x="159.75" y="1225.0" />
+      <point x="53.25" y="72.5" />
+    </edge>
+    <edge source="org.turkey.models.PoLine" target="org.turkey.models.Item" relationship="DEPENDENCY">
+      <point x="-60.25" y="-237.5" />
+      <point x="293.25" y="710.0" />
+      <point x="348.5" y="710.0" />
+      <point x="348.5" y="690.0" />
+      <point x="519.1360294117648" y="690.0" />
+      <point x="-60.25" y="237.5" />
+    </edge>
+    <edge source="org.turkey.models.ResponseMessage" target="org.turkey.models.Error" relationship="TO_ONE">
+      <point x="43.25" y="-105.5" />
+      <point x="1536.25" y="412.0" />
+      <point x="1550.0" y="412.0" />
+      <point x="57.0" y="193.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrder" target="org.turkey.models.Status" relationship="DEPENDENCY">
+      <point x="70.75" y="-413.5" />
+      <point x="1112.75" y="1245.0" />
+      <point x="1047.0" y="1245.0" />
+      <point x="1047.0" y="1225.0" />
+      <point x="1292.75" y="1225.0" />
+      <point x="41.25" y="61.5" />
+    </edge>
+    <edge source="org.turkey.models.SaleOrder" target="org.turkey.models.SaleOrderLine" relationship="TO_MANY">
+      <point x="-70.75" y="-413.5" />
+      <point x="971.25" y="1245.0" />
+      <point x="1037.0" y="1245.0" />
+      <point x="1037.0" y="1235.0" />
+      <point x="748.5" y="1235.0" />
+      <point x="-55.5" y="204.5" />
+    </edge>
+    <edge source="org.turkey.models.Po" target="org.turkey.models.Supplier" relationship="TO_ONE">
+      <point x="-57.0" y="-281.5" />
+      <point x="296.5" y="1245.0" />
+      <point x="348.5" y="1245.0" />
+      <point x="348.5" y="1235.0" />
+      <point x="538.75" y="1235.0" />
+      <point x="-44.75" y="116.5" />
+    </edge>
+    <edge source="org.turkey.models.Po" target="org.turkey.models.Supplier" relationship="DEPENDENCY">
+      <point x="57.0" y="-281.5" />
+      <point x="410.5" y="1245.0" />
+      <point x="358.5" y="1245.0" />
+      <point x="358.5" y="1225.0" />
+      <point x="628.25" y="1225.0" />
+      <point x="44.75" y="116.5" />
+    </edge>
+    <edge source="org.turkey.models.ResponseMessage" target="org.turkey.models.Error" relationship="DEPENDENCY">
+      <point x="-43.25" y="-105.5" />
+      <point x="1449.75" y="412.0" />
+      <point x="1436.0" y="412.0" />
+      <point x="-57.0" y="193.5" />
+    </edge>
+    <edge source="org.turkey.models.Po" target="org.turkey.models.PurchaseStatus" relationship="TO_ONE">
+      <point x="-57.0" y="-281.5" />
+      <point x="296.5" y="1245.0" />
+      <point x="348.5" y="1245.0" />
+      <point x="348.5" y="1235.0" />
+      <point x="53.25" y="1235.0" />
+      <point x="-53.25" y="72.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.3963068181818182" showDependencies="true" x="803.5" y="1046.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
