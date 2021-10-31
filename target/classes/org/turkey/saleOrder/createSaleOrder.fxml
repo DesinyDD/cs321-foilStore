@@ -184,7 +184,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="customerBox" prefHeight="51.0" prefWidth="238.0" promptText="ชื่อลูกค้า" style="-fx-font-size: 24px;" />
+                        <ComboBox fx:id="customerBox" prefHeight="51.0" prefWidth="292.0" promptText="ชื่อลูกค้า" style="-fx-font-size: 22px;" />
                      </children>
                   </HBox>
                   <Label fx:id="customerAlert" text="&lt; Alert &gt;" textFill="RED">

@@ -21,6 +21,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("SA Project");
         stage.setResizable(false);
+        stage.getIcons().clear();
         stage.show();
     }
 
