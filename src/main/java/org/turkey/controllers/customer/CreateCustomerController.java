@@ -50,7 +50,7 @@ public class CreateCustomerController {
 //            create customer API
             new DBConnector().createCustomer(customer);
 
-            customers.add(customer);
+            customers = new DBConnector().getCustomer();
             setCustomerTable();
             // Alert Box
             Stage createCustomerAlertPage = new Stage();
