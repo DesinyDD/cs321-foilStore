@@ -105,7 +105,7 @@ public class PurchaseOrderController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/turkey/purchaseOrder/toComplete/updatePurchaseOrderToComplete.fxml"));
         Scene scene = new Scene(loader.load());
         updatePurchaseOrderToCompletePage.setScene(scene);
-        updatePurchaseOrderToCompletePage.setTitle("เปลี่ยนสถานะใบสั่งขาย");
+        updatePurchaseOrderToCompletePage.setTitle("เปลี่ยนสถานะใบสั่งซื้อ");
         updatePurchaseOrderToCompletePage.setResizable(false);
         UpdatePurchaseOrderToCompleteController ua = loader.getController();
         ua.setPo(po);
